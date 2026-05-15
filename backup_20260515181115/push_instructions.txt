@@ -1,4 +1,4 @@
-Instrucciones para subir manualmente si no tienes `gh`:
+﻿Instrucciones para subir manualmente si no tienes `gh`:
 
 1) Crea el repo en GitHub: https://github.com/new  (nombre: reformasB)
 
@@ -13,6 +13,7 @@ git remote add origin https://github.com/slvk420/reformasB.git
 git push -u origin main
 ```
 
-3) Ve a Settings → Pages y configura la rama `main` y la carpeta `/ (root)` o espera a que Actions despliegue automáticamente.
+3) Ve a Settings â†’ Pages y configura la rama `main` y la carpeta `/ (root)` o espera a que Actions despliegue automÃ¡ticamente.
 
-La URL será: https://slvk420.github.io/reformasB/
+La URL serÃ¡: https://slvk420.github.io/reformasB/
+
