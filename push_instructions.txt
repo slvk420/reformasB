@@ -1,0 +1,18 @@
+Instrucciones para subir manualmente si no tienes `gh`:
+
+1) Crea el repo en GitHub: https://github.com/new  (nombre: reformasB)
+
+2) Desde la carpeta del proyecto ejecuta:
+
+```bash
+git init
+git add .
+git commit -m "Demo: publicar sitio reformasB"
+git branch -M main
+git remote add origin https://github.com/slvk420/reformasB.git
+git push -u origin main
+```
+
+3) Ve a Settings → Pages y configura la rama `main` y la carpeta `/ (root)` o espera a que Actions despliegue automáticamente.
+
+La URL será: https://slvk420.github.io/reformasB/

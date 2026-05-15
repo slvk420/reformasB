@@ -1,0 +1,49 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install & Build (if package.json)
+        id: build
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+            if npm run | grep -q "build"; then
+              npm run build
+            fi
+          fi
+
+      - name: Determine publish folder
+        id: determine
+        run: |
+          if [ -d dist ]; then echo "publish_folder=dist" >> $GITHUB_OUTPUT
+          elif [ -d build ]; then echo "publish_folder=build" >> $GITHUB_OUTPUT
+          elif [ -d public ]; then echo "publish_folder=public" >> $GITHUB_OUTPUT
+          else echo "publish_folder=." >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ${{ steps.determine.outputs.publish_folder }}
+
+      - name: Deploy to Pages
+        uses: actions/deploy-pages@v1
