@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
 
-Sitemap: https://www.riureformaslleida.es/sitemap.xml
+Sitemap: https://www.reformasb.es/sitemap.xml
