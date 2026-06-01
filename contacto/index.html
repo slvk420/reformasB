@@ -4,310 +4,523 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contacto | RSB Reformas en Lleida</title>
-  <meta name="description" content="Contacta con RSB para ordenar una reforma, obra nueva, fachada, tejado o rehabilitacion en Lleida." />
-  <link rel="stylesheet" href="/reformasB/_next/static/css/8aa0ef5edcd4965e.css" />
-  <link rel="icon" href="/favicon.ico" />
+  <meta name="description" content="Contacta con RSB para valorar una reforma, obra nueva, fachada, tejado o rehabilitacion en Lleida." />
+  <link rel="stylesheet" href="../_next/static/css/8aa0ef5edcd4965e.css" />
+  <link rel="icon" href="../favicon.ico" />
   <style>
     :root {
-      --contact-dark: #080d0b;
-      --contact-ink: #111815;
-      --contact-warm: #f4d5bf;
-      --contact-paper: #fffdf8;
+      --rsb-ink: #121a17;
+      --rsb-night: #07100d;
+      --rsb-paper: #fffdf8;
+      --rsb-soft: #f4f1ec;
+      --rsb-copper: #a65f3f;
+      --rsb-warm: #f2d2be;
+      --rsb-line: rgba(18, 26, 23, .16);
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body.contact-page {
       min-height: 100vh;
       margin: 0;
-      background: var(--contact-dark);
-      color: #fff;
+      color: var(--rsb-ink);
+      background: var(--rsb-paper);
+      font-family: var(--font-sans), Arial, sans-serif;
       overflow-x: hidden;
     }
 
-    .contact-page .site-header {
+    .contact-header {
+      z-index: 20;
+      width: min(100% - 48px, 1760px);
+      min-height: 82px;
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: minmax(92px, 1fr) auto minmax(180px, 1fr);
+      align-items: center;
+      gap: 18px;
+      position: absolute;
+      inset: 0 0 auto;
+    }
+
+    .contact-logo {
+      width: 92px;
+      height: 76px;
+      display: inline-grid;
+      place-items: center;
+    }
+
+    .contact-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .45));
+    }
+
+    .contact-nav,
+    .contact-actions-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .contact-nav {
+      justify-self: center;
+    }
+
+    .contact-actions-top {
+      justify-self: end;
+    }
+
+    .contact-nav a,
+    .contact-phone {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
       color: #fff;
-      background: linear-gradient(180deg, rgba(8, 13, 11, .9), rgba(8, 13, 11, 0));
-    }
-
-    .contact-page .desktop-nav a,
-    .contact-page .phone-link {
-      background: rgba(255, 255, 255, .08);
-      border-color: rgba(255, 255, 255, .22);
-    }
-
-    .contact-page .phone-link span {
-      display: inline;
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 900;
+      backdrop-filter: blur(10px);
     }
 
     .contact-hero {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: minmax(0, .95fr) minmax(420px, .72fr);
-      position: relative;
-      isolation: isolate;
-    }
-
-    .contact-visual {
-      position: relative;
-      min-height: 100vh;
-      overflow: hidden;
-      order: 2;
-    }
-
-    .contact-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      filter: saturate(.92) contrast(1.05);
-    }
-
-    .contact-visual::after {
-      content: "";
-      position: absolute;
-      inset: 0;
+      color: #fff;
       background:
-        linear-gradient(90deg, rgba(8, 13, 11, .96), rgba(8, 13, 11, .48) 38%, rgba(8, 13, 11, .08)),
-        linear-gradient(0deg, rgba(8, 13, 11, .62), rgba(8, 13, 11, 0) 42%);
+        radial-gradient(circle at 80% 16%, rgba(166, 95, 63, .26), transparent 28%),
+        linear-gradient(135deg, #07100d, #111a16 62%, #070b09);
+      padding: 128px clamp(22px, 4vw, 76px) 74px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-hero::after {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      inset: auto 0 0;
+      height: 34%;
+      background: linear-gradient(0deg, rgba(255, 253, 248, 1), rgba(255, 253, 248, 0));
+    }
+
+    .contact-shell {
+      width: min(100%, 1720px);
+      min-height: calc(100vh - 202px);
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: minmax(420px, .78fr) minmax(560px, 1.08fr);
+      align-items: center;
+      gap: clamp(34px, 5vw, 86px);
+      position: relative;
+      z-index: 1;
     }
 
     .contact-copy {
-      order: 1;
-      align-self: center;
-      padding: 112px clamp(24px, 5vw, 76px) 54px;
-      position: relative;
-      z-index: 2;
-      min-width: 0;
-      width: 100%;
+      max-width: 720px;
+    }
+
+    .contact-kicker {
+      margin: 0 0 16px;
+      color: var(--rsb-warm);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-size: .78rem;
+      font-weight: 950;
     }
 
     .contact-copy h1 {
-      max-width: min(840px, 100%);
       margin: 0;
       font-family: var(--font-serif), Georgia, serif;
-      font-size: clamp(3.2rem, 5.9vw, 6.5rem);
-      line-height: .88;
+      font-size: clamp(3.35rem, 5vw, 5.95rem);
+      line-height: .9;
       letter-spacing: 0;
       text-wrap: balance;
     }
 
     .contact-copy h1 span {
       display: block;
-      color: var(--contact-warm);
+      color: var(--rsb-warm);
     }
 
-    .contact-copy > p:not(.eyebrow) {
-      max-width: min(620px, 100%);
-      margin: 28px 0 0;
-      color: rgba(255, 255, 255, .76);
-      font-size: clamp(1.05rem, 1.45vw, 1.28rem);
-      line-height: 1.58;
+    .contact-lead {
+      max-width: 620px;
+      margin: 26px 0 0;
+      color: rgba(255, 255, 255, .78);
+      font-size: clamp(1.05rem, 1.35vw, 1.24rem);
+      line-height: 1.62;
     }
 
     .contact-panel {
-      width: min(100%, 640px);
+      width: min(100%, 720px);
       margin-top: 28px;
-      color: var(--contact-ink);
-      background: var(--contact-paper);
-      border: 1px solid rgba(255, 255, 255, .18);
-      box-shadow: 0 34px 110px rgba(0, 0, 0, .42);
-      padding: clamp(20px, 3vw, 30px);
+      background: var(--rsb-paper);
+      color: var(--rsb-ink);
+      border: 1px solid rgba(255, 255, 255, .26);
+      box-shadow: 0 34px 100px rgba(0, 0, 0, .42);
+      padding: clamp(22px, 2.4vw, 30px);
+      display: block !important;
+    }
+
+    .contact-panel-row {
       display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 18px 22px;
+      grid-template-columns: 210px 1fr;
+      gap: 18px;
+      align-items: start;
     }
 
     .contact-panel h2 {
       margin: 0;
       font-family: "Nippo", var(--font-sans), Arial, sans-serif;
-      font-size: clamp(1.65rem, 2.2vw, 2.25rem);
-      line-height: 1;
+      font-size: clamp(1.75rem, 2.2vw, 2.4rem);
+      line-height: .96;
       letter-spacing: -.035em;
     }
 
     .contact-panel p {
-      margin: 13px 0 0;
-      color: #58615d;
+      margin: 0;
+      color: #59615d;
       line-height: 1.55;
     }
 
-    .contact-actions {
+    .contact-buttons {
       display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
       margin-top: 22px;
-      grid-column: 1 / -1;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: start;
     }
 
-    .contact-actions a {
-      min-height: 54px;
+    .contact-buttons a {
+      height: 58px;
+      min-height: 58px;
+      max-height: 58px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 18px;
-      color: var(--contact-ink);
-      border: 1px solid rgba(17, 24, 21, .18);
+      gap: 12px;
+      padding: 0 16px;
+      color: var(--rsb-ink);
+      border: 1px solid var(--rsb-line);
       text-decoration: none;
       font-weight: 950;
-      line-height: 1.15;
+      line-height: 1.12;
+      overflow: hidden;
     }
 
-    .contact-actions a:first-child {
+    .contact-buttons a:first-child {
       color: #fff;
-      background: var(--contact-ink);
-      border-color: var(--contact-ink);
+      background: var(--rsb-ink);
+      border-color: var(--rsb-ink);
     }
 
-    .contact-actions a span {
-      margin-left: 12px;
-      white-space: nowrap;
-    }
-
-    .contact-brief {
-      width: min(100% - 48px, 1180px);
-      margin: -64px auto 0;
+    .contact-media {
+      margin: 0;
+      min-height: clamp(520px, 64vh, 700px);
       position: relative;
-      z-index: 3;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .18);
+      box-shadow: 0 42px 130px rgba(0, 0, 0, .45);
+      background: #101714;
+    }
+
+    .contact-media img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(.95) contrast(1.04);
+    }
+
+    .contact-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(7, 16, 13, .56), rgba(7, 16, 13, .05) 46%),
+        linear-gradient(0deg, rgba(7, 16, 13, .42), transparent 46%);
+    }
+
+    .contact-caption {
+      z-index: 2;
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      width: min(420px, calc(100% - 40px));
+      padding: 16px 18px;
+      color: #fff;
+      background: rgba(7, 16, 13, .72);
+      border: 1px solid rgba(255, 255, 255, .16);
+      backdrop-filter: blur(14px);
+    }
+
+    .contact-caption strong {
+      display: block;
+      color: var(--rsb-warm);
+      font-family: "Nippo", var(--font-sans), Arial, sans-serif;
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .contact-caption span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, .76);
+      line-height: 1.45;
+    }
+
+    .contact-steps {
+      padding: 76px clamp(22px, 4vw, 76px) 86px;
+      background: var(--rsb-paper);
+    }
+
+    .contact-steps-shell {
+      width: min(100%, 1320px);
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: minmax(260px, .55fr) minmax(0, 1fr);
+      gap: clamp(28px, 5vw, 78px);
+      align-items: start;
+    }
+
+    .contact-steps h2 {
+      margin: 0;
+      font-family: "Nippo", var(--font-sans), Arial, sans-serif;
+      font-size: clamp(2.05rem, 4vw, 4.4rem);
+      line-height: .95;
+      letter-spacing: -.04em;
+    }
+
+    .contact-steps p {
+      margin: 16px 0 0;
+      color: #59615d;
+      line-height: 1.6;
+    }
+
+    .step-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      background: rgba(255, 255, 255, .08);
-      border: 1px solid rgba(255, 255, 255, .12);
-      backdrop-filter: blur(16px);
+      border: 1px solid var(--rsb-line);
+      background: #fff;
     }
 
-    .contact-brief div {
-      min-height: 132px;
-      padding: 22px;
-      border-right: 1px solid rgba(255, 255, 255, .12);
-      background: rgba(8, 13, 11, .58);
+    .step-card {
+      min-height: 188px;
+      padding: 24px;
+      border-right: 1px solid var(--rsb-line);
     }
 
-    .contact-brief div:last-child {
+    .step-card:last-child {
       border-right: 0;
     }
 
-    .contact-brief strong {
+    .step-card strong {
       display: block;
-      color: var(--contact-warm);
+      color: var(--rsb-copper);
       font-family: "Nippo", var(--font-sans), Arial, sans-serif;
       font-size: 1.35rem;
       line-height: 1;
     }
 
-    .contact-brief span {
+    .step-card span {
       display: block;
-      margin-top: 11px;
-      color: rgba(255, 255, 255, .7);
-      line-height: 1.45;
+      margin-top: 14px;
+      color: #59615d;
+      line-height: 1.5;
     }
 
-    @media (max-width: 980px) {
-      .contact-hero {
-        grid-template-columns: 1fr;
+    @media (max-width: 1120px) {
+      .contact-header {
+        grid-template-columns: 1fr auto;
       }
 
-      .contact-visual {
-        order: 1;
-        min-height: 38vh;
+      .contact-nav {
+        display: none;
+      }
+
+      .contact-shell {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .contact-media {
+        min-height: 420px;
+        order: -1;
       }
 
       .contact-copy {
-        order: 2;
-        padding-top: 38px;
+        max-width: 820px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .contact-header {
+        width: min(100% - 24px, 1760px);
+        min-height: 72px;
+      }
+
+      .contact-logo {
+        width: 70px;
+        height: 60px;
+      }
+
+      .contact-phone {
+        width: 86px;
+        min-height: 40px;
+        padding-inline: 12px;
+        font-size: 0;
+      }
+
+      .contact-phone::after {
+        content: "Llamar";
+        font-size: .82rem;
+      }
+
+      .contact-actions-top {
+        display: none;
+      }
+
+      .contact-hero {
+        padding: 92px 12px 46px;
+      }
+
+      .contact-shell {
+        width: 100%;
+        min-width: 0;
+        overflow: hidden;
+      }
+
+      .contact-media {
+        min-height: 265px;
       }
 
       .contact-copy h1 {
-        font-size: clamp(3rem, 12vw, 5.4rem);
+        max-width: calc(100vw - 24px);
+        font-size: clamp(2.25rem, 9.5vw, 2.75rem);
+        line-height: .94;
+      }
+
+      .contact-lead,
+      .contact-copy {
+        width: min(100%, 340px);
+        max-width: 340px;
+        overflow-wrap: break-word;
       }
 
       .contact-panel {
         width: 100%;
+        max-width: 100%;
+      }
+
+      .contact-panel-row,
+      .contact-buttons,
+      .contact-steps-shell,
+      .step-grid {
         grid-template-columns: 1fr;
       }
 
-      .contact-actions {
-        grid-template-columns: 1fr;
+      .contact-buttons a {
+        min-height: 54px;
       }
 
-      .contact-brief {
-        grid-template-columns: 1fr;
-        margin-top: 0;
-        width: min(100% - 24px, 720px);
+      .contact-caption {
+        display: none;
       }
 
-      .contact-brief div {
+      .contact-steps {
+        padding: 56px 12px 72px;
+      }
+
+      .step-card {
+        min-height: auto;
         border-right: 0;
-        border-bottom: 1px solid rgba(255, 255, 255, .12);
-      }
-    }
-
-    @media (max-width: 520px) {
-      .contact-copy {
-        padding: 34px 24px 42px;
+        border-bottom: 1px solid var(--rsb-line);
       }
 
-      .contact-copy h1 {
-        max-width: 340px;
-        font-size: clamp(2.05rem, 8.8vw, 2.45rem);
-        line-height: .92;
-      }
-
-      .contact-copy > p:not(.eyebrow) {
-        max-width: 340px;
-        font-size: .98rem;
-      }
-
-      .contact-panel {
-        padding: 18px;
+      .step-card:last-child {
+        border-bottom: 0;
       }
     }
   </style>
 </head>
 <body class="contact-page">
-  <header class="site-header is-page">
-    <a class="brand" aria-label="RSB - inicio" href="/reformasB/">
-      <span class="brand-logo-shell" aria-hidden="true">
-        <img alt="" class="brand-logo" src="/reformasB/_next/static/media/logo-rsb-full.5ada7e7b.png" />
-      </span>
+  <header class="contact-header" aria-label="Cabecera RSB">
+    <a class="contact-logo" aria-label="RSB - inicio" href="../index.html">
+      <img alt="RSB Reformas" src="../_next/static/media/logo-rsb-full.5ada7e7b.png" />
     </a>
-    <nav class="desktop-nav" aria-label="Navegacion principal">
-      <a href="/reformasB/#presupuesto">Pedir visita</a>
-      <a href="/reformasB/#proceso">Proceso</a>
-      <a href="/reformasB/contacto/index.html">Contacto</a>
+
+    <nav class="contact-nav" aria-label="Navegacion principal">
+      <a href="../index.html#presupuesto">Pedir visita</a>
+      <a href="../index.html#proceso">Proceso</a>
+      <a href="index.html">Contacto</a>
     </nav>
-    <div class="header-actions">
-      <a class="phone-link" href="tel:+34605065700" aria-label="Llamar a +34 605 065 700">
-        <span>+34 605 065 700</span>
-      </a>
+
+    <div class="contact-actions-top">
+      <a class="contact-phone" href="tel:+34605065700">+34 605 065 700</a>
     </div>
   </header>
 
   <main id="main">
     <section class="contact-hero">
-      <div class="contact-visual" aria-hidden="true">
-        <img src="/reformasB/reformas/hero-rsb.jpg" alt="" />
-      </div>
+      <div class="contact-shell">
+        <div class="contact-copy">
+          <p class="contact-kicker">Contacto RSB</p>
+          <h1>Env&iacute;anos 3 fotos. <span>Ordenamos el siguiente paso.</span></h1>
+          <p class="contact-lead">Sin formularios largos. M&aacute;ndanos fotos, zona aproximada y qu&eacute; quieres conseguir. Te diremos si conviene llamada, visita o una primera lectura visual.</p>
 
-      <div class="contact-copy">
-        <p class="eyebrow">Contacto RSB</p>
-        <h1>Envíanos 3 fotos. <span>Ordenamos el siguiente paso.</span></h1>
-        <p>Sin formularios largos. Mándanos fotos, zona aproximada y qué quieres conseguir. Te diremos si conviene llamada, visita o una primera lectura visual.</p>
+          <section class="contact-panel" aria-label="Contacto rapido">
+            <div class="contact-panel-row">
+              <h2>Respuesta directa.</h2>
+              <p>Para avanzar r&aacute;pido, usa WhatsApp. Si prefieres hablar, llama directamente. Si quieres dejarlo por escrito, env&iacute;a un email con fotos y medidas aproximadas.</p>
+            </div>
+            <div class="contact-buttons">
+              <a href="https://wa.me/34605065700?text=Hola%20RSB%2C%20quiero%20valorar%20una%20reforma.%20Puedo%20enviar%20fotos.">WhatsApp con fotos <span>&gt;</span></a>
+              <a href="tel:+34605065700">Llamar ahora <span>&gt;</span></a>
+              <a href="mailto:reformasb.oficial@gmail.com?subject=Consulta%20reforma%20RSB">Enviar email <span>&gt;</span></a>
+            </div>
+          </section>
+        </div>
 
-        <section class="contact-panel" aria-label="Contacto rapido">
-          <h2>Respuesta directa.</h2>
-          <p>Para avanzar rápido, usa WhatsApp. Si prefieres hablar, llama directamente.</p>
-          <div class="contact-actions">
-            <a href="https://wa.me/34605065700?text=Hola%20RSB%2C%20quiero%20valorar%20una%20reforma.%20Puedo%20enviar%20fotos.">WhatsApp con fotos <span>&gt;</span></a>
-            <a href="tel:+34605065700">Llamar ahora <span>&gt;</span></a>
-            <a href="mailto:reformasb.oficial@gmail.com?subject=Consulta%20reforma%20RSB">Enviar email <span>&gt;</span></a>
-          </div>
-        </section>
+        <figure class="contact-media">
+          <img src="../reformas/hero-rsb.jpg" alt="Vivienda reformada con salon y cocina iluminados" />
+          <figcaption class="contact-caption">
+            <strong>Primero claridad. Despu&eacute;s obra.</strong>
+            <span>Una primera lectura visual evita presupuestos a ciegas y decisiones improvisadas.</span>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
-    <section class="contact-brief" aria-label="Que enviar">
-      <div><strong>01 / Fotos</strong><span>Vista general, detalle del problema y una referencia de lo que quieres lograr.</span></div>
-      <div><strong>02 / Zona</strong><span>Lleida o municipio cercano, tipo de vivienda/local y si hay urgencia de fechas.</span></div>
-      <div><strong>03 / Objetivo</strong><span>Reforma integral, cocina, baño, fachada, terraza, tejado u obra nueva.</span></div>
+    <section class="contact-steps" aria-label="Que enviar">
+      <div class="contact-steps-shell">
+        <div>
+          <p class="contact-kicker">Para no perder tiempo</p>
+          <h2>Qu&eacute; enviar en el primer mensaje.</h2>
+          <p>Con tres datos podemos responder con m&aacute;s criterio y decidir si toca llamada, visita o una primera orientaci&oacute;n.</p>
+        </div>
+
+        <div class="step-grid">
+          <div class="step-card">
+            <strong>01 / Fotos</strong>
+            <span>Vista general, detalle del problema y una referencia de lo que quieres lograr.</span>
+          </div>
+          <div class="step-card">
+            <strong>02 / Zona</strong>
+            <span>Lleida o municipio cercano, tipo de vivienda o local y si hay urgencia de fechas.</span>
+          </div>
+          <div class="step-card">
+            <strong>03 / Objetivo</strong>
+            <span>Reforma integral, cocina, ba&ntilde;o, fachada, terraza, tejado u obra nueva.</span>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 </body>
