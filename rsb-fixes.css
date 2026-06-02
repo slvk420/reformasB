@@ -87,6 +87,31 @@ html.rsb-skip-intro .brand-intro {
   border-color: rgba(242, 210, 190, .55) !important;
 }
 
+.site-header .mobile-nav,
+.site-header.is-page .mobile-nav,
+.site-header.is-scrolled .mobile-nav,
+.site-header.menu-open .mobile-nav {
+  color: var(--color-ink) !important;
+  background: rgba(255, 253, 248, .98) !important;
+  border-color: rgba(24, 32, 29, .18) !important;
+  z-index: 80 !important;
+}
+
+.site-header .mobile-nav a,
+.site-header.is-page .mobile-nav a,
+.site-header.is-scrolled .mobile-nav a,
+.site-header.menu-open .mobile-nav a {
+  color: var(--color-ink) !important;
+  background: transparent !important;
+  border-color: rgba(24, 32, 29, .12) !important;
+}
+
+.site-header .mobile-nav a:hover,
+.site-header .mobile-nav a:focus-visible {
+  color: var(--color-copper) !important;
+  background: rgba(166, 95, 63, .09) !important;
+}
+
 .editorial-hero {
   padding-top: 0 !important;
   min-height: 100dvh !important;
