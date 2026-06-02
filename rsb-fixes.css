@@ -1,0 +1,125 @@
+.brand-intro {
+  display: none !important;
+}
+
+.hero-copy,
+.hero-editorial-media {
+  animation: none !important;
+  opacity: 1 !important;
+}
+
+.hero-editorial-media img {
+  opacity: 1 !important;
+}
+
+.site-header,
+.site-header.is-page,
+.site-header.is-scrolled,
+.site-header.menu-open {
+  min-height: 76px !important;
+  color: #fff !important;
+  background: rgba(7, 16, 13, .92) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, .12) !important;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .18) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+.site-header .desktop-nav a,
+.site-header.is-page .desktop-nav a,
+.site-header.is-scrolled .desktop-nav a,
+.site-header.menu-open .desktop-nav a,
+.site-header .phone-link,
+.site-header.is-page .phone-link,
+.site-header.is-scrolled .phone-link,
+.site-header.menu-open .phone-link,
+.site-header .mobile-menu-button,
+.site-header.is-page .mobile-menu-button,
+.site-header.is-scrolled .mobile-menu-button,
+.site-header.menu-open .mobile-menu-button {
+  color: #fff !important;
+  background: rgba(255, 255, 255, .1) !important;
+  border-color: rgba(255, 255, 255, .2) !important;
+}
+
+.site-header .desktop-nav a:hover,
+.site-header .phone-link:hover {
+  background: rgba(255, 255, 255, .18) !important;
+  border-color: rgba(242, 210, 190, .55) !important;
+}
+
+.editorial-hero {
+  padding-top: 76px !important;
+}
+
+.editorial-hero .hero-content {
+  min-height: calc(100dvh - 76px) !important;
+  padding-top: clamp(86px, 10vh, 112px) !important;
+}
+
+.more-services-hero {
+  min-height: auto !important;
+  padding: 124px 0 72px !important;
+}
+
+.more-services-hero-inner {
+  display: grid !important;
+  gap: clamp(34px, 4vw, 58px) !important;
+}
+
+.more-services-topbar {
+  margin: 0 !important;
+}
+
+.more-services-magazine-layout {
+  align-items: center !important;
+  gap: clamp(34px, 5vw, 76px) !important;
+}
+
+.more-services-hero h1 {
+  max-width: 820px !important;
+  font-size: clamp(3rem, 5.1vw, 5.9rem) !important;
+  line-height: .94 !important;
+}
+
+.magazine-photo-left {
+  min-height: clamp(440px, 58vh, 640px) !important;
+}
+
+@media (max-width: 1024px) {
+  .site-header,
+  .site-header.is-page,
+  .site-header.is-scrolled,
+  .site-header.menu-open {
+    min-height: 72px !important;
+  }
+
+  .more-services-hero {
+    padding: 104px 0 56px !important;
+  }
+
+  .more-services-magazine-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .magazine-photo-left {
+    min-height: 360px !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .site-header,
+  .site-header.is-page,
+  .site-header.is-scrolled,
+  .site-header.menu-open {
+    min-height: 66px !important;
+  }
+
+  .editorial-hero .hero-content {
+    padding-top: 86px !important;
+  }
+
+  .more-services-hero h1 {
+    font-size: clamp(2.25rem, 10vw, 3.25rem) !important;
+  }
+}
