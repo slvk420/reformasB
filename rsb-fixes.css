@@ -58,7 +58,7 @@ html.rsb-skip-intro .brand-intro {
   min-height: 76px !important;
   color: #fff !important;
   background: rgba(7, 16, 13, .92) !important;
-  border-bottom: 1px solid rgba(7, 16, 13, .92) !important;
+  border-bottom: 0 !important;
   box-shadow: none !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
@@ -90,6 +90,7 @@ html.rsb-skip-intro .brand-intro {
 .editorial-hero {
   padding-top: 0 !important;
   min-height: 100dvh !important;
+  margin-top: -1px !important;
 }
 
 .editorial-hero .hero-content {
@@ -107,10 +108,6 @@ html.rsb-skip-intro .brand-intro {
   max-width: 980px !important;
   font-size: clamp(3.35rem, 4.55vw, 5.25rem) !important;
   line-height: .92 !important;
-}
-
-.webgl-frame canvas {
-  display: none !important;
 }
 
 .webgl-frame {
