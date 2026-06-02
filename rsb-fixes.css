@@ -58,8 +58,8 @@ html.rsb-skip-intro .brand-intro {
   min-height: 76px !important;
   color: #fff !important;
   background: rgba(7, 16, 13, .92) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, .12) !important;
-  box-shadow: 0 18px 48px rgba(0, 0, 0, .18) !important;
+  border-bottom: 1px solid rgba(7, 16, 13, .92) !important;
+  box-shadow: none !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
 }
@@ -88,12 +88,33 @@ html.rsb-skip-intro .brand-intro {
 }
 
 .editorial-hero {
-  padding-top: 76px !important;
+  padding-top: 0 !important;
+  min-height: 100dvh !important;
 }
 
 .editorial-hero .hero-content {
-  min-height: calc(100dvh - 76px) !important;
-  padding-top: clamp(86px, 10vh, 112px) !important;
+  min-height: 100dvh !important;
+  padding-top: clamp(112px, 13vh, 150px) !important;
+  padding-bottom: clamp(36px, 5vh, 64px) !important;
+  align-content: start !important;
+}
+
+.editorial-hero .hero-copy {
+  margin-top: 0 !important;
+}
+
+.editorial-hero h1 {
+  max-width: 980px !important;
+  font-size: clamp(3.35rem, 4.55vw, 5.25rem) !important;
+  line-height: .92 !important;
+}
+
+.webgl-frame canvas {
+  display: none !important;
+}
+
+.webgl-frame {
+  background: transparent !important;
 }
 
 .more-services-hero {
