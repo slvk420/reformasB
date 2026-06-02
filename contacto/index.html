@@ -7,6 +7,11 @@
   <meta name="description" content="Contacta con RSB para valorar una reforma, obra nueva, fachada, tejado o rehabilitacion." />
   <link rel="stylesheet" href="../_next/static/css/8aa0ef5edcd4965e.css" />
   <link rel="icon" href="../favicon.ico" />
+  <script>
+    try {
+      localStorage.setItem("rsbSeenIntro", "1");
+    } catch (e) {}
+  </script>
   <style>
     :root {
       --contact-ink: #101714;
@@ -176,7 +181,7 @@
     .contact-buttons {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
+      gap: 14px;
       margin-top: 22px;
     }
 
@@ -190,6 +195,7 @@
       color: var(--contact-ink);
       background: #fffdf8;
       border: 1px solid rgba(16, 23, 20, .16);
+      border-radius: 0;
       text-decoration: none;
       font-weight: 950;
       line-height: 1.12;
@@ -211,21 +217,17 @@
       max-width: 1040px;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      border: 1px solid rgba(255, 255, 255, .18);
-      background: rgba(7, 13, 11, .72);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      gap: 16px;
     }
 
     .step-card {
       min-height: 128px;
       padding: 22px;
-      border-right: 1px solid rgba(255, 255, 255, .14);
-      background: rgba(7, 13, 11, .76) !important;
-    }
-
-    .step-card:last-child {
-      border-right: 0;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 14px;
+      background: rgba(7, 13, 11, .78) !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     .step-card strong {
@@ -340,19 +342,13 @@
 
       .step-card {
         min-height: auto;
-        border-right: 0;
-        border-bottom: 1px solid rgba(255, 255, 255, .14);
-      }
-
-      .step-card:last-child {
-        border-bottom: 0;
       }
     }
   </style>
 </head>
 <body class="contact-page">
   <header class="contact-header" aria-label="Cabecera RSB">
-    <a class="contact-logo" href="../index.html" aria-label="RSB - inicio">
+    <a class="contact-logo" href="../index.html?skipIntro=1" aria-label="RSB - inicio">
       <img src="../_next/static/media/logo-rsb-full.5ada7e7b.png" alt="RSB Reformas" />
     </a>
 

@@ -1,5 +1,36 @@
-.brand-intro {
+html.rsb-skip-intro .brand-intro {
   display: none !important;
+}
+
+.brand-intro-inner strong {
+  font-size: 0 !important;
+}
+
+.brand-intro-inner strong::after {
+  content: "RSB Reformas";
+  display: block;
+  color: #fffdf8;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2.35rem, 5vw, 4.9rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: .92;
+}
+
+.brand-loader svg {
+  display: none !important;
+}
+
+.brand-loader::before {
+  content: "";
+  width: 38px;
+  height: 38px;
+  display: block;
+  border: 3px solid rgba(242, 210, 190, .95);
+  border-top-color: transparent;
+  border-left-color: #a65f3f;
+  transform: rotate(45deg);
+  box-shadow: 12px 12px 0 -8px rgba(255, 253, 248, .85);
 }
 
 .hero-copy,
