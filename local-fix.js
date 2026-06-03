@@ -1,8 +1,16 @@
 (function () {
-  if (window.location.protocol !== "file:") return;
+  var isFile = window.location.protocol === "file:";
+  var isGithubPages =
+    window.location.hostname === "slvk420.github.io" &&
+    window.location.pathname.indexOf("/reformasB") === 0;
+
+  if (!isFile && !isGithubPages) return;
 
   var isSubpage = /\/(?:contacto|mas-servicios)\//.test(window.location.pathname.replace(/\\/g, "/"));
-  var rootUrl = new URL(isSubpage ? "../" : "./", window.location.href);
+  var rootUrl = isGithubPages
+    ? new URL("/reformasB/", window.location.origin)
+    : new URL(isSubpage ? "../" : "./", window.location.href);
+
   document.documentElement.classList.add("rsb-skip-intro");
 
   function rootPath(path) {
@@ -36,16 +44,16 @@
         link.setAttribute("href", rootPath("mas-servicios/"));
       }
       if (href.indexOf("/reformasB/contacto") === 0 || href === "/contacto" || href === "/contacto/") {
-        link.setAttribute("href", rootPath("contacto/index.html"));
+        link.setAttribute("href", rootPath("contacto/"));
       }
-      if (href === "/" || href === "/reformasB/") {
-        link.setAttribute("href", rootPath("index.html?skipIntro=1"));
+      if (href === "/" || href === "/reformasB/" || href === "./?skipIntro=1" || href === "../?skipIntro=1") {
+        link.setAttribute("href", rootPath("?skipIntro=1"));
       }
       if (href === "/#presupuesto" || href === "/reformasB/#presupuesto") {
-        link.setAttribute("href", rootPath("index.html?skipIntro=1#presupuesto"));
+        link.setAttribute("href", rootPath("?skipIntro=1#presupuesto"));
       }
       if (href === "/#proceso" || href === "/reformasB/#proceso") {
-        link.setAttribute("href", rootPath("index.html?skipIntro=1#proceso"));
+        link.setAttribute("href", rootPath("?skipIntro=1#proceso"));
       }
     });
   }
@@ -59,24 +67,24 @@
       var href = link.getAttribute("href");
       if (!href || /^(?:tel:|mailto:|https?:)/i.test(href)) return;
 
-      if (href === "/" || href === "/reformasB/" || href === "index.html?skipIntro=1") {
+      if (href === "/" || href === "/reformasB/" || href === "./?skipIntro=1" || href === "../?skipIntro=1") {
         event.preventDefault();
-        window.location.href = rootPath("index.html?skipIntro=1");
+        window.location.href = rootPath("?skipIntro=1");
         return;
       }
 
       if (href === "/#presupuesto" || href === "#presupuesto") {
-        if (!/\/index\.html(?:\?|$)/.test(window.location.pathname)) {
+        if (!/\/(?:index\.html)?(?:\?|$)/.test(window.location.pathname)) {
           event.preventDefault();
-          window.location.href = rootPath("index.html?skipIntro=1#presupuesto");
+          window.location.href = rootPath("?skipIntro=1#presupuesto");
         }
         return;
       }
 
       if (href === "/#proceso" || href === "#proceso") {
-        if (!/\/index\.html(?:\?|$)/.test(window.location.pathname)) {
+        if (!/\/(?:index\.html)?(?:\?|$)/.test(window.location.pathname)) {
           event.preventDefault();
-          window.location.href = rootPath("index.html?skipIntro=1#proceso");
+          window.location.href = rootPath("?skipIntro=1#proceso");
         }
         return;
       }
@@ -89,7 +97,7 @@
 
       if (href.indexOf("/reformasB/contacto") === 0 || href === "/contacto" || href === "/contacto/") {
         event.preventDefault();
-        window.location.href = rootPath("contacto/index.html");
+        window.location.href = rootPath("contacto/");
       }
     },
     true
