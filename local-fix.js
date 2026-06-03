@@ -33,7 +33,7 @@
       var href = link.getAttribute("href");
       if (!href) return;
       if (href === "/mas-servicios" || href === "/mas-servicios/" || href.indexOf("/reformasB/mas-servicios") === 0) {
-        link.setAttribute("href", rootPath("mas-servicios/index.html"));
+        link.setAttribute("href", rootPath("mas-servicios/"));
       }
       if (href.indexOf("/reformasB/contacto") === 0 || href === "/contacto" || href === "/contacto/") {
         link.setAttribute("href", rootPath("contacto/index.html"));
@@ -83,7 +83,7 @@
 
       if (href === "/mas-servicios" || href === "/mas-servicios/" || href.indexOf("/reformasB/mas-servicios") === 0) {
         event.preventDefault();
-        window.location.href = rootPath("mas-servicios/index.html");
+        window.location.href = rootPath("mas-servicios/");
         return;
       }
 
