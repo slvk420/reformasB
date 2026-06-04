@@ -224,7 +224,47 @@ html.rsb-skip-intro .brand-intro {
     padding-top: 86px !important;
   }
 
+  .editorial-hero .hero-copy {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .editorial-hero h1 {
+    width: min(100%, 21rem) !important;
+    max-width: 100% !important;
+    font-size: clamp(2rem, 8.6vw, 2.4rem) !important;
+    line-height: 1.04 !important;
+    text-wrap: balance;
+    white-space: normal !important;
+    overflow-wrap: normal;
+  }
+
+  .editorial-hero h1 span {
+    display: block !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+
+  .editorial-hero .hero-description {
+    width: min(100%, 21rem) !important;
+    max-width: 100% !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+
   .more-services-hero h1 {
     font-size: clamp(2.25rem, 10vw, 3.25rem) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .editorial-hero h1 {
+    width: min(100%, 20rem) !important;
+    font-size: clamp(1.88rem, 8.45vw, 2.08rem) !important;
+    line-height: 1.05 !important;
+  }
+
+  .editorial-hero .hero-description {
+    width: min(100%, 20rem) !important;
   }
 }
