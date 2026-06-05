@@ -49,6 +49,8 @@
       var src = normalizeAsset(img.getAttribute("src"));
       if (src && src !== img.getAttribute("src")) img.setAttribute("src", src);
       if (img.hasAttribute("srcset")) img.removeAttribute("srcset");
+      if (img.getAttribute("loading") === "lazy") img.setAttribute("loading", "eager");
+      if (!img.getAttribute("decoding")) img.setAttribute("decoding", "async");
     });
 
     document.querySelectorAll('a[href]').forEach(function (link) {
