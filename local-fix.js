@@ -398,6 +398,7 @@
   }
 
   function updateMoreServicesPage() {
+    document.documentElement.classList.add("rsb-more-services-page");
     var main = document.querySelector("main");
     if (!main) return;
 
