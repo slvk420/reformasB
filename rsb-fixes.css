@@ -762,4 +762,17 @@ html.rsb-more-services-page .more-services-editorial-section {
 
 html.rsb-more-services-page .rsb-sate-section {
   padding-top: clamp(22px, 3vw, 34px) !important;
+  scroll-margin-top: 96px;
+}
+
+@media (max-width: 720px) {
+  html.rsb-more-services-page .site-header,
+  html.rsb-more-services-page .site-header.is-page,
+  html.rsb-more-services-page .site-header.is-scrolled,
+  html.rsb-more-services-page .site-header.menu-open {
+    background: linear-gradient(180deg, rgba(255, 253, 248, .98), rgba(255, 253, 248, .9)) !important;
+    box-shadow: 0 12px 32px rgba(24, 32, 29, .08) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
 }
