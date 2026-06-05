@@ -519,6 +519,22 @@ html.rsb-skip-intro .brand-intro {
   width: 100%;
 }
 
+.rsb-ba-layer {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  inset: 0;
+  position: absolute;
+}
+
+.rsb-ba-layer-after {
+  background-image: var(--ba-after);
+}
+
+.rsb-ba-layer-before {
+  background-image: var(--ba-before);
+}
+
 .rsb-ba-before-wrap {
   clip-path: inset(0 calc(100% - var(--split, 52%)) 0 0);
   inset: 0;

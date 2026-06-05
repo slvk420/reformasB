@@ -229,6 +229,28 @@
     ].join("");
   }
 
+  function beforeAfterHtmlV3() {
+    return [
+      '<section class="rsb-before-after-section" aria-labelledby="rsb-before-after-title">',
+      '<div class="container rsb-before-after-grid">',
+      '<div class="rsb-before-after-copy">',
+      '<p class="eyebrow">Antes / despu&eacute;s interactivo</p>',
+      '<h2 id="rsb-before-after-title">Del edificio apagado a una visi&oacute;n con valor.</h2>',
+      '<p>La diferencia no est&aacute; solo en pintar bonito. Est&aacute; en ver el potencial, ordenar la idea y convertir una reforma en una decisi&oacute;n clara antes de gastar dinero.</p>',
+      '</div>',
+      '<div class="rsb-ba-frame rsb-ba-frame-v3" style="--split: 52%; --ba-after: url(' + rootPath("reformas/despues-comparador.jpg") + '); --ba-before: url(' + rootPath("reformas/antes-comparador.jpg") + ')">',
+      '<div class="rsb-ba-layer rsb-ba-layer-after" aria-label="Resultado reformado despu&eacute;s de la intervenci&oacute;n"></div>',
+      '<div class="rsb-ba-before-wrap"><div class="rsb-ba-layer rsb-ba-layer-before" aria-label="Estado inicial antes de la reforma"></div></div>',
+      '<input class="rsb-ba-range" type="range" min="0" max="100" value="52" aria-label="Comparar antes y despu&eacute;s"/>',
+      '<span class="rsb-ba-handle" aria-hidden="true"></span>',
+      '<span class="rsb-ba-label rsb-ba-label-before">Antes</span>',
+      '<span class="rsb-ba-label rsb-ba-label-after">Despu&eacute;s</span>',
+      '</div>',
+      '</div>',
+      '</section>'
+    ].join("");
+  }
+
   function sateSectionHtmlV2() {
     return [
       '<section class="rsb-sate-section" aria-labelledby="rsb-sate-title">',
@@ -377,7 +399,7 @@
     moveConstructionAfterSate();
 
     if (!document.querySelector(".rsb-before-after-section")) {
-      main.insertAdjacentHTML("beforeend", beforeAfterHtmlV2());
+      main.insertAdjacentHTML("beforeend", beforeAfterHtmlV3());
     }
 
     initBeforeAfter();
