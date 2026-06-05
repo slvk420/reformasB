@@ -485,9 +485,11 @@ html.rsb-skip-intro .brand-intro {
 
 .rsb-before-after-grid {
   display: grid;
-  grid-template-columns: minmax(280px, .42fr) minmax(440px, .78fr);
+  grid-template-columns: minmax(360px, .36fr) minmax(880px, 1.14fr);
   align-items: center;
-  gap: clamp(28px, 5vw, 68px);
+  gap: clamp(28px, 3.2vw, 58px);
+  max-width: min(1680px, calc(100vw - 96px));
+  width: min(1680px, calc(100vw - 96px));
 }
 
 .rsb-before-after-copy h2,
@@ -500,15 +502,16 @@ html.rsb-skip-intro .brand-intro {
 }
 
 .rsb-ba-frame {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   background: #0d1311;
   box-shadow: 0 28px 86px rgba(0, 0, 0, .38);
   cursor: ew-resize;
-  min-height: 340px;
+  min-height: clamp(460px, 34vw, 640px);
   overflow: hidden;
   position: relative;
   touch-action: none;
   user-select: none;
+  width: min(100%, 1180px);
 }
 
 .rsb-ba-img {
@@ -522,7 +525,7 @@ html.rsb-skip-intro .brand-intro {
 .rsb-ba-layer {
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   inset: 0;
   position: absolute;
 }
@@ -577,6 +580,7 @@ html.rsb-skip-intro .brand-intro {
 }
 
 .rsb-ba-handle {
+  animation: rsb-ba-pulse 1.9s ease-in-out infinite;
   background: #fffdf8;
   border: 3px solid var(--color-copper);
   border-radius: 999px;
@@ -589,6 +593,15 @@ html.rsb-skip-intro .brand-intro {
   transform: translate(-50%, -50%);
   width: 38px;
   z-index: 5;
+}
+
+@keyframes rsb-ba-pulse {
+  0%, 100% {
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .32), 0 0 0 0 rgba(166, 95, 63, .24);
+  }
+  50% {
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .32), 0 0 0 10px rgba(166, 95, 63, 0);
+  }
 }
 
 .rsb-ba-handle::before {
@@ -631,8 +644,9 @@ html.rsb-skip-intro .brand-intro {
 
   .rsb-sate-carousel,
   .rsb-ba-frame {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 11;
     min-height: 0;
+    width: 100%;
   }
 
   .rsb-construction-after-sate {
@@ -703,7 +717,7 @@ html.rsb-skip-intro .brand-intro {
   }
 
   .rsb-ba-frame {
-    aspect-ratio: 1 / 1.05;
+    aspect-ratio: 1 / 1.08;
     border: 1px solid rgba(255, 255, 255, .18);
   }
 

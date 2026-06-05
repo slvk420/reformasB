@@ -306,6 +306,7 @@
       range.addEventListener("input", update);
       frame.addEventListener("pointerdown", function (event) {
         event.preventDefault();
+        frame.dataset.rsbUserControlled = "1";
         if (frame.setPointerCapture) frame.setPointerCapture(event.pointerId);
         updateFromPointer(event);
       });
@@ -314,6 +315,14 @@
         updateFromPointer(event);
       });
       update();
+      var direction = 1;
+      window.setInterval(function () {
+        if (frame.dataset.rsbUserControlled === "1") return;
+        var current = Number(range.value) || 52;
+        if (current >= 84) direction = -1;
+        if (current <= 16) direction = 1;
+        setSplit(current + direction);
+      }, 90);
     });
   }
 
