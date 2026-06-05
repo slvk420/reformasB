@@ -400,6 +400,125 @@
     });
   }
 
+  function initHorizontalProcessAutoplay() {
+    document.querySelectorAll(".cinematic-process").forEach(function (section) {
+      if (section.dataset.rsbAutoplayReady) return;
+      section.dataset.rsbAutoplayReady = "1";
+
+      var timer = null;
+      var isVisible = false;
+      var delay = 10000;
+
+      var stepButtons = function () {
+        return Array.prototype.slice
+          .call(section.querySelectorAll('button[aria-label^="Ver paso "]'))
+          .filter(function (button) {
+            return /Ver paso \d+/i.test(button.getAttribute("aria-label") || "");
+          });
+      };
+
+      var isVisibleElement = function (element) {
+        if (!element) return false;
+        var style = window.getComputedStyle(element);
+        var rect = element.getBoundingClientRect();
+        return style.display !== "none" && style.visibility !== "hidden" && rect.width > 0 && rect.height > 0;
+      };
+
+      var desktopMode = function () {
+        return isVisibleElement(section.querySelector(".cinematic-sticky")) && !isVisibleElement(section.querySelector(".cinematic-mobile-flow"));
+      };
+
+      var activeIndex = function (buttons) {
+        var index = buttons.findIndex(function (button) {
+          return button.classList.contains("is-active") || button.getAttribute("aria-current") === "step";
+        });
+        return index < 0 ? 0 : index;
+      };
+
+      var stop = function () {
+        if (timer) window.clearInterval(timer);
+        timer = null;
+      };
+
+      var advance = function () {
+        if (desktopMode()) {
+          var finalCard = section.querySelector(".cinematic-final-card");
+          var finalVisible =
+            finalCard &&
+            (window.getComputedStyle(finalCard).pointerEvents === "auto" || parseFloat(finalCard.style.opacity || "0") > 0.8);
+
+          if (finalVisible) {
+            section.scrollIntoView({ block: "start", behavior: "smooth" });
+            return;
+          }
+
+          var nextButton = section.querySelector('.cinematic-sticky .cinematic-arrows button[aria-label="Ver paso siguiente"]');
+          if (nextButton) {
+            nextButton.click();
+            return;
+          }
+        }
+
+        var buttons = stepButtons();
+        if (!buttons.length) return;
+        var next = (activeIndex(buttons) + 1) % buttons.length;
+        buttons[next].click();
+      };
+
+      var start = function () {
+        if (timer) return;
+        timer = window.setInterval(advance, delay);
+      };
+
+      var restart = function () {
+        stop();
+        if (isVisible) start();
+      };
+
+      var updateVisibility = function () {
+        var rect = section.getBoundingClientRect();
+        isVisible = rect.top < window.innerHeight * 0.85 && rect.bottom > window.innerHeight * 0.15;
+        if (isVisible && document.visibilityState !== "hidden") start();
+        else stop();
+      };
+
+      section.addEventListener(
+        "click",
+        function (event) {
+          if (event.target.closest && event.target.closest("button")) {
+            window.setTimeout(restart, 0);
+          }
+        },
+        true
+      );
+
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(
+          function (entries) {
+            isVisible = entries.some(function (entry) {
+              var rect = entry.boundingClientRect;
+              return entry.isIntersecting && rect.top < window.innerHeight * 0.85 && rect.bottom > window.innerHeight * 0.15;
+            });
+            if (isVisible && document.visibilityState !== "hidden") start();
+            else stop();
+          },
+          { threshold: [0] }
+        ).observe(section);
+      } else {
+        updateVisibility();
+      }
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "hidden") stop();
+        else if (isVisible) start();
+      });
+
+      window.addEventListener("scroll", updateVisibility, { passive: true });
+      window.addEventListener("resize", updateVisibility);
+      window.setTimeout(updateVisibility, 250);
+    });
+  }
+
   function updateMoreServicesPage() {
     document.documentElement.classList.add("rsb-more-services-page");
     var main = document.querySelector("main");
@@ -437,6 +556,7 @@
   function runFixes() {
     fixAssets();
     applyRequestedChanges();
+    initHorizontalProcessAutoplay();
   }
 
   document.addEventListener(
