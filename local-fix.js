@@ -347,14 +347,10 @@
   function styleExteriorConstructionCard(card) {
     if (!card) return;
     card.classList.add("rsb-exterior-construction-card");
-    card.style.setProperty("display", "grid", "important");
-    card.style.setProperty(
-      "grid-template-columns",
-      window.matchMedia("(max-width: 1100px)").matches ? "1fr" : "minmax(0, 1fr) minmax(0, 1fr)",
-      "important"
-    );
-    card.style.setProperty("gap", "clamp(28px, 5vw, 82px)", "important");
-    card.style.setProperty("align-items", "start", "important");
+    card.style.removeProperty("display");
+    card.style.removeProperty("grid-template-columns");
+    card.style.removeProperty("gap");
+    card.style.removeProperty("align-items");
     var exteriorImage = card.querySelector(":scope > .more-service-editorial-image");
     if (exteriorImage) exteriorImage.style.setProperty("display", "none", "important");
   }
@@ -493,6 +489,12 @@
   window.setTimeout(runFixes, 0);
   window.setTimeout(runFixes, 600);
   window.setTimeout(runFixes, 1600);
+
+  var resizeTimer = null;
+  window.addEventListener("resize", function () {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(runFixes, 120);
+  });
 
   new MutationObserver(runFixes).observe(document.documentElement, {
     subtree: true,
