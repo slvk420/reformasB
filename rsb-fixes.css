@@ -587,6 +587,10 @@ html.rsb-skip-intro .brand-intro {
   z-index: 5;
 }
 
+.rsb-ba-frame .rsb-ba-handle {
+  display: none !important;
+}
+
 @keyframes rsb-ba-pulse {
   0%, 100% {
     box-shadow: 0 8px 22px rgba(0, 0, 0, .32), 0 0 0 0 rgba(166, 95, 63, .24);
