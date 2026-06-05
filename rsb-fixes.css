@@ -755,3 +755,11 @@ html.rsb-more-services-page .site-header .mobile-menu-button:focus-visible {
   border-color: rgba(166, 95, 63, .32) !important;
   box-shadow: 0 16px 42px rgba(24, 32, 29, .18), inset 0 1px rgba(255, 255, 255, .68) !important;
 }
+
+html.rsb-more-services-page .more-services-editorial-section {
+  padding-bottom: clamp(16px, 2.4vw, 28px) !important;
+}
+
+html.rsb-more-services-page .rsb-sate-section {
+  padding-top: clamp(22px, 3vw, 34px) !important;
+}
