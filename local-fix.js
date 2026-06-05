@@ -205,18 +205,136 @@
     ].join("");
   }
 
+  function beforeAfterHtmlV2() {
+    return [
+      '<section class="rsb-before-after-section" aria-labelledby="rsb-before-after-title">',
+      '<div class="container rsb-before-after-grid">',
+      '<div class="rsb-before-after-copy">',
+      '<p class="eyebrow">Antes / despu&eacute;s interactivo</p>',
+      '<h2 id="rsb-before-after-title">Del edificio apagado a una visi&oacute;n con valor.</h2>',
+      '<p>La diferencia no est&aacute; solo en pintar bonito. Est&aacute; en ver el potencial, ordenar la idea y convertir una reforma en una decisi&oacute;n clara antes de gastar dinero.</p>',
+      '</div>',
+      '<div class="rsb-ba-frame" style="--split: 52%">',
+      '<img class="rsb-ba-img rsb-ba-after" src="' + rootPath("reformas/despues.png") + '" data-rsb-src="reformas/despues.png" loading="eager" decoding="async" alt="Resultado reformado despu&eacute;s de la intervenci&oacute;n"/>',
+      '<div class="rsb-ba-before-wrap"><img class="rsb-ba-img rsb-ba-before" src="' + rootPath("reformas/antes.png") + '" data-rsb-src="reformas/antes.png" loading="eager" decoding="async" alt="Estado inicial antes de la reforma"/></div>',
+      '<input class="rsb-ba-range" type="range" min="0" max="100" value="52" aria-label="Comparar antes y despu&eacute;s"/>',
+      '<span class="rsb-ba-handle" aria-hidden="true"></span>',
+      '<span class="rsb-ba-label rsb-ba-label-before">Antes</span>',
+      '<span class="rsb-ba-label rsb-ba-label-after">Despu&eacute;s</span>',
+      '</div>',
+      '</div>',
+      '</section>'
+    ].join("");
+  }
+
+  function sateSectionHtmlV2() {
+    return [
+      '<section class="rsb-sate-section" aria-labelledby="rsb-sate-title">',
+      '<div class="container rsb-sate-grid">',
+      '<div class="rsb-sate-copy">',
+      '<p class="eyebrow">Instalaci&oacute;n de SATE</p>',
+      '<h2 id="rsb-sate-title">Aislamiento exterior para casas y edificios.</h2>',
+      '<p>El sistema SATE mejora la envolvente desde el exterior: sobre el muro soporte se colocan mortero adhesivo o fijaciones, aislamiento XPS, capa base, malla de armadura y revestimiento final.</p>',
+      '<ul>',
+      '<li>Estudio previo del soporte: hormig&oacute;n, bloque o ladrillo.</li>',
+      '<li>Colocaci&oacute;n de aislamiento, capa base, malla de armadura e imprimaci&oacute;n.</li>',
+      '<li>Soluci&oacute;n pensada para vivienda unifamiliar, comunidades y fachadas expuestas.</li>',
+      '</ul>',
+      '</div>',
+      '<div class="rsb-sate-carousel" aria-label="Ejemplos de fachadas para SATE">',
+      '<img class="is-active" src="' + rootPath("reformas/sate-casa-blanca.jpg") + '" alt="Casa blanca con fachada exterior renovada mediante SATE"/>',
+      '<img src="' + rootPath("reformas/sate-fachada-piedra.jpg") + '" alt="Vivienda moderna con fachada preparada para aislamiento exterior SATE"/>',
+      '<div class="rsb-sate-controls">',
+      '<button type="button" class="is-active" aria-label="Ver ejemplo SATE 1"></button>',
+      '<button type="button" aria-label="Ver ejemplo SATE 2"></button>',
+      '</div>',
+      '</div>',
+      '</div>',
+      '</section>'
+    ].join("");
+  }
+
   function initBeforeAfter() {
     document.querySelectorAll(".rsb-ba-frame").forEach(function (frame) {
       if (frame.dataset.rsbReady) return;
       frame.dataset.rsbReady = "1";
       var range = frame.querySelector(".rsb-ba-range");
       if (!range) return;
+      frame.querySelectorAll("img[data-rsb-src]").forEach(function (img) {
+        img.addEventListener("error", function () {
+          var fallback = img.getAttribute("data-rsb-src");
+          if (fallback) img.src = rootPath(fallback);
+        });
+      });
+      var setSplit = function (value) {
+        var next = Math.max(0, Math.min(100, Number(value) || 0));
+        range.value = String(Math.round(next));
+        frame.style.setProperty("--split", next + "%");
+      };
       var update = function () {
-        frame.style.setProperty("--split", range.value + "%");
+        setSplit(range.value);
+      };
+      var updateFromPointer = function (event) {
+        var rect = frame.getBoundingClientRect();
+        if (!rect.width) return;
+        setSplit(((event.clientX - rect.left) / rect.width) * 100);
       };
       range.addEventListener("input", update);
+      frame.addEventListener("pointerdown", function (event) {
+        event.preventDefault();
+        if (frame.setPointerCapture) frame.setPointerCapture(event.pointerId);
+        updateFromPointer(event);
+      });
+      frame.addEventListener("pointermove", function (event) {
+        if (!event.buttons) return;
+        updateFromPointer(event);
+      });
       update();
     });
+  }
+
+  function constructionFallbackHtml() {
+    return [
+      '<article class="more-service-editorial-card" data-rsb-construction-card="1">',
+      '<div class="more-service-editorial-image"><img src="' + rootPath("reformas/process-2.webp") + '" alt="Obra nueva y rehabilitaci&oacute;n"/></div>',
+      '<div class="more-service-editorial-copy">',
+      '<p class="eyebrow">06 / Construcci&oacute;n</p>',
+      '<h2>Obra nueva y rehabilitaci&oacute;n</h2>',
+      '<p>Cuando el proyecto pide m&aacute;s alcance, ordenamos fases, documentaci&oacute;n, gremios y decisiones t&eacute;cnicas para avanzar con control.</p>',
+      '</div>',
+      '</article>'
+    ].join("");
+  }
+
+  function findConstructionCard() {
+    var match = null;
+    document.querySelectorAll(".more-service-editorial-card").forEach(function (card) {
+      if (!match && hasText(card.querySelector("h2"), "Obra nueva y rehabilitaci")) match = card;
+    });
+    return match;
+  }
+
+  function moveConstructionAfterSate() {
+    var sate = document.querySelector(".rsb-sate-section");
+    if (!sate) return;
+
+    var wrapper = document.querySelector(".rsb-construction-after-sate");
+    if (!wrapper) {
+      sate.insertAdjacentHTML(
+        "afterend",
+        '<section class="rsb-construction-after-sate" aria-label="Obra nueva y rehabilitaci&oacute;n"><div class="container rsb-construction-inner"></div></section>'
+      );
+      wrapper = document.querySelector(".rsb-construction-after-sate");
+    }
+
+    var inner = wrapper.querySelector(".rsb-construction-inner");
+    var sourceCard = findConstructionCard();
+    if (sourceCard && !wrapper.contains(sourceCard)) {
+      sourceCard.remove();
+    }
+    if (inner && !inner.querySelector("[data-rsb-construction-card]")) {
+      inner.innerHTML = constructionFallbackHtml();
+    }
   }
 
   function initSateCarousel() {
@@ -252,11 +370,12 @@
 
     if (!document.querySelector(".rsb-sate-section")) {
       var returnSection = document.querySelector(".more-services-return");
-      if (returnSection) returnSection.insertAdjacentHTML("beforebegin", sateSectionHtml());
+      if (returnSection) returnSection.insertAdjacentHTML("beforebegin", sateSectionHtmlV2());
     }
+    moveConstructionAfterSate();
 
     if (!document.querySelector(".rsb-before-after-section")) {
-      main.insertAdjacentHTML("beforeend", beforeAfterHtml());
+      main.insertAdjacentHTML("beforeend", beforeAfterHtmlV2());
     }
 
     initBeforeAfter();

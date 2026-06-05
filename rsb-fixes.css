@@ -449,6 +449,34 @@ html.rsb-skip-intro .brand-intro {
   background: #fffdf8;
 }
 
+.rsb-construction-after-sate {
+  background: var(--color-paper);
+  padding: 0 0 clamp(76px, 8vw, 118px);
+}
+
+.rsb-construction-inner {
+  max-width: 980px;
+}
+
+.rsb-construction-after-sate .more-service-editorial-card {
+  margin: 0;
+}
+
+.rsb-construction-after-sate .more-service-editorial-image {
+  aspect-ratio: 16 / 9;
+  min-height: 260px;
+  overflow: hidden;
+  position: relative;
+}
+
+.rsb-construction-after-sate .more-service-editorial-image img {
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+}
+
 .rsb-before-after-section {
   background: linear-gradient(135deg, #101714, #18201d 58%, #070a09);
   color: #fff;
@@ -475,9 +503,12 @@ html.rsb-skip-intro .brand-intro {
   aspect-ratio: 16 / 10;
   background: #0d1311;
   box-shadow: 0 28px 86px rgba(0, 0, 0, .38);
+  cursor: ew-resize;
   min-height: 340px;
   overflow: hidden;
   position: relative;
+  touch-action: none;
+  user-select: none;
 }
 
 .rsb-ba-img {
@@ -491,6 +522,7 @@ html.rsb-skip-intro .brand-intro {
 .rsb-ba-before-wrap {
   clip-path: inset(0 calc(100% - var(--split, 52%)) 0 0);
   inset: 0;
+  overflow: hidden;
   position: absolute;
 }
 
@@ -509,8 +541,11 @@ html.rsb-skip-intro .brand-intro {
   appearance: none;
   background: transparent;
   cursor: ew-resize;
+  height: 100%;
   inset: 0;
+  opacity: 0;
   position: absolute;
+  touch-action: none;
   width: 100%;
   z-index: 4;
 }
@@ -523,6 +558,32 @@ html.rsb-skip-intro .brand-intro {
   box-shadow: 0 8px 22px rgba(0, 0, 0, .32);
   height: 34px;
   width: 34px;
+}
+
+.rsb-ba-handle {
+  background: #fffdf8;
+  border: 3px solid var(--color-copper);
+  border-radius: 999px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .32);
+  height: 38px;
+  left: var(--split, 52%);
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  z-index: 5;
+}
+
+.rsb-ba-handle::before {
+  background: #fffdf8;
+  content: "";
+  height: 999px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
 }
 
 .rsb-ba-label {
@@ -556,6 +617,10 @@ html.rsb-skip-intro .brand-intro {
   .rsb-ba-frame {
     aspect-ratio: 4 / 3;
     min-height: 0;
+  }
+
+  .rsb-construction-after-sate {
+    padding-bottom: 68px;
   }
 }
 
@@ -608,6 +673,10 @@ html.rsb-skip-intro .brand-intro {
     padding: 64px 0;
   }
 
+  .rsb-sate-carousel {
+    aspect-ratio: 1.22 / 1;
+  }
+
   .rsb-before-after-section {
     padding: 64px 0 calc(104px + env(safe-area-inset-bottom));
   }
@@ -615,5 +684,21 @@ html.rsb-skip-intro .brand-intro {
   .rsb-sate-copy h2,
   .rsb-before-after-copy h2 {
     font-size: clamp(2rem, 9vw, 2.75rem);
+  }
+
+  .rsb-ba-frame {
+    aspect-ratio: 1 / 1.05;
+    border: 1px solid rgba(255, 255, 255, .18);
+  }
+
+  .rsb-ba-handle {
+    height: 44px;
+    width: 44px;
+  }
+
+  .rsb-ba-label {
+    bottom: 12px;
+    font-size: .78rem;
+    padding: 7px 10px;
   }
 }
