@@ -350,7 +350,7 @@
     card.style.setProperty("display", "grid", "important");
     card.style.setProperty(
       "grid-template-columns",
-      window.matchMedia("(max-width: 720px)").matches ? "1fr" : "minmax(0, 1fr) minmax(0, 1fr)",
+      window.matchMedia("(max-width: 1100px)").matches ? "1fr" : "minmax(0, 1fr) minmax(0, 1fr)",
       "important"
     );
     card.style.setProperty("gap", "clamp(28px, 5vw, 82px)", "important");
