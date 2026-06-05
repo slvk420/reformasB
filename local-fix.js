@@ -326,48 +326,55 @@
     });
   }
 
-  function constructionFallbackHtml() {
+  function constructionTextHtml() {
     return [
-      '<article class="more-service-editorial-card" data-rsb-construction-card="1">',
-      '<div class="more-service-editorial-image"><img src="' + rootPath("reformas/process-2.webp") + '" alt="Obra nueva y rehabilitaci&oacute;n"/></div>',
-      '<div class="more-service-editorial-copy">',
+      '<div class="more-service-editorial-copy rsb-construction-inline" data-rsb-construction-inline="1">',
       '<p class="eyebrow">06 / Construcci&oacute;n</p>',
       '<h2>Obra nueva y rehabilitaci&oacute;n</h2>',
       '<p>Cuando el proyecto pide m&aacute;s alcance, ordenamos fases, documentaci&oacute;n, gremios y decisiones t&eacute;cnicas para avanzar con control.</p>',
-      '</div>',
-      '</article>'
+      '</div>'
     ].join("");
   }
 
   function findConstructionCard() {
     var match = null;
     document.querySelectorAll(".more-service-editorial-card").forEach(function (card) {
-      if (!match && hasText(card.querySelector("h2"), "Obra nueva y rehabilitaci")) match = card;
+      if (!match && !card.querySelector("[data-rsb-construction-inline]") && hasText(card.querySelector("h2"), "Obra nueva y rehabilitaci")) match = card;
     });
     return match;
   }
 
-  function moveConstructionAfterSate() {
-    var sate = document.querySelector(".rsb-sate-section");
-    if (!sate) return;
+  function styleExteriorConstructionCard(card) {
+    if (!card) return;
+    card.classList.add("rsb-exterior-construction-card");
+    card.style.setProperty("display", "grid", "important");
+    card.style.setProperty(
+      "grid-template-columns",
+      window.matchMedia("(max-width: 720px)").matches ? "1fr" : "minmax(0, 1fr) minmax(0, 1fr)",
+      "important"
+    );
+    card.style.setProperty("gap", "clamp(28px, 5vw, 82px)", "important");
+    card.style.setProperty("align-items", "start", "important");
+    var exteriorImage = card.querySelector(":scope > .more-service-editorial-image");
+    if (exteriorImage) exteriorImage.style.setProperty("display", "none", "important");
+  }
 
-    var wrapper = document.querySelector(".rsb-construction-after-sate");
-    if (!wrapper) {
-      sate.insertAdjacentHTML(
-        "afterend",
-        '<section class="rsb-construction-after-sate" aria-label="Obra nueva y rehabilitaci&oacute;n"><div class="container rsb-construction-inner"></div></section>'
-      );
-      wrapper = document.querySelector(".rsb-construction-after-sate");
-    }
+  function moveConstructionNextToExterior() {
+    document.querySelectorAll(".rsb-construction-after-sate").forEach(function (section) {
+      section.remove();
+    });
 
-    var inner = wrapper.querySelector(".rsb-construction-inner");
     var sourceCard = findConstructionCard();
-    if (sourceCard && !wrapper.contains(sourceCard)) {
-      sourceCard.remove();
-    }
-    if (inner && !inner.querySelector("[data-rsb-construction-card]")) {
-      inner.innerHTML = constructionFallbackHtml();
-    }
+    if (sourceCard) sourceCard.remove();
+
+    var exteriorCard = null;
+    document.querySelectorAll(".more-service-editorial-card").forEach(function (card) {
+      if (!exteriorCard && hasText(card.querySelector(".eyebrow"), "05 / Exterior")) exteriorCard = card;
+    });
+    if (!exteriorCard) return;
+    styleExteriorConstructionCard(exteriorCard);
+    if (exteriorCard.querySelector("[data-rsb-construction-inline]")) return;
+    exteriorCard.insertAdjacentHTML("beforeend", constructionTextHtml());
   }
 
   function initSateCarousel() {
@@ -406,7 +413,7 @@
       var returnSection = document.querySelector(".more-services-return");
       if (returnSection) returnSection.insertAdjacentHTML("beforebegin", sateSectionHtmlV2());
     }
-    moveConstructionAfterSate();
+    moveConstructionNextToExterior();
 
     if (!document.querySelector(".rsb-before-after-section")) {
       main.insertAdjacentHTML("beforeend", beforeAfterHtmlV3());

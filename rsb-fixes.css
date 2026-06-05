@@ -449,32 +449,24 @@ html.rsb-skip-intro .brand-intro {
   background: #fffdf8;
 }
 
-.rsb-construction-after-sate {
-  background: var(--color-paper);
-  padding: 0 0 clamp(76px, 8vw, 118px);
+.more-service-editorial-card:has(.rsb-construction-inline),
+.rsb-exterior-construction-card {
+  align-items: start;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: clamp(28px, 5vw, 82px);
 }
 
-.rsb-construction-inner {
-  max-width: 980px;
+.more-service-editorial-card:has(.rsb-construction-inline) > .more-service-editorial-image,
+.rsb-exterior-construction-card > .more-service-editorial-image {
+  display: none !important;
 }
 
-.rsb-construction-after-sate .more-service-editorial-card {
-  margin: 0;
-}
-
-.rsb-construction-after-sate .more-service-editorial-image {
-  aspect-ratio: 16 / 9;
-  min-height: 260px;
-  overflow: hidden;
-  position: relative;
-}
-
-.rsb-construction-after-sate .more-service-editorial-image img {
-  height: 100%;
-  inset: 0;
-  object-fit: cover;
-  position: absolute;
-  width: 100%;
+.rsb-construction-inline {
+  align-self: start;
+  justify-self: end;
+  margin-top: 0;
+  max-width: 560px;
 }
 
 .rsb-before-after-section {
@@ -649,8 +641,8 @@ html.rsb-skip-intro .brand-intro {
     width: 100%;
   }
 
-  .rsb-construction-after-sate {
-    padding-bottom: 68px;
+  .rsb-construction-inline {
+    justify-self: start;
   }
 }
 
