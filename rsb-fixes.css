@@ -1020,6 +1020,99 @@ body.contact-page .contact-trust-card {
   border-radius: 8px !important;
 }
 
+.rsb-process-step-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: fit-content !important;
+  min-height: 44px !important;
+  margin-top: 18px !important;
+  padding: 0 18px !important;
+  border-radius: 6px !important;
+  background: #f7f4ed !important;
+  color: #101714 !important;
+  font-family: var(--font-sans), Arial, sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24) !important;
+}
+
+.rsb-process-step-cta:hover {
+  background: #d9824b !important;
+  color: #fff !important;
+}
+
+@media (min-width: 1025px) {
+  .cinematic-layout {
+    grid-template-columns: minmax(340px, 0.72fr) minmax(560px, 1.28fr) !important;
+    align-items: center !important;
+    align-content: center !important;
+    gap: clamp(34px, 4vw, 72px) !important;
+    width: min(100% - 64px, 1560px) !important;
+    min-height: 100dvh !important;
+    margin-inline: auto !important;
+    padding: 108px 0 88px !important;
+  }
+
+  .cinematic-copy {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    z-index: 8 !important;
+    width: 100% !important;
+    max-width: 520px !important;
+  }
+
+  .cinematic-copy h2 {
+    max-width: 520px !important;
+    font-size: clamp(3.05rem, 4.35vw, 4.9rem) !important;
+    line-height: 0.98 !important;
+  }
+
+  .cinematic-step {
+    max-width: 520px !important;
+  }
+
+  .cinematic-progress {
+    width: min(520px, 100%) !important;
+  }
+
+  .cinematic-progress span {
+    width: 100% !important;
+    transform-origin: left center !important;
+  }
+
+  .cinematic-visuals {
+    position: relative !important;
+    z-index: 2 !important;
+    width: 100% !important;
+    min-height: clamp(410px, 41vw, 620px) !important;
+    transform: none !important;
+  }
+
+  .cinematic-photo-stack {
+    width: min(100%, 890px) !important;
+    height: clamp(390px, 39vw, 560px) !important;
+    margin-inline: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .cinematic-photo-card {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  .cinematic-arrows {
+    z-index: 30 !important;
+  }
+}
+
 body.contact-page .rsb-contact-trust {
   background: #101714 !important;
   color: #fff !important;

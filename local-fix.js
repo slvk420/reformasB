@@ -677,6 +677,7 @@
           title: "Ya se puede pedir visita.",
           body: "Con el alcance entendido, damos el siguiente paso con una visita clara y sin vueltas innecesarias.",
           image: "reformas/process-4.webp",
+          cta: true,
         },
       ];
 
@@ -717,9 +718,17 @@
         var eyebrow = copy.querySelector("span");
         var title = copy.querySelector("h3");
         var body = copy.querySelector("p");
+        var existingCta = copy.querySelector(".rsb-process-step-cta");
+        if (existingCta) existingCta.remove();
         if (eyebrow) eyebrow.textContent = step.eyebrow;
         if (title) title.textContent = step.title;
         if (body) body.textContent = step.body;
+        if (step.cta) {
+          copy.insertAdjacentHTML(
+            "beforeend",
+            '<a class="rsb-process-step-cta" href="#presupuesto" aria-label="Pedir visita desde el proceso">Pedir visita <span aria-hidden="true">→</span></a>'
+          );
+        }
       };
 
       var updatePhotoStack = function (index) {
