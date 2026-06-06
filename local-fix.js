@@ -734,10 +734,11 @@
       var updatePhotoStack = function (index) {
         var cards = Array.prototype.slice.call(section.querySelectorAll(".cinematic-photo-card"));
         var stack = section.querySelector(".cinematic-photo-stack");
+        var step = forcedSteps[index];
         if (stack) {
-          stack.style.opacity = "1";
-          stack.style.visibility = "visible";
-          stack.style.pointerEvents = "auto";
+          stack.style.opacity = step.cta ? "0" : "1";
+          stack.style.visibility = step.cta ? "hidden" : "visible";
+          stack.style.pointerEvents = step.cta ? "none" : "auto";
         }
         var stackStyles = [
           { opacity: "1", transform: "translate3d(0, 0, 0) rotate(0deg) scale(1)", zIndex: "14" },
@@ -758,6 +759,7 @@
           card.style.opacity = style.opacity;
           card.style.transform = style.transform;
           card.style.zIndex = style.zIndex;
+          card.style.visibility = forcedSteps[index].cta ? "hidden" : "visible";
           card.style.transition = "opacity 520ms ease, transform 620ms cubic-bezier(.22,.8,.22,1)";
         });
       };
@@ -786,9 +788,13 @@
 
       var showForcedStep = function (nextIndex) {
         var index = (nextIndex + forcedSteps.length) % forcedSteps.length;
+        var step = forcedSteps[index];
+        var layout = section.querySelector(".cinematic-layout");
         section.dataset.rsbProcessIndex = String(index);
+        section.classList.toggle("rsb-process-final", !!step.cta);
+        if (layout) layout.classList.toggle("rsb-process-final", !!step.cta);
         hideNativeFinalCard();
-        updateStepCopy(forcedSteps[index]);
+        updateStepCopy(step);
         updatePhotoStack(index);
         updateProgress(index);
       };
