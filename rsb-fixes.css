@@ -1217,10 +1217,22 @@ body.contact-page .contact-trust-card {
   .cinematic-photo-stack {
     width: min(94%, 760px) !important;
     height: clamp(310px, 44vw, 430px) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .cinematic-photo-card {
+    display: block !important;
+    visibility: visible !important;
     transition: opacity 520ms ease, transform 620ms cubic-bezier(.22, .8, .22, 1) !important;
+  }
+
+  .cinematic-final-card,
+  .cinematic-final-bg {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
 
   .cinematic-arrows {

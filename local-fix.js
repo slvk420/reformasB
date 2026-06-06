@@ -724,6 +724,12 @@
 
       var updatePhotoStack = function (index) {
         var cards = Array.prototype.slice.call(section.querySelectorAll(".cinematic-photo-card"));
+        var stack = section.querySelector(".cinematic-photo-stack");
+        if (stack) {
+          stack.style.opacity = "1";
+          stack.style.visibility = "visible";
+          stack.style.pointerEvents = "auto";
+        }
         var stackStyles = [
           { opacity: "1", transform: "translate3d(0, 0, 0) rotate(0deg) scale(1)", zIndex: "14" },
           { opacity: "0.52", transform: "translate3d(34px, -20px, 0) rotate(4deg) scale(0.97)", zIndex: "12" },
@@ -755,21 +761,27 @@
       var hideNativeFinalCard = function () {
         var finalCard = section.querySelector(".cinematic-final-card");
         if (finalCard) {
+          finalCard.style.display = "none";
           finalCard.style.opacity = "0";
           finalCard.style.pointerEvents = "none";
+          finalCard.style.visibility = "hidden";
           finalCard.setAttribute("aria-hidden", "true");
         }
         var finalBg = section.querySelector(".cinematic-final-bg");
-        if (finalBg) finalBg.style.opacity = "0";
+        if (finalBg) {
+          finalBg.style.display = "none";
+          finalBg.style.opacity = "0";
+          finalBg.style.visibility = "hidden";
+        }
       };
 
       var showForcedStep = function (nextIndex) {
         var index = (nextIndex + forcedSteps.length) % forcedSteps.length;
         section.dataset.rsbProcessIndex = String(index);
+        hideNativeFinalCard();
         updateStepCopy(forcedSteps[index]);
         updatePhotoStack(index);
         updateProgress(index);
-        hideNativeFinalCard();
       };
 
       var forcedMode = function () {
