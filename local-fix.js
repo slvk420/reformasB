@@ -647,6 +647,38 @@
       var timer = null;
       var isVisible = false;
       var delay = 4000;
+      var forcedSteps = [
+        {
+          eyebrow: "01 / Punto de partida",
+          title: "Vemos el estado real.",
+          body: "Fachada, orientacion, volumen, zonas deterioradas y oportunidades que no se aprecian en un presupuesto rapido.",
+          image: "reformas/process-1.webp",
+        },
+        {
+          eyebrow: "02 / Idea",
+          title: "Abrimos la idea.",
+          body: "Ordenamos opciones reales antes de invertir tiempo y dinero en una reforma sin direccion clara.",
+          image: "reformas/process-4.webp",
+        },
+        {
+          eyebrow: "03 / Potencial",
+          title: "Aparece el potencial.",
+          body: "La propuesta empieza a tener lectura: imagen, uso, envolvente y prioridades trabajan juntas.",
+          image: "reformas/process-2.webp",
+        },
+        {
+          eyebrow: "04 / Envolvente",
+          title: "La fachada acompaña.",
+          body: "No se trata solo de renovar por dentro: la imagen exterior tambien comunica valor, orden y calidad.",
+          image: "reformas/process-3.webp",
+        },
+        {
+          eyebrow: "05 / Pedir visita",
+          title: "Ya se puede pedir visita.",
+          body: "Con el alcance entendido, damos el siguiente paso con una visita clara y sin vueltas innecesarias.",
+          image: "reformas/process-4.webp",
+        },
+      ];
 
       var stepButtons = function () {
         return Array.prototype.slice
@@ -674,28 +706,85 @@
         return index < 0 ? 0 : index;
       };
 
+      var forcedIndex = function () {
+        var index = Number(section.dataset.rsbProcessIndex || "0");
+        return Number.isFinite(index) ? index : 0;
+      };
+
+      var updateStepCopy = function (step) {
+        var copy = section.querySelector(".cinematic-step");
+        if (!copy) return;
+        var eyebrow = copy.querySelector("span");
+        var title = copy.querySelector("h3");
+        var body = copy.querySelector("p");
+        if (eyebrow) eyebrow.textContent = step.eyebrow;
+        if (title) title.textContent = step.title;
+        if (body) body.textContent = step.body;
+      };
+
+      var updatePhotoStack = function (index) {
+        var cards = Array.prototype.slice.call(section.querySelectorAll(".cinematic-photo-card"));
+        var stackStyles = [
+          { opacity: "1", transform: "translate3d(0, 0, 0) rotate(0deg) scale(1)", zIndex: "14" },
+          { opacity: "0.52", transform: "translate3d(34px, -20px, 0) rotate(4deg) scale(0.97)", zIndex: "12" },
+          { opacity: "0.28", transform: "translate3d(62px, -38px, 0) rotate(7deg) scale(0.94)", zIndex: "10" },
+          { opacity: "0.16", transform: "translate3d(88px, -54px, 0) rotate(10deg) scale(0.91)", zIndex: "8" },
+        ];
+
+        cards.forEach(function (card, cardIndex) {
+          var step = forcedSteps[(index + cardIndex) % forcedSteps.length];
+          var image = card.querySelector("img");
+          var style = stackStyles[cardIndex] || stackStyles[stackStyles.length - 1];
+          if (image) {
+            image.src = rootPath(step.image);
+            image.removeAttribute("srcset");
+            image.alt = step.title;
+          }
+          card.style.opacity = style.opacity;
+          card.style.transform = style.transform;
+          card.style.zIndex = style.zIndex;
+          card.style.transition = "opacity 520ms ease, transform 620ms cubic-bezier(.22,.8,.22,1)";
+        });
+      };
+
+      var updateProgress = function (index) {
+        var progress = section.querySelector(".cinematic-progress span");
+        if (progress) progress.style.transform = "scaleX(" + (index + 1) / forcedSteps.length + ")";
+      };
+
+      var hideNativeFinalCard = function () {
+        var finalCard = section.querySelector(".cinematic-final-card");
+        if (finalCard) {
+          finalCard.style.opacity = "0";
+          finalCard.style.pointerEvents = "none";
+          finalCard.setAttribute("aria-hidden", "true");
+        }
+        var finalBg = section.querySelector(".cinematic-final-bg");
+        if (finalBg) finalBg.style.opacity = "0";
+      };
+
+      var showForcedStep = function (nextIndex) {
+        var index = (nextIndex + forcedSteps.length) % forcedSteps.length;
+        section.dataset.rsbProcessIndex = String(index);
+        updateStepCopy(forcedSteps[index]);
+        updatePhotoStack(index);
+        updateProgress(index);
+        hideNativeFinalCard();
+      };
+
+      var forcedMode = function () {
+        return isVisibleElement(section.querySelector(".cinematic-sticky"));
+      };
+
       var stop = function () {
         if (timer) window.clearInterval(timer);
         timer = null;
       };
 
       var advance = function () {
-        if (desktopMode()) {
-          var finalCard = section.querySelector(".cinematic-final-card");
-          var finalVisible =
-            finalCard &&
-            (window.getComputedStyle(finalCard).pointerEvents === "auto" || parseFloat(finalCard.style.opacity || "0") > 0.8);
-
-          if (finalVisible) {
-            section.scrollIntoView({ block: "start", behavior: "smooth" });
-            return;
-          }
-
-          var nextButton = section.querySelector('.cinematic-sticky .cinematic-arrows button[aria-label="Ver paso siguiente"]');
-          if (nextButton) {
-            nextButton.click();
-            return;
-          }
+        if (forcedMode()) {
+          showForcedStep(forcedIndex() + 1);
+          return;
         }
 
         var buttons = stepButtons();
@@ -713,6 +802,22 @@
         stop();
         if (isVisible) start();
       };
+
+      section.querySelectorAll(".cinematic-arrows button").forEach(function (button) {
+        button.addEventListener(
+          "click",
+          function (event) {
+            if (!forcedMode()) return;
+            event.preventDefault();
+            event.stopPropagation();
+            if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+            var label = button.getAttribute("aria-label") || "";
+            showForcedStep(forcedIndex() + (/anterior/i.test(label) ? -1 : 1));
+            window.setTimeout(restart, 0);
+          },
+          true
+        );
+      });
 
       var updateVisibility = function () {
         var rect = section.getBoundingClientRect();
@@ -754,6 +859,7 @@
 
       window.addEventListener("scroll", updateVisibility, { passive: true });
       window.addEventListener("resize", updateVisibility);
+      showForcedStep(forcedIndex());
       window.setTimeout(updateVisibility, 250);
     });
   }

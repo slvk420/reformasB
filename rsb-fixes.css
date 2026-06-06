@@ -1219,6 +1219,22 @@ body.contact-page .contact-trust-card {
     height: clamp(310px, 44vw, 430px) !important;
   }
 
+  .cinematic-photo-card {
+    transition: opacity 520ms ease, transform 620ms cubic-bezier(.22, .8, .22, 1) !important;
+  }
+
+  .cinematic-arrows {
+    z-index: 40 !important;
+    pointer-events: none !important;
+  }
+
+  .cinematic-arrows button {
+    position: relative !important;
+    z-index: 41 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+
   .cinematic-copy {
     position: relative !important;
     z-index: 5 !important;
@@ -1243,5 +1259,10 @@ body.contact-page .contact-trust-card {
 
   .cinematic-progress {
     width: 100% !important;
+  }
+
+  .cinematic-progress span {
+    width: 100% !important;
+    transform-origin: left center !important;
   }
 }
