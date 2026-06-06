@@ -365,32 +365,67 @@
     });
   }
 
-  function updateHomeKitchenGallery() {
-    if (isMoreServicesPath() || /\/contacto(?:\/|\/index\.html)?$/.test(pagePath())) return;
+  function makeWorkArrow(direction) {
+    var path =
+      direction === "prev"
+        ? "M19 12H5m7 7-7-7 7-7"
+        : "M5 12h14m-7-7 7 7-7 7";
+    return (
+      '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="' +
+      path +
+      '"></path></svg>'
+    );
+  }
 
-    var media = document.querySelector(".work-example-kitchen .work-example-media");
+  function ensureWorkControls(media, labelText, previousLabel, nextLabel) {
+    var controls = media.querySelector(".work-image-controls");
+    if (!controls) {
+      controls = document.createElement("div");
+      controls.className = "work-image-controls";
+      controls.innerHTML =
+        '<button type="button" aria-label="' +
+        previousLabel +
+        '">' +
+        makeWorkArrow("prev") +
+        "</button><span>" +
+        labelText +
+        '</span><button type="button" aria-label="' +
+        nextLabel +
+        '">' +
+        makeWorkArrow("next") +
+        "</button>";
+      media.appendChild(controls);
+      return controls;
+    }
+
+    var label = controls.querySelector("span");
+    if (!label) {
+      label = document.createElement("span");
+      label.textContent = labelText;
+      var nextButton = controls.querySelectorAll("button")[1];
+      controls.insertBefore(label, nextButton || null);
+    }
+    return controls;
+  }
+
+  function setupWorkGallery(selector, key, slides, previousLabel, nextLabel) {
+    var media = document.querySelector(selector + " .work-example-media");
     if (!media) return;
     var image = media.querySelector("img");
-    var label = media.querySelector(".work-image-controls span");
-    var buttons = Array.prototype.slice.call(media.querySelectorAll(".work-image-controls button"));
-    if (!image || buttons.length < 2) return;
+    if (!image) return;
 
-    var slides = [
-      {
-        src: rootPath("reformas/cocina-madera-negra.png"),
-        label: "Cocina madera y negro",
-        alt: "Cocina reformada con madera, frentes negros e iluminacion calida"
-      },
-      {
-        src: rootPath("reformas/ejemplo-cocina-rsb-real.webp"),
-        label: "Cocina blanca",
-        alt: "Cocina reformada blanca con encimera clara y electrodomesticos de acero"
-      }
-    ];
+    var controls = ensureWorkControls(media, slides[0].label, previousLabel, nextLabel);
+    var label = controls.querySelector("span");
+    var buttons = Array.prototype.slice.call(controls.querySelectorAll("button"));
+    if (buttons.length < 2) return;
+
+    var indexKey = "rsb" + key + "Index";
+    var readyKey = "rsb" + key + "Ready";
 
     var show = function (nextIndex) {
       var index = (nextIndex + slides.length) % slides.length;
-      media.dataset.rsbKitchenIndex = String(index);
+      media.dataset[indexKey] = String(index);
       if (image.getAttribute("src") !== slides[index].src) image.setAttribute("src", slides[index].src);
       if (image.getAttribute("alt") !== slides[index].alt) image.setAttribute("alt", slides[index].alt);
       if (image.hasAttribute("srcset")) image.removeAttribute("srcset");
@@ -399,17 +434,17 @@
       if (label && label.textContent !== slides[index].label) label.textContent = slides[index].label;
     };
 
-    if (!media.dataset.rsbKitchenReady) {
-      media.dataset.rsbKitchenReady = "1";
-      buttons[0].setAttribute("aria-label", "Ver cocina anterior");
-      buttons[1].setAttribute("aria-label", "Ver cocina siguiente");
+    if (!media.dataset[readyKey]) {
+      media.dataset[readyKey] = "1";
+      buttons[0].setAttribute("aria-label", previousLabel);
+      buttons[1].setAttribute("aria-label", nextLabel);
       buttons.forEach(function (button, buttonIndex) {
         button.addEventListener(
           "click",
           function (event) {
             event.preventDefault();
             event.stopImmediatePropagation();
-            var current = Number(media.dataset.rsbKitchenIndex || 0);
+            var current = Number(media.dataset[indexKey] || 0);
             show(current + (buttonIndex === 0 ? -1 : 1));
           },
           true
@@ -417,8 +452,69 @@
       });
     }
 
-    var current = Math.max(0, Math.min(slides.length - 1, Number(media.dataset.rsbKitchenIndex || 0)));
+    var current = Math.max(0, Math.min(slides.length - 1, Number(media.dataset[indexKey] || 0)));
     show(current);
+  }
+
+  function updateHomeWorkGalleries() {
+    if (isMoreServicesPath() || /\/contacto(?:\/|\/index\.html)?$/.test(pagePath())) return;
+
+    setupWorkGallery(
+      ".work-example-kitchen",
+      "Kitchen",
+      [
+        {
+          src: rootPath("reformas/cocina-madera-negra.png"),
+          label: "Cocina madera y negro",
+          alt: "Cocina reformada con madera, frentes negros e iluminacion calida"
+        },
+        {
+          src: rootPath("reformas/ejemplo-cocina-rsb-real.webp"),
+          label: "Cocina blanca",
+          alt: "Cocina reformada blanca con encimera clara y electrodomesticos de acero"
+        }
+      ],
+      "Ver cocina anterior",
+      "Ver cocina siguiente"
+    );
+
+    setupWorkGallery(
+      ".work-example-bath",
+      "Bath",
+      [
+        {
+          src: rootPath("reformas/bano-blanco-ducha.jpg"),
+          label: "Baño claro",
+          alt: "Baño renovado con ducha de cristal, mueble blanco y revestimiento gris"
+        },
+        {
+          src: rootPath("reformas/ejemplo-bano-real.jpg"),
+          label: "Baño gris",
+          alt: "Baño reformado con revestimiento gris, lavabo negro y ducha acristalada"
+        }
+      ],
+      "Ver baño anterior",
+      "Ver baño siguiente"
+    );
+
+    setupWorkGallery(
+      ".work-example-living",
+      "Living",
+      [
+        {
+          src: rootPath("reformas/salon-blanco-chimenea.jpg"),
+          label: "Salón luminoso",
+          alt: "Salón luminoso con chimenea lineal, sofás grises y ventanales"
+        },
+        {
+          src: rootPath("reformas/ejemplo-salon-real.jpg"),
+          label: "Salón cálido",
+          alt: "Salón reformado con chimenea, estanterías de madera y cortinas claras"
+        }
+      ],
+      "Ver salón anterior",
+      "Ver salón siguiente"
+    );
   }
 
   function initBeforeAfter() {
@@ -702,7 +798,7 @@
     fixAssets();
     applyRequestedChanges();
     initHorizontalProcessAutoplay();
-    updateHomeKitchenGallery();
+    updateHomeWorkGalleries();
   }
 
   document.addEventListener(
