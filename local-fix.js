@@ -78,6 +78,28 @@
     return window.location.pathname.replace(/\\/g, "/");
   }
 
+  function isMoreServicesPath() {
+    return /\/mas-servicios\/?$/.test(pagePath()) || /\/reformasB\/mas-servicios\/?$/.test(pagePath());
+  }
+
+  function forceMoreServicesTopOnLoad() {
+    if (!isMoreServicesPath() || window.location.hash) return;
+    if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
+    var toTop = function () {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+    toTop();
+    window.addEventListener("pageshow", toTop);
+    window.addEventListener("load", function () {
+      toTop();
+      window.requestAnimationFrame(toTop);
+      window.setTimeout(toTop, 180);
+      window.setTimeout(toTop, 640);
+    });
+  }
+
   function hasText(element, text) {
     return element && element.textContent && element.textContent.toLowerCase().indexOf(text.toLowerCase()) !== -1;
   }
@@ -148,6 +170,14 @@
   }
 
   function updateContactPage() {
+    var fixedTitle = document.getElementById("contact-title");
+    if (fixedTitle) fixedTitle.textContent = "Ll\u00e1manos y vemos tu reforma contigo.";
+    if (!document.querySelector(".rsb-contact-trust")) {
+      var fixedSteps = document.querySelector(".contact-steps");
+      if (fixedSteps) fixedSteps.insertAdjacentHTML("afterend", trustSectionHtml());
+    }
+    return;
+
     var title = document.getElementById("contact-title");
     if (title && title.textContent !== "Llámanos y vemos tu reforma contigo.") {
       title.textContent = "Llámanos y vemos tu reforma contigo.";
@@ -336,7 +366,7 @@
   }
 
   function updateHomeKitchenGallery() {
-    if (/\/mas-servicios(?:\/|\/index\.html)?$/.test(pagePath()) || /\/contacto(?:\/|\/index\.html)?$/.test(pagePath())) return;
+    if (isMoreServicesPath() || /\/contacto(?:\/|\/index\.html)?$/.test(pagePath())) return;
 
     var media = document.querySelector(".work-example-kitchen .work-example-media");
     if (!media) return;
@@ -520,7 +550,7 @@
 
       var timer = null;
       var isVisible = false;
-      var delay = 10000;
+      var delay = 4000;
 
       var stepButtons = function () {
         return Array.prototype.slice
@@ -634,6 +664,7 @@
 
   function updateMoreServicesPage() {
     document.documentElement.classList.add("rsb-more-services-page");
+    forceMoreServicesTopOnLoad();
     var main = document.querySelector("main");
     if (!main) return;
 
