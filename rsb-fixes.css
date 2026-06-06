@@ -835,3 +835,53 @@ html.rsb-more-services-page .more-services-editorial-list > .rsb-exterior-constr
     max-width: min(100%, 680px) !important;
   }
 }
+
+html.rsb-more-services-page .rsb-slide-text {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition:
+    opacity .72s cubic-bezier(.2, .7, .2, 1) var(--rsb-slide-delay, 0ms),
+    transform .72s cubic-bezier(.2, .7, .2, 1) var(--rsb-slide-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+html.rsb-more-services-page .rsb-slide-text.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.rsb-more-services-page .rsb-slide-text {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  html.rsb-more-services-page .more-services-hero,
+  html.rsb-more-services-page .more-services-hero-inner,
+  html.rsb-more-services-page .more-services-magazine-layout,
+  html.rsb-more-services-page .more-services-hero-copy {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: clip !important;
+  }
+
+  html.rsb-more-services-page .more-services-hero-copy > p:not(.eyebrow) {
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+  }
+
+  html.rsb-more-services-page .more-services-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    max-width: 100% !important;
+  }
+
+  html.rsb-more-services-page .more-services-actions > a {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}

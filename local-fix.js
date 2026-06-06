@@ -266,7 +266,7 @@
       '</ul>',
       '</div>',
       '<div class="rsb-sate-carousel" aria-label="Ejemplos de fachadas para SATE">',
-      '<img class="is-active" src="' + rootPath("reformas/sate-casa-blanca.jpg") + '" alt="Casa blanca con fachada exterior renovada mediante SATE"/>',
+      '<img class="is-active" src="' + rootPath("reformas/sate-casa-blanca-hq.png") + '" alt="Casa blanca con fachada exterior renovada mediante SATE"/>',
       '<img src="' + rootPath("reformas/sate-fachada-piedra.jpg") + '" alt="Vivienda moderna con fachada preparada para aislamiento exterior SATE"/>',
       '<div class="rsb-sate-controls">',
       '<button type="button" class="is-active" aria-label="Ver ejemplo SATE 1"></button>',
@@ -276,6 +276,119 @@
       '</div>',
       '</section>'
     ].join("");
+  }
+
+  function initMoreServicesTextReveal() {
+    if (!document.documentElement.classList.contains("rsb-more-services-page")) return;
+    var targets = Array.prototype.slice.call(
+      document.querySelectorAll(
+        [
+          ".more-services-hero-copy > p:not(.eyebrow)",
+          ".more-service-editorial-copy h2",
+          ".more-service-editorial-copy > p:not(.eyebrow)",
+          ".more-service-editorial-copy > a",
+          ".rsb-construction-inline h2",
+          ".rsb-construction-inline > p",
+          ".rsb-sate-copy h2",
+          ".rsb-sate-copy > p",
+          ".rsb-sate-copy li",
+          ".rsb-before-after-copy h2",
+          ".rsb-before-after-copy > p",
+          ".more-services-return h2"
+        ].join(", ")
+      )
+    );
+    targets.forEach(function (target, index) {
+      if (target.dataset.rsbSlideReady) return;
+      target.dataset.rsbSlideReady = "1";
+      target.style.setProperty("--rsb-slide-delay", Math.min(index % 4, 3) * 70 + "ms");
+      target.classList.add("rsb-slide-text");
+    });
+
+    var hiddenTargets = targets.filter(function (target) {
+      return !target.classList.contains("is-visible");
+    });
+    if (!hiddenTargets.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      hiddenTargets.forEach(function (target) {
+        target.classList.add("is-visible");
+      });
+      return;
+    }
+
+    if (!window.rsbTextRevealObserver) {
+      window.rsbTextRevealObserver = new IntersectionObserver(
+        function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          });
+        },
+        { rootMargin: "0px 0px -12% 0px", threshold: 0.18 }
+      );
+    }
+
+    hiddenTargets.forEach(function (target) {
+      window.rsbTextRevealObserver.observe(target);
+    });
+  }
+
+  function updateHomeKitchenGallery() {
+    if (/\/mas-servicios(?:\/|\/index\.html)?$/.test(pagePath()) || /\/contacto(?:\/|\/index\.html)?$/.test(pagePath())) return;
+
+    var media = document.querySelector(".work-example-kitchen .work-example-media");
+    if (!media) return;
+    var image = media.querySelector("img");
+    var label = media.querySelector(".work-image-controls span");
+    var buttons = Array.prototype.slice.call(media.querySelectorAll(".work-image-controls button"));
+    if (!image || buttons.length < 2) return;
+
+    var slides = [
+      {
+        src: rootPath("reformas/cocina-madera-negra.png"),
+        label: "Cocina madera y negro",
+        alt: "Cocina reformada con madera, frentes negros e iluminacion calida"
+      },
+      {
+        src: rootPath("reformas/ejemplo-cocina-rsb-real.webp"),
+        label: "Cocina blanca",
+        alt: "Cocina reformada blanca con encimera clara y electrodomesticos de acero"
+      }
+    ];
+
+    var show = function (nextIndex) {
+      var index = (nextIndex + slides.length) % slides.length;
+      media.dataset.rsbKitchenIndex = String(index);
+      if (image.getAttribute("src") !== slides[index].src) image.setAttribute("src", slides[index].src);
+      if (image.getAttribute("alt") !== slides[index].alt) image.setAttribute("alt", slides[index].alt);
+      if (image.hasAttribute("srcset")) image.removeAttribute("srcset");
+      if (image.getAttribute("loading") !== "eager") image.setAttribute("loading", "eager");
+      if (image.getAttribute("decoding") !== "async") image.setAttribute("decoding", "async");
+      if (label && label.textContent !== slides[index].label) label.textContent = slides[index].label;
+    };
+
+    if (!media.dataset.rsbKitchenReady) {
+      media.dataset.rsbKitchenReady = "1";
+      buttons[0].setAttribute("aria-label", "Ver cocina anterior");
+      buttons[1].setAttribute("aria-label", "Ver cocina siguiente");
+      buttons.forEach(function (button, buttonIndex) {
+        button.addEventListener(
+          "click",
+          function (event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            var current = Number(media.dataset.rsbKitchenIndex || 0);
+            show(current + (buttonIndex === 0 ? -1 : 1));
+          },
+          true
+        );
+      });
+    }
+
+    var current = Math.max(0, Math.min(slides.length - 1, Number(media.dataset.rsbKitchenIndex || 0)));
+    show(current);
   }
 
   function initBeforeAfter() {
@@ -536,6 +649,7 @@
 
     initBeforeAfter();
     initSateCarousel();
+    initMoreServicesTextReveal();
   }
 
   function applyRequestedChanges() {
@@ -557,6 +671,7 @@
     fixAssets();
     applyRequestedChanges();
     initHorizontalProcessAutoplay();
+    updateHomeKitchenGallery();
   }
 
   document.addEventListener(
