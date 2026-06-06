@@ -1102,3 +1102,57 @@ body.contact-page .contact-trust-card {
     overflow-wrap: anywhere !important;
   }
 }
+
+/* Home: agranda la imagen de baño manteniendo proporciones por formato. */
+.work-example-bath {
+  grid-template-columns: minmax(260px, 0.78fr) minmax(520px, 1.34fr) !important;
+  align-items: center !important;
+  gap: clamp(42px, 6vw, 96px) !important;
+}
+
+.work-example-bath .work-example-media {
+  width: min(100%, 860px) !important;
+  min-height: clamp(520px, 48vw, 720px) !important;
+  aspect-ratio: 1 / 1.08 !important;
+  justify-self: end !important;
+}
+
+.work-example-bath .work-example-media img {
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+@media (max-width: 1180px) {
+  .work-example-bath {
+    grid-template-columns: minmax(240px, 0.82fr) minmax(440px, 1.18fr) !important;
+    gap: clamp(32px, 4vw, 56px) !important;
+  }
+
+  .work-example-bath .work-example-media {
+    min-height: clamp(460px, 54vw, 620px) !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .work-example-bath {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 28px !important;
+  }
+
+  .work-example-bath .work-example-copy {
+    max-width: 680px !important;
+  }
+
+  .work-example-bath .work-example-media {
+    width: 100% !important;
+    min-height: 0 !important;
+    aspect-ratio: 4 / 3 !important;
+    justify-self: stretch !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .work-example-bath .work-example-media {
+    aspect-ratio: 1 / 1.08 !important;
+  }
+}
