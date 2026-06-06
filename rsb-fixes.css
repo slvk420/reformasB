@@ -945,15 +945,28 @@ body.contact-page .rsb-contact-trust .contact-shell {
 }
 
 body.contact-page .contact-header {
-  background: rgba(255, 253, 248, .9) !important;
-  color: #101714 !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  background: transparent !important;
+  color: #fff !important;
   border-bottom: 0 !important;
+}
+
+body.contact-page .contact-nav a,
+body.contact-page .contact-phone {
+  color: #fff !important;
+  background: rgba(255, 255, 255, .08) !important;
+  border-color: rgba(255, 255, 255, .28) !important;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .18) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
 }
 
 body.contact-page .contact-hero {
   width: 100% !important;
   max-width: none !important;
-  min-height: calc(100svh - 86px) !important;
+  min-height: 100svh !important;
   margin-inline: 0 !important;
   display: flex !important;
   align-items: center !important;
@@ -977,10 +990,28 @@ body.contact-page .contact-lead {
 }
 
 body.contact-page .contact-card {
-  background: rgba(255, 253, 248, .94) !important;
-  border-color: rgba(255, 255, 255, .36) !important;
+  color: #fff !important;
+  background: rgba(7, 13, 11, .36) !important;
+  border-color: rgba(255, 255, 255, .22) !important;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, .24) !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
+}
+
+body.contact-page .contact-card p {
+  color: rgba(255, 255, 255, .78) !important;
+}
+
+body.contact-page .contact-buttons a {
+  color: #fff !important;
+  background: rgba(255, 255, 255, .08) !important;
+  border-color: rgba(255, 255, 255, .24) !important;
+}
+
+body.contact-page .contact-buttons a:first-child {
+  color: #101714 !important;
+  background: rgba(255, 253, 248, .94) !important;
+  border-color: rgba(255, 255, 255, .5) !important;
 }
 
 body.contact-page .contact-card,
@@ -1047,10 +1078,27 @@ body.contact-page .contact-trust-card {
   body.contact-page .contact-hero {
     width: 100% !important;
     max-width: none !important;
-    min-height: calc(100svh - 72px) !important;
-    padding: 42px 12px 64px !important;
+    min-height: 100svh !important;
+    padding: 98px 12px 64px !important;
     background:
       linear-gradient(180deg, rgba(7, 13, 11, .72) 0%, rgba(7, 13, 11, .54) 34%, rgba(7, 13, 11, .88) 100%),
       url("reformas/contacto-fondo.png") 69% center / cover no-repeat !important;
+  }
+
+  body.contact-page .contact-copy,
+  body.contact-page .contact-proof-lines,
+  body.contact-page .contact-card {
+    width: calc(100vw - 48px) !important;
+    max-width: 360px !important;
+    min-width: 0 !important;
+  }
+  body.contact-page .contact-copy {
+    max-width: calc(100vw - 24px) !important;
+  }
+
+  body.contact-page .contact-proof-lines p,
+  body.contact-page .contact-card p,
+  body.contact-page .contact-buttons a {
+    overflow-wrap: anywhere !important;
   }
 }
