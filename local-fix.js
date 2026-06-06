@@ -483,7 +483,7 @@
       "Bath",
       [
         {
-          src: rootPath("reformas/bano-blanco-ducha.jpg"),
+          src: rootPath("reformas/bano-blanco-ducha.png"),
           label: "Baño claro",
           alt: "Baño renovado con ducha de cristal, mueble blanco y revestimiento gris"
         },
