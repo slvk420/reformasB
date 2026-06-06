@@ -49,7 +49,7 @@
     .contact-page {
       min-height: 100dvh;
       background:
-        linear-gradient(180deg, rgba(255, 253, 248, .98), rgba(255, 253, 248, .92) 54%, rgba(243, 239, 232, .86)),
+        linear-gradient(180deg, rgba(255, 253, 248, .98), rgba(255, 253, 248, .94) 54%, rgba(243, 239, 232, .86)),
         var(--contact-paper);
     }
 
@@ -119,15 +119,27 @@
     }
 
     .contact-hero {
-      display: grid;
-      grid-template-columns: minmax(0, .88fr) minmax(420px, .72fr);
-      gap: clamp(28px, 5vw, 84px);
+      width: 100%;
+      max-width: none;
+      min-height: calc(100svh - 86px);
+      display: flex;
       align-items: center;
-      padding: clamp(46px, 7vw, 108px) 0 clamp(56px, 8vw, 116px);
+      margin-inline: 0;
+      padding: clamp(64px, 8vw, 122px) clamp(24px, 5vw, 84px) clamp(68px, 8vw, 126px);
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(7, 13, 11, .95) 0%, rgba(7, 13, 11, .84) 38%, rgba(7, 13, 11, .38) 68%, rgba(7, 13, 11, .08) 100%),
+        url("../reformas/contacto-fondo.png") 62% center / cover no-repeat;
+      border-bottom: 1px solid rgba(16, 23, 20, .12);
     }
 
     .contact-copy {
+      width: min(760px, 100%);
       min-width: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .contact-kicker,
@@ -143,6 +155,7 @@
     .contact-hero h1 {
       max-width: 760px;
       margin: 0;
+      color: #fff;
       font-family: "Nippo", var(--font-sans), Arial, sans-serif;
       font-size: clamp(3rem, 5.4vw, 6.35rem);
       font-weight: 700;
@@ -154,7 +167,7 @@
     .contact-lead {
       max-width: 690px;
       margin: 24px 0 0;
-      color: var(--contact-muted);
+      color: rgba(255, 255, 255, .82);
       font-size: clamp(1.04rem, 1.25vw, 1.24rem);
       line-height: 1.58;
     }
@@ -163,10 +176,12 @@
       width: min(100%, 760px);
       margin-top: 30px;
       padding: clamp(18px, 2.2vw, 28px);
-      background: #fff;
-      border: 1px solid var(--contact-line);
+      background: rgba(255, 253, 248, .94);
+      border: 1px solid rgba(255, 255, 255, .36);
       border-radius: 8px;
       box-shadow: 0 30px 90px rgba(16, 23, 20, .13);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     .contact-card-top {
@@ -224,50 +239,8 @@
       border-color: var(--contact-ink);
     }
 
-    .contact-visual {
-      margin: 0;
-      min-width: 0;
-      position: relative;
-    }
-
-    .contact-visual img {
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      max-height: min(72vh, 760px);
-      object-fit: cover;
-      object-position: 58% center;
-      border-radius: 8px;
-      box-shadow: 0 34px 100px rgba(16, 23, 20, .22);
-    }
-
-    .contact-visual figcaption {
-      position: absolute;
-      left: 18px;
-      right: 18px;
-      bottom: 18px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-    }
-
-    .contact-visual span {
-      min-height: 58px;
-      display: grid;
-      align-content: center;
-      padding: 12px;
-      color: #fff;
-      background: rgba(7, 13, 11, .78);
-      border: 1px solid rgba(255, 255, 255, .16);
-      border-radius: 8px;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      font-size: .8rem;
-      font-weight: 850;
-      line-height: 1.2;
-    }
-
     .contact-steps {
-      padding: 0 0 clamp(54px, 7vw, 88px);
+      padding: clamp(64px, 8vw, 104px) 0 clamp(54px, 7vw, 88px);
     }
 
     .contact-section-head {
@@ -377,18 +350,8 @@
         display: none;
       }
 
-      .contact-hero,
       .contact-section-head {
         grid-template-columns: 1fr;
-      }
-
-      .contact-visual {
-        order: -1;
-      }
-
-      .contact-visual img {
-        aspect-ratio: 16 / 10;
-        max-height: 420px;
       }
 
       .step-grid,
@@ -418,25 +381,11 @@
 
       .contact-hero {
         gap: 22px;
-        padding: 18px 0 54px;
-      }
-
-      .contact-visual img {
-        aspect-ratio: 4 / 3;
-        max-height: 280px;
-        object-position: 70% center;
-      }
-
-      .contact-visual figcaption {
-        position: static;
-        grid-template-columns: 1fr;
-        margin-top: 10px;
-      }
-
-      .contact-visual span {
-        color: var(--contact-ink);
-        background: #fff;
-        border-color: var(--contact-line);
+        min-height: calc(100svh - 72px);
+        padding: 42px 12px 64px;
+        background:
+          linear-gradient(180deg, rgba(7, 13, 11, .72) 0%, rgba(7, 13, 11, .54) 34%, rgba(7, 13, 11, .88) 100%),
+          url("../reformas/contacto-fondo.png") 69% center / cover no-repeat;
       }
 
       .contact-hero h1 {
@@ -513,15 +462,6 @@
           </div>
         </section>
       </div>
-
-      <figure class="contact-visual">
-        <img src="../reformas/contacto-fondo.png" alt="Cliente revisando una reforma con RSB" />
-        <figcaption aria-label="Datos rapidos">
-          <span>Lleida y alrededores</span>
-          <span>Fotos primero si ayuda</span>
-          <span>Visita cuando encaja</span>
-        </figcaption>
-      </figure>
     </section>
 
     <section class="contact-shell contact-steps" aria-labelledby="contact-steps-title">
