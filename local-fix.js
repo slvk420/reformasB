@@ -737,10 +737,12 @@
           eyebrow: "05 / Pedir visita",
           title: "Ya se puede pedir visita.",
           body: "Con el alcance entendido, damos el siguiente paso con una visita clara y sin vueltas innecesarias.",
-          image: "reformas/process-4.webp",
           cta: true
         }
       ];
+      var visualSteps = steps.filter(function (step) {
+        return !!step.image;
+      });
 
       var carousel = document.createElement("div");
       carousel.className = "rsb-process-carousel";
@@ -757,8 +759,16 @@
         "</article>" +
         '<div class="rsb-process-progress" aria-hidden="true"><span></span></div>' +
         "</div>" +
-        '<div class="rsb-process-visual">' +
-        '<img alt="" width="1600" height="900" decoding="async" loading="lazy">' +
+        '<div class="rsb-process-visual" aria-live="off">' +
+        visualSteps
+          .map(function (_, imageIndex) {
+            return (
+              '<figure class="rsb-process-photo rsb-process-photo-' +
+              (imageIndex + 1) +
+              '"><img alt="" width="1600" height="900" decoding="async" loading="lazy"></figure>'
+            );
+          })
+          .join("") +
         "</div>" +
         '<button class="rsb-process-arrow is-previous" type="button" aria-label="Ver paso anterior">&#8592;</button>' +
         '<button class="rsb-process-arrow is-next" type="button" aria-label="Ver paso siguiente">&#8594;</button>' +
@@ -766,7 +776,7 @@
         "</div>";
       section.appendChild(carousel);
 
-      var image = carousel.querySelector(".rsb-process-visual img");
+      var images = Array.prototype.slice.call(carousel.querySelectorAll(".rsb-process-visual img"));
       var eyebrow = carousel.querySelector(".rsb-process-eyebrow");
       var title = carousel.querySelector(".rsb-process-card h3");
       var body = carousel.querySelector(".rsb-process-card > p");
@@ -803,6 +813,7 @@
         transitionToken += 1;
         var currentToken = transitionToken;
         var step = steps[index];
+        carousel.classList.toggle("is-final", !!step.cta);
         carousel.classList.remove("is-forward", "is-backward");
         carousel.classList.add("is-changing", direction < 0 ? "is-backward" : "is-forward");
 
@@ -812,8 +823,13 @@
             eyebrow.textContent = step.eyebrow;
             title.textContent = step.title;
             body.textContent = step.body;
-            image.src = rootPath(step.image);
-            image.alt = step.title;
+            if (!step.cta) {
+              images.forEach(function (image, imageIndex) {
+                var visualStep = visualSteps[(index + imageIndex) % visualSteps.length];
+                image.src = rootPath(visualStep.image);
+                image.alt = imageIndex === 0 ? visualStep.title : "";
+              });
+            }
             cta.hidden = !step.cta;
             progress.style.transform = "scaleX(" + (index + 1) / steps.length + ")";
             dotButtons.forEach(function (button, dotIndex) {
@@ -869,13 +885,6 @@
           render(dotIndex, dotIndex < index ? -1 : 1);
           start();
         });
-      });
-
-      carousel.addEventListener("mouseenter", stop);
-      carousel.addEventListener("mouseleave", start);
-      carousel.addEventListener("focusin", stop);
-      carousel.addEventListener("focusout", function (event) {
-        if (!carousel.contains(event.relatedTarget)) start();
       });
 
       var updateVisibility = function () {

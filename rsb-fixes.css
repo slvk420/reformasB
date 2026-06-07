@@ -2155,3 +2155,196 @@ body.contact-page .contact-trust-card {
     width: 30px;
   }
 }
+
+/* Process composition refined from the Figma reference. */
+.cinematic-process.rsb-stable-process {
+  min-height: 760px;
+  scroll-margin-top: 72px;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-carousel {
+  min-height: 760px;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-inner {
+  gap: clamp(48px, 5vw, 76px);
+  grid-template-columns: minmax(360px, 500px) minmax(480px, 610px);
+  min-height: 760px;
+  padding: 104px clamp(54px, 6vw, 92px) 78px;
+  width: min(100%, 1320px);
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-copy > h2 {
+  font-size: clamp(2.6rem, 3.5vw, 3.7rem);
+  max-width: 540px;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-card {
+  margin-top: 24px;
+  min-height: 230px;
+  padding: 24px 26px;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-card h3 {
+  font-size: clamp(2.25rem, 3vw, 3.25rem);
+  margin-top: 14px;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-card > p {
+  font-size: 1rem;
+  margin-top: 13px;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-progress {
+  height: 5px;
+  margin-top: 24px;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-visual {
+  aspect-ratio: 16 / 10;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  min-width: 0;
+  overflow: visible;
+  position: relative;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-visual::after {
+  display: none;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-photo {
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 7px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .34);
+  inset: 0;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  transform-origin: center;
+  transition: opacity .32s ease, transform .58s cubic-bezier(.22, .8, .22, 1);
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-photo img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-photo-1 {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  z-index: 4;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-photo-2 {
+  opacity: .48;
+  transform: translate3d(20px, -14px, 0) rotate(2.2deg) scale(.975);
+  z-index: 3;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-photo-3 {
+  opacity: .27;
+  transform: translate3d(38px, -26px, 0) rotate(4deg) scale(.95);
+  z-index: 2;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-photo-4 {
+  opacity: .14;
+  transform: translate3d(54px, -36px, 0) rotate(5.5deg) scale(.925);
+  z-index: 1;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-carousel.is-changing .rsb-process-photo-1 {
+  opacity: .18;
+  transform: translate3d(18px, 5px, 0) rotate(1.4deg) scale(.97);
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-carousel.is-backward.is-changing .rsb-process-photo-1 {
+  transform: translate3d(-18px, 5px, 0) rotate(-1.4deg) scale(.97);
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-carousel.is-final .rsb-process-inner {
+  grid-template-columns: minmax(0, 650px);
+  justify-content: center;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-carousel.is-final .rsb-process-copy {
+  width: 100%;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-carousel.is-final .rsb-process-visual {
+  display: none;
+}
+
+.cinematic-process.rsb-stable-process .rsb-process-carousel.is-final .rsb-process-card {
+  background: linear-gradient(145deg, rgba(241, 200, 174, .12), rgba(7, 13, 11, .68));
+  min-height: 260px;
+}
+
+@media (max-width: 1024px) {
+  .cinematic-process.rsb-stable-process,
+  .cinematic-process.rsb-stable-process .rsb-process-carousel {
+    min-height: auto;
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-inner {
+    gap: 34px;
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 92px 24px 106px;
+    width: min(100%, 760px);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-visual {
+    grid-row: 1;
+    margin-inline: auto;
+    width: min(88%, 580px);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-carousel.is-final .rsb-process-inner {
+    min-height: 620px;
+  }
+}
+
+@media (max-width: 760px) {
+  .cinematic-process.rsb-stable-process .rsb-process-inner {
+    gap: 24px;
+    padding: 82px 12px 104px;
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-visual {
+    aspect-ratio: 4 / 3;
+    width: calc(100% - 38px);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-photo-2 {
+    transform: translate3d(10px, -8px, 0) rotate(1.6deg) scale(.98);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-photo-3 {
+    transform: translate3d(19px, -15px, 0) rotate(3deg) scale(.96);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-photo-4 {
+    transform: translate3d(27px, -21px, 0) rotate(4.2deg) scale(.94);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-copy > h2 {
+    font-size: clamp(1.95rem, 8.3vw, 2.5rem);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-card {
+    min-height: 210px;
+    padding: 17px;
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-card h3 {
+    font-size: clamp(1.8rem, 8vw, 2.35rem);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-carousel.is-final .rsb-process-inner {
+    min-height: 570px;
+  }
+}
