@@ -776,7 +776,10 @@
         "</div>";
       section.appendChild(carousel);
 
-      var images = Array.prototype.slice.call(carousel.querySelectorAll(".rsb-process-visual img"));
+      var photos = Array.prototype.slice.call(carousel.querySelectorAll(".rsb-process-photo"));
+      var images = photos.map(function (photo) {
+        return photo.querySelector("img");
+      });
       var eyebrow = carousel.querySelector(".rsb-process-eyebrow");
       var title = carousel.querySelector(".rsb-process-card h3");
       var body = carousel.querySelector(".rsb-process-card > p");
@@ -805,10 +808,73 @@
         .join("");
       var dotButtons = Array.prototype.slice.call(dots.querySelectorAll("button"));
 
+      images.forEach(function (image, imageIndex) {
+        image.src = rootPath(visualSteps[imageIndex].image);
+        image.alt = imageIndex === 0 ? visualSteps[imageIndex].title : "";
+        photos[imageIndex].dataset.slot = String(imageIndex);
+      });
+
+      var setPhotoSlots = function (activeIndex) {
+        photos.forEach(function (photo, photoIndex) {
+          photo.dataset.slot = String((photoIndex - activeIndex + visualSteps.length) % visualSteps.length);
+          photo.classList.remove("is-exiting-forward", "is-entering-backward", "is-resetting");
+        });
+      };
+
+      var animatePhotoStack = function (previousIndex, nextIndex, direction, token) {
+        var previousFinal = !!steps[previousIndex].cta;
+        var nextFinal = !!steps[nextIndex].cta;
+
+        if (nextFinal) {
+          carousel.classList.add("is-stack-leaving");
+          return;
+        }
+
+        carousel.classList.remove("is-stack-leaving");
+        if (previousFinal || reduceMotion) {
+          setPhotoSlots(nextIndex);
+          return;
+        }
+
+        var outgoing = photos.find(function (photo) {
+          return photo.dataset.slot === "0";
+        });
+        var incoming = photos.find(function (photo) {
+          return photo.dataset.slot === "3";
+        });
+
+        photos.forEach(function (photo, photoIndex) {
+          var targetSlot = (photoIndex - nextIndex + visualSteps.length) % visualSteps.length;
+          if (direction > 0 && photo === outgoing) return;
+          photo.dataset.slot = String(targetSlot);
+        });
+
+        if (direction > 0 && outgoing) {
+          outgoing.classList.add("is-exiting-forward");
+          window.setTimeout(function () {
+            if (token !== transitionToken) return;
+            outgoing.classList.add("is-resetting");
+            outgoing.dataset.slot = "3";
+            outgoing.classList.remove("is-exiting-forward");
+            window.requestAnimationFrame(function () {
+              window.requestAnimationFrame(function () {
+                outgoing.classList.remove("is-resetting");
+              });
+            });
+          }, 760);
+        } else if (incoming) {
+          incoming.classList.add("is-entering-backward");
+          window.setTimeout(function () {
+            if (token === transitionToken) incoming.classList.remove("is-entering-backward");
+          }, 820);
+        }
+      };
+
       var render = function (nextIndex, direction) {
         var normalized = (nextIndex + steps.length) % steps.length;
-        if (!changing && normalized === index) return;
+        if (changing || normalized === index) return;
         changing = true;
+        var previousIndex = index;
         index = normalized;
         transitionToken += 1;
         var currentToken = transitionToken;
@@ -816,6 +882,7 @@
         carousel.classList.toggle("is-final", !!step.cta);
         carousel.classList.remove("is-forward", "is-backward");
         carousel.classList.add("is-changing", direction < 0 ? "is-backward" : "is-forward");
+        animatePhotoStack(previousIndex, index, direction, currentToken);
 
         window.setTimeout(
           function () {
@@ -823,13 +890,6 @@
             eyebrow.textContent = step.eyebrow;
             title.textContent = step.title;
             body.textContent = step.body;
-            if (!step.cta) {
-              images.forEach(function (image, imageIndex) {
-                var visualStep = visualSteps[(index + imageIndex) % visualSteps.length];
-                image.src = rootPath(visualStep.image);
-                image.alt = imageIndex === 0 ? visualStep.title : "";
-              });
-            }
             cta.hidden = !step.cta;
             progress.style.transform = "scaleX(" + (index + 1) / steps.length + ")";
             dotButtons.forEach(function (button, dotIndex) {
@@ -838,7 +898,7 @@
               button.setAttribute("aria-current", active ? "step" : "false");
             });
           },
-          reduceMotion ? 0 : 150
+          reduceMotion ? 0 : 280
         );
 
         window.setTimeout(
@@ -847,13 +907,24 @@
             carousel.classList.remove("is-changing", "is-forward", "is-backward");
             changing = false;
           },
-          reduceMotion ? 20 : 360
+          reduceMotion ? 20 : 920
         );
       };
 
       var renderInitial = function () {
-        index = steps.length - 1;
-        render(0, 1);
+        index = 0;
+        var step = steps[index];
+        eyebrow.textContent = step.eyebrow;
+        title.textContent = step.title;
+        body.textContent = step.body;
+        cta.hidden = true;
+        progress.style.transform = "scaleX(" + 1 / steps.length + ")";
+        setPhotoSlots(0);
+        dotButtons.forEach(function (button, dotIndex) {
+          var active = dotIndex === 0;
+          button.classList.toggle("is-active", active);
+          button.setAttribute("aria-current", active ? "step" : "false");
+        });
       };
 
       var stop = function () {
