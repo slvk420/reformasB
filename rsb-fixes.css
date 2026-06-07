@@ -817,9 +817,10 @@ html.rsb-more-services-page .more-services-editorial-section {
 }
 
 .rsb-home-hero-slide {
-  aspect-ratio: 16 / 9;
   height: 100%;
   inset: 0;
+  object-fit: cover;
+  object-position: center center;
   opacity: 0;
   position: absolute;
   transform: translate3d(6%, 0, 0) scale(1.035);
@@ -830,14 +831,6 @@ html.rsb-more-services-page .more-services-editorial-section {
   width: 100%;
   will-change: opacity, transform;
   z-index: 1;
-}
-
-.rsb-home-hero-image {
-  display: block;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  width: 100%;
 }
 
 .rsb-home-hero-slide.is-active {
@@ -996,7 +989,7 @@ html.rsb-more-services-page .more-services-editorial-section {
       linear-gradient(90deg, rgba(5, 10, 9, .72), rgba(5, 10, 9, .12));
   }
 
-  .rsb-home-hero-image {
+  .rsb-home-hero-slide {
     object-position: 68% center;
   }
 
