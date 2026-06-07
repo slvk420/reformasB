@@ -861,12 +861,12 @@
                 outgoing.classList.remove("is-resetting");
               });
             });
-          }, 760);
+          }, 1040);
         } else if (incoming) {
           incoming.classList.add("is-entering-backward");
           window.setTimeout(function () {
             if (token === transitionToken) incoming.classList.remove("is-entering-backward");
-          }, 820);
+          }, 1220);
         }
       };
 
@@ -907,7 +907,7 @@
             carousel.classList.remove("is-changing", "is-forward", "is-backward");
             changing = false;
           },
-          reduceMotion ? 20 : 920
+          reduceMotion ? 20 : 1320
         );
       };
 
