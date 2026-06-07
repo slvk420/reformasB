@@ -48,9 +48,22 @@
     document.querySelectorAll("img").forEach(function (img) {
       var src = normalizeAsset(img.getAttribute("src"));
       if (src && src !== img.getAttribute("src")) img.setAttribute("src", src);
-      if (img.hasAttribute("srcset")) img.removeAttribute("srcset");
-      if (img.getAttribute("loading") === "lazy") img.setAttribute("loading", "eager");
       if (!img.getAttribute("decoding")) img.setAttribute("decoding", "async");
+    });
+
+    document.querySelectorAll(".brand-logo").forEach(function (logo) {
+      var logo80 = rootPath("reformas/brand/logo-rsb-80.webp");
+      var logo160 = rootPath("reformas/brand/logo-rsb-160.webp");
+      var logoSrcset = logo80 + " 80w, " + logo160 + " 160w";
+      if (logo.getAttribute("src") !== logo80) logo.setAttribute("src", logo80);
+      if (logo.getAttribute("srcset") !== logoSrcset) logo.setAttribute("srcset", logoSrcset);
+      if (logo.getAttribute("sizes") !== "(max-width: 760px) 64px, 80px") {
+        logo.setAttribute("sizes", "(max-width: 760px) 64px, 80px");
+      }
+      if (logo.getAttribute("width") !== "80") logo.setAttribute("width", "80");
+      if (logo.getAttribute("height") !== "70") logo.setAttribute("height", "70");
+      if (logo.getAttribute("loading") !== "eager") logo.setAttribute("loading", "eager");
+      if (logo.getAttribute("decoding") !== "async") logo.setAttribute("decoding", "async");
     });
 
     document.querySelectorAll('a[href]').forEach(function (link) {
@@ -1012,17 +1025,17 @@
 
     var slides = [
       {
-        image: "reformas/hero-planificacion.webp",
+        image: "hero-planificacion",
         alt: "Planificación de una reforma integral con selección de materiales y revisión de planos",
         text: "Diseñamos reformas integrales en Lleida con una planificación clara, materiales bien elegidos y decisiones tomadas antes de empezar la obra."
       },
       {
-        image: "reformas/hero-reforma-integral.webp",
+        image: "hero-reforma-integral",
         alt: "Reforma integral de vivienda con fachada, salón y cocina renovados",
         text: "Realizamos obra nueva, reformas de viviendas, fachadas, tejados y rehabilitación de pisos antiguos. Te acompañamos desde la primera visita hasta la entrega, con presupuesto claro y una gestión cercana."
       },
       {
-        image: "reformas/hero-entrega-llaves.webp",
+        image: "hero-entrega-llaves",
         alt: "Entrega de llaves al finalizar una reforma de vivienda",
         text: "Coordinamos cada oficio y cada detalle hasta la entrega de llaves, para que estrenes tu vivienda reformada con tranquilidad, plazos claros y un único interlocutor."
       }
@@ -1033,14 +1046,41 @@
     carousel.setAttribute("aria-hidden", "true");
     carousel.innerHTML = slides
       .map(function (slide, index) {
+        var base = "reformas/hero-responsive/" + slide.image;
+        var avifSrcset =
+          rootPath(base + "-640.avif") +
+          " 640w, " +
+          rootPath(base + "-1024.avif") +
+          " 1024w, " +
+          rootPath(base + "-1600.avif") +
+          " 1600w";
+        var webpSrcset =
+          rootPath(base + "-640.webp") +
+          " 640w, " +
+          rootPath(base + "-1024.webp") +
+          " 1024w, " +
+          rootPath(base + "-1600.webp") +
+          " 1600w";
         return (
-          '<img class="rsb-home-hero-slide' +
+          '<picture class="rsb-home-hero-slide' +
           (index === 0 ? " is-active" : "") +
-          '" src="' +
-          rootPath(slide.image) +
-          '" alt="" loading="' +
+          '">' +
+          '<source type="image/avif" srcset="' +
+          avifSrcset +
+          '" sizes="100vw">' +
+          '<source type="image/webp" srcset="' +
+          webpSrcset +
+          '" sizes="100vw">' +
+          '<img class="rsb-home-hero-image" src="' +
+          rootPath(base + "-640.webp") +
+          '" srcset="' +
+          webpSrcset +
+          '" sizes="100vw" alt="" width="1600" height="900" loading="' +
           (index === 0 ? "eager" : "lazy") +
-          '" decoding="async">'
+          '" decoding="async"' +
+          (index === 0 ? ' fetchpriority="high"' : "") +
+          ">" +
+          "</picture>"
         );
       })
       .join("");
@@ -1212,8 +1252,6 @@
 
   new MutationObserver(runFixes).observe(document.documentElement, {
     subtree: true,
-    childList: true,
-    attributes: true,
-    attributeFilter: ["src", "srcset"]
+    childList: true
   });
 })();
