@@ -517,6 +517,69 @@
     );
   }
 
+  function updateHomeMarketingCopy() {
+    if (isSubpage || isMoreServicesPath()) return;
+
+    var content = [
+      {
+        selector: ".work-example-kitchen",
+        title: "Reformas de cocinas funcionales y bien coordinadas.",
+        text: "Coordinamos albañilería, fontanería, electricidad, mobiliario y acabados para reformar cocinas prácticas, resistentes y adaptadas al uso diario."
+      },
+      {
+        selector: ".work-example-bath",
+        title: "Reformas de baños pensadas para durar.",
+        text: "Renovamos distribución, fontanería, impermeabilización, revestimientos y sanitarios para conseguir baños cómodos, seguros y fáciles de mantener."
+      },
+      {
+        selector: ".work-example-living",
+        title: "Salones con más luz y mejor distribución.",
+        text: "Mejoramos la distribución, iluminación, pavimentos, carpintería y acabados para aprovechar mejor el espacio y crear una estancia cómoda."
+      }
+    ];
+
+    content.forEach(function (item) {
+      var section = document.querySelector(item.selector);
+      if (!section) return;
+      var title = section.querySelector(".work-example-copy h2");
+      var text = section.querySelector(".work-example-copy > p:last-child");
+      if (title && title.textContent !== item.title) title.textContent = item.title;
+      if (text && text.textContent !== item.text) text.textContent = item.text;
+    });
+  }
+
+  function updateHomeHeroActions() {
+    if (isSubpage || isMoreServicesPath()) return;
+
+    var links = document.querySelectorAll(".editorial-hero .hero-actions a");
+    if (links.length < 2) return;
+    var isMobile = window.matchMedia && window.matchMedia("(max-width: 760px)").matches;
+    var labels = [
+      { desktop: "Pedir visita", mobile: "Solicitar visita" },
+      { desktop: "Llamar ahora", mobile: "Llamar" }
+    ];
+
+    links.forEach(function (link, index) {
+      if (!labels[index]) return;
+      var label = isMobile ? labels[index].mobile : labels[index].desktop;
+      var textNodes = Array.prototype.filter.call(link.childNodes, function (node) {
+        return node.nodeType === 3;
+      });
+      textNodes.forEach(function (node) {
+        node.remove();
+      });
+
+      var text = link.querySelector(".rsb-responsive-action-label");
+      if (!text) {
+        text = document.createElement("span");
+        text.className = "rsb-responsive-action-label";
+        link.insertBefore(text, link.firstChild);
+      }
+      if (text.textContent !== label) text.textContent = label;
+      link.setAttribute("aria-label", label);
+    });
+  }
+
   function initBeforeAfter() {
     document.querySelectorAll(".rsb-ba-frame").forEach(function (frame) {
       if (frame.dataset.rsbReady) return;
@@ -930,6 +993,8 @@
 
     removeTurnkeyHabitability();
     removeHomeOnlySections();
+    updateHomeMarketingCopy();
+    updateHomeHeroActions();
   }
 
   function initHomeHeroCarousel() {
