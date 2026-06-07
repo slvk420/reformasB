@@ -932,9 +932,158 @@
     removeHomeOnlySections();
   }
 
+  function initHomeHeroCarousel() {
+    if (isSubpage || document.documentElement.classList.contains("rsb-more-services-page")) return;
+
+    var hero = document.querySelector(".editorial-hero");
+    if (!hero || hero.dataset.rsbHeroCarouselReady) return;
+    hero.dataset.rsbHeroCarouselReady = "1";
+    hero.classList.add("rsb-hero-carousel-ready");
+
+    var oldMedia = hero.querySelector(".hero-editorial-media");
+    var oldBrandType = hero.querySelector(".hero-brand-type");
+    if (oldMedia) oldMedia.remove();
+    if (oldBrandType) oldBrandType.remove();
+
+    var slides = [
+      {
+        image: "reformas/hero-planificacion.webp",
+        alt: "Planificación de una reforma integral con selección de materiales y revisión de planos",
+        text: "Diseñamos reformas integrales en Lleida con una planificación clara, materiales bien elegidos y decisiones tomadas antes de empezar la obra."
+      },
+      {
+        image: "reformas/hero-reforma-integral.webp",
+        alt: "Reforma integral de vivienda con fachada, salón y cocina renovados",
+        text: "Realizamos obra nueva, reformas de viviendas, fachadas, tejados y rehabilitación de pisos antiguos. Te acompañamos desde la primera visita hasta la entrega, con presupuesto claro y una gestión cercana."
+      },
+      {
+        image: "reformas/hero-entrega-llaves.webp",
+        alt: "Entrega de llaves al finalizar una reforma de vivienda",
+        text: "Coordinamos cada oficio y cada detalle hasta la entrega de llaves, para que estrenes tu vivienda reformada con tranquilidad, plazos claros y un único interlocutor."
+      }
+    ];
+
+    var carousel = document.createElement("div");
+    carousel.className = "rsb-home-hero-carousel";
+    carousel.setAttribute("aria-hidden", "true");
+    carousel.innerHTML = slides
+      .map(function (slide, index) {
+        return (
+          '<img class="rsb-home-hero-slide' +
+          (index === 0 ? " is-active" : "") +
+          '" src="' +
+          rootPath(slide.image) +
+          '" alt="" loading="' +
+          (index === 0 ? "eager" : "lazy") +
+          '" decoding="async">'
+        );
+      })
+      .join("");
+    hero.insertBefore(carousel, hero.firstChild);
+
+    var description = hero.querySelector(".hero-description");
+    if (description) {
+      description.textContent = slides[0].text;
+      description.setAttribute("aria-live", "polite");
+      description.setAttribute("aria-atomic", "true");
+    }
+
+    var actions = hero.querySelector(".hero-actions");
+    var controls = document.createElement("div");
+    controls.className = "rsb-home-hero-controls";
+    controls.setAttribute("aria-label", "Seleccionar imagen del inicio");
+    controls.innerHTML = slides
+      .map(function (slide, index) {
+        return (
+          '<button type="button" class="' +
+          (index === 0 ? "is-active" : "") +
+          '" aria-label="Ver imagen ' +
+          (index + 1) +
+          ' de ' +
+          slides.length +
+          '" aria-current="' +
+          (index === 0 ? "true" : "false") +
+          '"><span></span></button>'
+        );
+      })
+      .join("");
+    if (actions) actions.insertAdjacentElement("afterend", controls);
+    else hero.querySelector(".hero-content").appendChild(controls);
+
+    var slideElements = Array.prototype.slice.call(carousel.querySelectorAll(".rsb-home-hero-slide"));
+    var controlElements = Array.prototype.slice.call(controls.querySelectorAll("button"));
+    var activeIndex = 0;
+    var timer = null;
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var showSlide = function (nextIndex) {
+      var next = (nextIndex + slides.length) % slides.length;
+      if (next === activeIndex) return;
+
+      var previous = activeIndex;
+      activeIndex = next;
+      slideElements[previous].classList.remove("is-active");
+      slideElements[previous].classList.add("is-leaving");
+      slideElements[next].classList.remove("is-leaving");
+      slideElements[next].classList.add("is-active");
+
+      controlElements.forEach(function (button, index) {
+        var isActive = index === next;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-current", isActive ? "true" : "false");
+      });
+
+      if (description) {
+        description.classList.add("is-changing");
+        window.setTimeout(
+          function () {
+            description.textContent = slides[next].text;
+            description.classList.remove("is-changing");
+          },
+          reduceMotion ? 0 : 260
+        );
+      }
+
+      window.setTimeout(
+        function () {
+          slideElements[previous].classList.remove("is-leaving");
+        },
+        reduceMotion ? 20 : 1250
+      );
+    };
+
+    var stop = function () {
+      if (timer) window.clearInterval(timer);
+      timer = null;
+    };
+
+    var start = function () {
+      stop();
+      if (document.visibilityState === "hidden") return;
+      timer = window.setInterval(function () {
+        showSlide(activeIndex + 1);
+      }, 5000);
+    };
+
+    controlElements.forEach(function (button, index) {
+      button.addEventListener("click", function () {
+        showSlide(index);
+        start();
+      });
+    });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "hidden") stop();
+      else start();
+    });
+
+    start();
+  }
+
   function runFixes() {
     fixAssets();
     applyRequestedChanges();
+    initHomeHeroCarousel();
     initHorizontalProcessAutoplay();
     updateHomeWorkGalleries();
   }
