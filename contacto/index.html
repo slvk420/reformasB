@@ -127,7 +127,7 @@
       display: flex;
       align-items: center;
       margin-inline: 0;
-      padding: clamp(64px, 8vw, 122px) clamp(24px, 5vw, 84px) clamp(68px, 8vw, 126px);
+      padding: clamp(98px, 8vw, 118px) clamp(24px, 5vw, 84px) clamp(38px, 4vw, 56px);
       position: relative;
       isolation: isolate;
       overflow: hidden;
@@ -155,39 +155,39 @@
     }
 
     .contact-hero h1 {
-      max-width: 760px;
+      max-width: 690px;
       margin: 0;
       color: #fff;
       font-family: "Nippo", var(--font-sans), Arial, sans-serif;
-      font-size: clamp(3rem, 5.4vw, 6.35rem);
+      font-size: clamp(2.8rem, 4.15vw, 4.8rem);
       font-weight: 700;
-      letter-spacing: -.035em;
-      line-height: .9;
+      letter-spacing: 0;
+      line-height: .94;
       text-wrap: balance;
     }
 
     .contact-lead {
       max-width: 690px;
-      margin: 24px 0 0;
+      margin: 16px 0 0;
       color: rgba(255, 255, 255, .82);
-      font-size: clamp(1.04rem, 1.25vw, 1.24rem);
-      line-height: 1.58;
+      font-size: clamp(1rem, 1.08vw, 1.12rem);
+      line-height: 1.5;
     }
 
     .contact-proof-lines {
       width: min(100%, 760px);
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 22px;
+      gap: 10px;
+      margin-top: 16px;
     }
 
     .contact-proof-lines p {
       margin: 0;
-      min-height: 88px;
+      min-height: 68px;
       display: grid;
       align-content: center;
-      padding: 16px 18px;
+      padding: 12px 16px;
       color: rgba(255, 255, 255, .88);
       background: rgba(7, 13, 11, .42);
       border: 1px solid rgba(255, 255, 255, .18);
@@ -206,8 +206,8 @@
 
     .contact-card {
       width: min(100%, 760px);
-      margin-top: 30px;
-      padding: clamp(18px, 2.2vw, 28px);
+      margin-top: 18px;
+      padding: clamp(16px, 1.8vw, 22px);
       color: #fff;
       background: rgba(7, 13, 11, .36);
       border: 1px solid rgba(255, 255, 255, .22);
@@ -219,8 +219,8 @@
 
     .contact-card-top {
       display: grid;
-      grid-template-columns: minmax(150px, 230px) minmax(0, 1fr);
-      gap: 20px;
+      grid-template-columns: minmax(150px, 210px) minmax(0, 1fr);
+      gap: 16px;
       align-items: start;
     }
 
@@ -235,24 +235,24 @@
     }
 
     .contact-card h2 {
-      font-size: clamp(1.85rem, 2.35vw, 2.65rem);
+      font-size: clamp(1.65rem, 2vw, 2.2rem);
     }
 
     .contact-card p {
       margin: 0;
       color: rgba(255, 255, 255, .78);
-      line-height: 1.55;
+      line-height: 1.45;
     }
 
     .contact-buttons {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 22px;
+      gap: 10px;
+      margin-top: 16px;
     }
 
     .contact-buttons a {
-      min-height: 58px;
+      min-height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -434,8 +434,9 @@
 
       .contact-hero {
         gap: 22px;
-        min-height: calc(100svh - 72px);
-        padding: 98px 12px 64px;
+        min-height: 100svh;
+        align-items: flex-start;
+        padding: 82px 12px 28px;
         background:
           linear-gradient(180deg, rgba(7, 13, 11, .72) 0%, rgba(7, 13, 11, .54) 34%, rgba(7, 13, 11, .88) 100%),
           url("../reformas/contacto-fondo.png") 69% center / cover no-repeat;
@@ -460,18 +461,19 @@
       }
 
       .contact-hero h1 {
-        font-size: clamp(2.24rem, 11vw, 3.05rem);
-        line-height: .95;
+        font-size: clamp(2rem, 9.6vw, 2.65rem);
+        line-height: .98;
       }
 
       .contact-lead {
-        margin-top: 16px;
-        font-size: 1rem;
+        margin-top: 12px;
+        font-size: .94rem;
+        line-height: 1.42;
       }
 
       .contact-card {
-        margin-top: 20px;
-        padding: 16px;
+        margin-top: 14px;
+        padding: 14px;
       }
 
       .contact-proof-lines,
@@ -485,7 +487,28 @@
       }
 
       .contact-buttons a {
-        min-height: 52px;
+        min-height: 46px;
+      }
+
+      .contact-card-top {
+        display: block;
+      }
+
+      .contact-card-top p {
+        display: none;
+      }
+
+      .contact-card h2 {
+        font-size: 1.55rem;
+      }
+
+      .contact-buttons {
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .contact-proof-lines {
+        margin-top: 12px;
       }
 
       .contact-section-head h2,
@@ -500,7 +523,7 @@
       }
     }
   </style>
-  <link rel="stylesheet" href="../rsb-fixes.css?v=process-final-card-20260607" />
+  <link rel="stylesheet" href="../rsb-fixes.css?v=contact-compact-20260607" />
 </head>
 <body class="contact-page">
   <header class="contact-header" aria-label="Cabecera RSB">
@@ -526,11 +549,6 @@
         <h1 id="contact-title">Ll&aacute;manos y vemos tu reforma contigo.</h1>
         <p class="contact-lead">Cu&eacute;ntanos qu&eacute; quieres hacer y te diremos el siguiente paso sin rodeos: llamada, visita o una primera lectura visual con fotos.</p>
 
-        <div class="contact-proof-lines" aria-label="Forma de trabajar">
-          <p><strong>Lo hacemos f&aacute;cil.</strong> Nos adaptamos al cliente para que el primer paso sea c&oacute;modo, claro y sin vueltas innecesarias.</p>
-          <p><strong>Distintas calidades y precios.</strong> Trabajamos con opciones ajustadas a cada vivienda, objetivo y rango de presupuesto.</p>
-        </div>
-
         <section class="contact-card" aria-label="Contacto rapido">
           <div class="contact-card-top">
             <h2>Respuesta directa.</h2>
@@ -542,6 +560,11 @@
             <a href="mailto:reformasb.oficial@gmail.com?subject=Consulta%20reforma%20RSB">Enviar email <span>&gt;</span></a>
           </div>
         </section>
+
+        <div class="contact-proof-lines" aria-label="Forma de trabajar">
+          <p><strong>Lo hacemos f&aacute;cil.</strong> Nos adaptamos al cliente para que el primer paso sea c&oacute;modo, claro y sin vueltas innecesarias.</p>
+          <p><strong>Distintas calidades y precios.</strong> Trabajamos con opciones ajustadas a cada vivienda, objetivo y rango de presupuesto.</p>
+        </div>
       </div>
     </section>
 
@@ -583,17 +606,17 @@
         </div>
         <div class="contact-trust-grid">
           <article class="contact-trust-card contact-reveal" style="--reveal-delay: 80ms">
-            <strong>01</strong>
+            <strong>04</strong>
             <h3>Lectura visual previa</h3>
             <p>Vemos potencial, l&iacute;mites y prioridades antes de hablar de precios a ciegas.</p>
           </article>
           <article class="contact-trust-card contact-reveal" style="--reveal-delay: 160ms">
-            <strong>02</strong>
+            <strong>05</strong>
             <h3>Plan claro antes de obra</h3>
             <p>Ordenamos alcance, fases y decisiones importantes antes de empezar a romper.</p>
           </article>
           <article class="contact-trust-card contact-reveal" style="--reveal-delay: 240ms">
-            <strong>03</strong>
+            <strong>06</strong>
             <h3>Un interlocutor</h3>
             <p>Menos ruido, menos llamadas cruzadas y una persona clara para avanzar.</p>
           </article>

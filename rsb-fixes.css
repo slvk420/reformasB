@@ -970,7 +970,7 @@ body.contact-page .contact-hero {
   margin-inline: 0 !important;
   display: flex !important;
   align-items: center !important;
-  padding: clamp(64px, 8vw, 122px) clamp(24px, 5vw, 84px) clamp(68px, 8vw, 126px) !important;
+  padding: clamp(98px, 8vw, 118px) clamp(24px, 5vw, 84px) clamp(38px, 4vw, 56px) !important;
   background:
     linear-gradient(90deg, rgba(7, 13, 11, .95) 0%, rgba(7, 13, 11, .84) 38%, rgba(7, 13, 11, .38) 68%, rgba(7, 13, 11, .08) 100%),
     url("reformas/contacto-fondo.png") 62% center / cover no-repeat !important;
@@ -983,10 +983,17 @@ body.contact-page .contact-copy {
 
 body.contact-page .contact-hero h1 {
   color: #fff !important;
+  max-width: 690px !important;
+  font-size: clamp(2.8rem, 4.15vw, 4.8rem) !important;
+  letter-spacing: 0 !important;
+  line-height: .94 !important;
 }
 
 body.contact-page .contact-lead {
   color: rgba(255, 255, 255, .82) !important;
+  margin-top: 16px !important;
+  font-size: clamp(1rem, 1.08vw, 1.12rem) !important;
+  line-height: 1.5 !important;
 }
 
 body.contact-page .contact-card {
@@ -1000,6 +1007,39 @@ body.contact-page .contact-card {
 
 body.contact-page .contact-card p {
   color: rgba(255, 255, 255, .78) !important;
+}
+
+body.contact-page .contact-card {
+  margin-top: 18px !important;
+  padding: clamp(16px, 1.8vw, 22px) !important;
+}
+
+body.contact-page .contact-card-top {
+  grid-template-columns: minmax(150px, 210px) minmax(0, 1fr) !important;
+  gap: 16px !important;
+}
+
+body.contact-page .contact-card h2 {
+  font-size: clamp(1.65rem, 2vw, 2.2rem) !important;
+}
+
+body.contact-page .contact-buttons {
+  gap: 10px !important;
+  margin-top: 16px !important;
+}
+
+body.contact-page .contact-buttons a {
+  min-height: 52px !important;
+}
+
+body.contact-page .contact-proof-lines {
+  gap: 10px !important;
+  margin-top: 16px !important;
+}
+
+body.contact-page .contact-proof-lines p {
+  min-height: 68px !important;
+  padding: 12px 16px !important;
 }
 
 body.contact-page .contact-buttons a {
@@ -1227,7 +1267,8 @@ body.contact-page .contact-trust-card {
     width: 100% !important;
     max-width: none !important;
     min-height: 100svh !important;
-    padding: 98px 12px 64px !important;
+    align-items: flex-start !important;
+    padding: 82px 12px 28px !important;
     background:
       linear-gradient(180deg, rgba(7, 13, 11, .72) 0%, rgba(7, 13, 11, .54) 34%, rgba(7, 13, 11, .88) 100%),
       url("reformas/contacto-fondo.png") 69% center / cover no-repeat !important;
@@ -1242,6 +1283,47 @@ body.contact-page .contact-trust-card {
   }
   body.contact-page .contact-copy {
     max-width: calc(100vw - 24px) !important;
+  }
+
+  body.contact-page .contact-hero h1 {
+    font-size: clamp(2rem, 9.6vw, 2.65rem) !important;
+    line-height: .98 !important;
+  }
+
+  body.contact-page .contact-lead {
+    margin-top: 12px !important;
+    font-size: .94rem !important;
+    line-height: 1.42 !important;
+  }
+
+  body.contact-page .contact-card {
+    margin-top: 14px !important;
+    padding: 14px !important;
+  }
+
+  body.contact-page .contact-card-top {
+    display: block !important;
+  }
+
+  body.contact-page .contact-card-top p {
+    display: none !important;
+  }
+
+  body.contact-page .contact-card h2 {
+    font-size: 1.55rem !important;
+  }
+
+  body.contact-page .contact-buttons {
+    gap: 8px !important;
+    margin-top: 12px !important;
+  }
+
+  body.contact-page .contact-buttons a {
+    min-height: 46px !important;
+  }
+
+  body.contact-page .contact-proof-lines {
+    margin-top: 12px !important;
   }
 
   body.contact-page .contact-proof-lines p,
