@@ -1840,3 +1840,318 @@ body.contact-page .contact-trust-card {
     padding: clamp(24px, 4vw, 36px) !important;
   }
 }
+/* Stable process carousel: one state source for autoplay, arrows and dots. */
+.cinematic-process.rsb-stable-process {
+  background: radial-gradient(circle at 76% 30%, rgba(50, 74, 95, .17), transparent 36%), linear-gradient(135deg, #101714, #07100d);
+  height: auto !important;
+  min-height: 100dvh;
+  overflow: hidden;
+  position: relative;
+}
+
+.cinematic-process.rsb-stable-process > :not(.rsb-process-carousel) {
+  display: none !important;
+}
+
+.rsb-process-carousel {
+  color: #fff;
+  min-height: 100dvh;
+  position: relative;
+}
+
+.rsb-process-inner {
+  align-items: center;
+  display: grid;
+  gap: clamp(42px, 7vw, 110px);
+  grid-template-columns: minmax(340px, .72fr) minmax(520px, 1.2fr);
+  margin-inline: auto;
+  min-height: 100dvh;
+  padding: clamp(110px, 12vh, 148px) 6vw clamp(84px, 9vh, 112px);
+  width: min(100%, 1720px);
+}
+
+.rsb-process-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.rsb-process-copy > .eyebrow {
+  color: #efb58f;
+}
+
+.rsb-process-copy > h2 {
+  font-family: "Nippo", var(--font-sans), Arial, sans-serif;
+  font-size: clamp(2.9rem, 4.2vw, 5rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: .96;
+  margin: 0;
+  max-width: 690px;
+  text-wrap: balance;
+}
+
+.rsb-process-card {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(7, 13, 11, .62);
+  border: 1px solid rgba(255, 255, 255, .17);
+  border-radius: 8px;
+  margin-top: 30px;
+  min-height: 272px;
+  padding: 28px 30px;
+  transition: opacity .16s ease, transform .22s ease;
+}
+
+.rsb-process-eyebrow {
+  color: #efb58f;
+  display: block;
+  font-size: .82rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.rsb-process-card h3 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2.5rem, 3.7vw, 4rem);
+  line-height: .98;
+  margin: 18px 0 0;
+  max-width: 620px;
+}
+
+.rsb-process-card > p {
+  color: rgba(255, 255, 255, .78);
+  font-size: clamp(1rem, 1.2vw, 1.14rem);
+  line-height: 1.55;
+  margin: 16px 0 0;
+  max-width: 620px;
+}
+
+.rsb-process-cta {
+  align-items: center;
+  background: #fff;
+  border-radius: 6px;
+  color: #18201d;
+  display: inline-flex;
+  font-weight: 900;
+  gap: 10px;
+  margin-top: 20px;
+  min-height: 46px;
+  padding: 0 18px;
+}
+
+.rsb-process-cta[hidden] {
+  display: none;
+}
+
+.rsb-process-progress {
+  background: rgba(255, 255, 255, .22);
+  height: 7px;
+  margin-top: 30px;
+  max-width: 620px;
+  overflow: hidden;
+}
+
+.rsb-process-progress span {
+  background: #f1c8ae;
+  display: block;
+  height: 100%;
+  transform: scaleX(.2);
+  transform-origin: left center;
+  transition: transform .32s ease;
+  width: 100%;
+}
+
+.rsb-process-visual {
+  aspect-ratio: 16 / 10;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 8px;
+  box-shadow: 0 34px 100px rgba(0, 0, 0, .38);
+  overflow: hidden;
+  position: relative;
+  transition: opacity .16s ease, transform .28s cubic-bezier(.22, .8, .22, 1);
+}
+
+.rsb-process-visual::after {
+  background: linear-gradient(90deg, rgba(7, 13, 11, .16), transparent 52%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.rsb-process-visual img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.rsb-process-carousel.is-changing .rsb-process-card,
+.rsb-process-carousel.is-changing .rsb-process-visual {
+  opacity: .18;
+}
+
+.rsb-process-carousel.is-forward.is-changing .rsb-process-visual {
+  transform: translate3d(18px, 0, 0) scale(.992);
+}
+
+.rsb-process-carousel.is-backward.is-changing .rsb-process-visual {
+  transform: translate3d(-18px, 0, 0) scale(.992);
+}
+
+.rsb-process-arrow {
+  align-items: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(10, 17, 14, .62);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  color: #fff;
+  display: flex;
+  font-family: Arial, sans-serif;
+  font-size: 2.1rem;
+  height: 56px;
+  justify-content: center;
+  line-height: 1;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  z-index: 4;
+}
+
+.rsb-process-arrow.is-previous {
+  left: 22px;
+}
+
+.rsb-process-arrow.is-next {
+  right: 22px;
+}
+
+.rsb-process-arrow:hover,
+.rsb-process-arrow:focus-visible {
+  background: rgba(255, 255, 255, .14);
+  border-color: rgba(241, 200, 174, .72);
+}
+
+.rsb-process-dots {
+  bottom: 28px;
+  display: flex;
+  gap: 8px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 4;
+}
+
+.rsb-process-dots button {
+  background: transparent;
+  border: 0;
+  height: 26px;
+  padding: 11px 0;
+  width: 44px;
+}
+
+.rsb-process-dots button span {
+  background: rgba(255, 255, 255, .28);
+  display: block;
+  height: 2px;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.rsb-process-dots button.is-active span {
+  background: #f1c8ae;
+  transform: scaleY(2);
+}
+
+@media (max-width: 1024px) {
+  .rsb-process-inner {
+    gap: 28px;
+    grid-template-columns: 1fr;
+    padding: 92px 24px 92px;
+    width: min(100%, 780px);
+  }
+
+  .rsb-process-copy > h2 {
+    font-size: clamp(2.5rem, 7vw, 4rem);
+  }
+
+  .rsb-process-card {
+    min-height: 226px;
+  }
+
+  .rsb-process-visual {
+    aspect-ratio: 16 / 9;
+    grid-row: 1;
+  }
+
+  .rsb-process-arrow {
+    bottom: 24px;
+    top: auto;
+    transform: none;
+  }
+
+  .rsb-process-arrow.is-previous {
+    left: 24px;
+  }
+
+  .rsb-process-arrow.is-next {
+    right: 24px;
+  }
+}
+
+@media (max-width: 760px) {
+  .cinematic-process.rsb-stable-process,
+  .rsb-process-carousel,
+  .rsb-process-inner {
+    min-height: auto;
+  }
+
+  .rsb-process-inner {
+    gap: 18px;
+    padding: 82px 12px 104px;
+  }
+
+  .rsb-process-copy > h2 {
+    font-size: clamp(2rem, 9vw, 2.7rem);
+  }
+
+  .rsb-process-card {
+    margin-top: 18px;
+    min-height: 240px;
+    padding: 18px;
+  }
+
+  .rsb-process-card h3 {
+    font-size: clamp(2rem, 9vw, 2.8rem);
+    margin-top: 12px;
+  }
+
+  .rsb-process-card > p {
+    font-size: .94rem;
+    line-height: 1.48;
+  }
+
+  .rsb-process-progress {
+    margin-top: 18px;
+  }
+
+  .rsb-process-visual {
+    aspect-ratio: 4 / 3;
+  }
+
+  .rsb-process-arrow {
+    bottom: 36px;
+    height: 46px;
+    width: 46px;
+  }
+
+  .rsb-process-dots {
+    bottom: 44px;
+    gap: 5px;
+  }
+
+  .rsb-process-dots button {
+    width: 30px;
+  }
+}

@@ -702,6 +702,214 @@
     });
   }
 
+  function initStableHorizontalProcess() {
+    document.querySelectorAll(".cinematic-process").forEach(function (section) {
+      if (section.dataset.rsbStableProcessReady) return;
+      section.dataset.rsbStableProcessReady = "1";
+      section.classList.add("rsb-stable-process");
+
+      var steps = [
+        {
+          eyebrow: "01 / Punto de partida",
+          title: "Vemos el estado real.",
+          body: "Fachada, orientación, volumen, zonas deterioradas y oportunidades que no se aprecian en un presupuesto rápido.",
+          image: "reformas/process-1.webp"
+        },
+        {
+          eyebrow: "02 / Idea",
+          title: "Abrimos la idea.",
+          body: "Ordenamos opciones reales antes de invertir tiempo y dinero en una reforma sin dirección clara.",
+          image: "reformas/process-4.webp"
+        },
+        {
+          eyebrow: "03 / Potencial",
+          title: "Aparece el potencial.",
+          body: "La propuesta empieza a tener lectura: imagen, uso, envolvente y prioridades trabajan juntas.",
+          image: "reformas/process-2.webp"
+        },
+        {
+          eyebrow: "04 / Envolvente",
+          title: "La fachada acompaña.",
+          body: "No se trata solo de renovar por dentro: la imagen exterior también comunica valor, orden y calidad.",
+          image: "reformas/process-3.webp"
+        },
+        {
+          eyebrow: "05 / Pedir visita",
+          title: "Ya se puede pedir visita.",
+          body: "Con el alcance entendido, damos el siguiente paso con una visita clara y sin vueltas innecesarias.",
+          image: "reformas/process-4.webp",
+          cta: true
+        }
+      ];
+
+      var carousel = document.createElement("div");
+      carousel.className = "rsb-process-carousel";
+      carousel.innerHTML =
+        '<div class="rsb-process-inner">' +
+        '<div class="rsb-process-copy">' +
+        '<p class="eyebrow">Proceso horizontal</p>' +
+        '<h2>La reforma se cuenta avanzando hacia el resultado.</h2>' +
+        '<article class="rsb-process-card" aria-live="polite" aria-atomic="true">' +
+        '<span class="rsb-process-eyebrow"></span>' +
+        '<h3></h3>' +
+        '<p></p>' +
+        '<a class="rsb-process-cta" href="#presupuesto">Pedir visita <span aria-hidden="true">→</span></a>' +
+        "</article>" +
+        '<div class="rsb-process-progress" aria-hidden="true"><span></span></div>' +
+        "</div>" +
+        '<div class="rsb-process-visual">' +
+        '<img alt="" width="1600" height="900" decoding="async" loading="lazy">' +
+        "</div>" +
+        '<button class="rsb-process-arrow is-previous" type="button" aria-label="Ver paso anterior">&#8592;</button>' +
+        '<button class="rsb-process-arrow is-next" type="button" aria-label="Ver paso siguiente">&#8594;</button>' +
+        '<div class="rsb-process-dots" aria-label="Seleccionar paso del proceso"></div>' +
+        "</div>";
+      section.appendChild(carousel);
+
+      var image = carousel.querySelector(".rsb-process-visual img");
+      var eyebrow = carousel.querySelector(".rsb-process-eyebrow");
+      var title = carousel.querySelector(".rsb-process-card h3");
+      var body = carousel.querySelector(".rsb-process-card > p");
+      var cta = carousel.querySelector(".rsb-process-cta");
+      var progress = carousel.querySelector(".rsb-process-progress span");
+      var dots = carousel.querySelector(".rsb-process-dots");
+      var previous = carousel.querySelector(".rsb-process-arrow.is-previous");
+      var next = carousel.querySelector(".rsb-process-arrow.is-next");
+      var index = 0;
+      var timer = null;
+      var visible = false;
+      var changing = false;
+      var transitionToken = 0;
+      var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      dots.innerHTML = steps
+        .map(function (_, stepIndex) {
+          return (
+            '<button type="button" aria-label="Ver paso ' +
+            (stepIndex + 1) +
+            ' de ' +
+            steps.length +
+            '"><span></span></button>'
+          );
+        })
+        .join("");
+      var dotButtons = Array.prototype.slice.call(dots.querySelectorAll("button"));
+
+      var render = function (nextIndex, direction) {
+        var normalized = (nextIndex + steps.length) % steps.length;
+        if (!changing && normalized === index) return;
+        changing = true;
+        index = normalized;
+        transitionToken += 1;
+        var currentToken = transitionToken;
+        var step = steps[index];
+        carousel.classList.remove("is-forward", "is-backward");
+        carousel.classList.add("is-changing", direction < 0 ? "is-backward" : "is-forward");
+
+        window.setTimeout(
+          function () {
+            if (currentToken !== transitionToken) return;
+            eyebrow.textContent = step.eyebrow;
+            title.textContent = step.title;
+            body.textContent = step.body;
+            image.src = rootPath(step.image);
+            image.alt = step.title;
+            cta.hidden = !step.cta;
+            progress.style.transform = "scaleX(" + (index + 1) / steps.length + ")";
+            dotButtons.forEach(function (button, dotIndex) {
+              var active = dotIndex === index;
+              button.classList.toggle("is-active", active);
+              button.setAttribute("aria-current", active ? "step" : "false");
+            });
+          },
+          reduceMotion ? 0 : 150
+        );
+
+        window.setTimeout(
+          function () {
+            if (currentToken !== transitionToken) return;
+            carousel.classList.remove("is-changing", "is-forward", "is-backward");
+            changing = false;
+          },
+          reduceMotion ? 20 : 360
+        );
+      };
+
+      var renderInitial = function () {
+        index = steps.length - 1;
+        render(0, 1);
+      };
+
+      var stop = function () {
+        if (timer) window.clearInterval(timer);
+        timer = null;
+      };
+
+      var start = function () {
+        stop();
+        if (!visible || document.visibilityState === "hidden") return;
+        timer = window.setInterval(function () {
+          render(index + 1, 1);
+        }, 5000);
+      };
+
+      var move = function (amount) {
+        render(index + amount, amount);
+        start();
+      };
+
+      previous.addEventListener("click", function () {
+        move(-1);
+      });
+      next.addEventListener("click", function () {
+        move(1);
+      });
+      dotButtons.forEach(function (button, dotIndex) {
+        button.addEventListener("click", function () {
+          render(dotIndex, dotIndex < index ? -1 : 1);
+          start();
+        });
+      });
+
+      carousel.addEventListener("mouseenter", stop);
+      carousel.addEventListener("mouseleave", start);
+      carousel.addEventListener("focusin", stop);
+      carousel.addEventListener("focusout", function (event) {
+        if (!carousel.contains(event.relatedTarget)) start();
+      });
+
+      var updateVisibility = function () {
+        var rect = section.getBoundingClientRect();
+        visible = rect.top < window.innerHeight * 0.85 && rect.bottom > window.innerHeight * 0.15;
+        if (visible) start();
+        else stop();
+      };
+
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(
+          function (entries) {
+            visible = entries.some(function (entry) {
+              return entry.isIntersecting;
+            });
+            if (visible) start();
+            else stop();
+          },
+          { threshold: 0.15 }
+        ).observe(section);
+      } else {
+        window.addEventListener("scroll", updateVisibility, { passive: true });
+      }
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "hidden") stop();
+        else start();
+      });
+
+      renderInitial();
+      window.setTimeout(updateVisibility, 100);
+    });
+  }
+
   function initHorizontalProcessAutoplay() {
     document.querySelectorAll(".cinematic-process").forEach(function (section) {
       if (section.dataset.rsbAutoplayReady) return;
@@ -1149,7 +1357,7 @@
     fixAssets();
     applyRequestedChanges();
     initHomeHeroCarousel();
-    initHorizontalProcessAutoplay();
+    initStableHorizontalProcess();
     updateHomeWorkGalleries();
   }
 
