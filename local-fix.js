@@ -897,6 +897,11 @@
     var main = document.querySelector("main");
     if (!main) return;
 
+    var heroTopbar = main.querySelector(".more-services-hero .more-services-topbar");
+    var heroActions = main.querySelector(".more-services-hero .more-services-actions");
+    if (heroTopbar) heroTopbar.remove();
+    if (heroActions) heroActions.remove();
+
     if (!document.querySelector(".rsb-sate-section")) {
       var returnSection = document.querySelector(".more-services-return");
       if (returnSection) returnSection.insertAdjacentHTML("beforebegin", sateSectionHtmlV2());

@@ -789,6 +789,15 @@ html.rsb-more-services-page .more-services-editorial-section {
   padding-bottom: clamp(16px, 2.4vw, 28px) !important;
 }
 
+html.rsb-more-services-page .more-services-topbar,
+html.rsb-more-services-page .more-services-hero .more-services-actions {
+  display: none !important;
+}
+
+html.rsb-more-services-page .more-services-hero-inner {
+  gap: 0 !important;
+}
+
 html.rsb-more-services-page .rsb-sate-section {
   padding-top: clamp(22px, 3vw, 34px) !important;
   scroll-margin-top: 96px;
