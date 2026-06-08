@@ -46,6 +46,12 @@
 
   function fixAssets() {
     document.querySelectorAll("img").forEach(function (img) {
+      if (img.classList.contains("brand-logo")) {
+        var logoSrc = rootPath("_next/static/media/logo-rsb-transparent.png");
+        if (img.src !== logoSrc) img.setAttribute("src", logoSrc);
+        img.setAttribute("width", "420");
+        img.setAttribute("height", "355");
+      }
       var src = normalizeAsset(img.getAttribute("src"));
       if (src && src !== img.getAttribute("src")) img.setAttribute("src", src);
       if (img.hasAttribute("srcset")) img.removeAttribute("srcset");
@@ -76,28 +82,6 @@
 
   function pagePath() {
     return window.location.pathname.replace(/\\/g, "/");
-  }
-
-  function isMoreServicesPath() {
-    return /\/mas-servicios\/?$/.test(pagePath()) || /\/reformasB\/mas-servicios\/?$/.test(pagePath());
-  }
-
-  function forceMoreServicesTopOnLoad() {
-    if (!isMoreServicesPath() || window.location.hash) return;
-    if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
-    var toTop = function () {
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    };
-    toTop();
-    window.addEventListener("pageshow", toTop);
-    window.addEventListener("load", function () {
-      toTop();
-      window.requestAnimationFrame(toTop);
-      window.setTimeout(toTop, 180);
-      window.setTimeout(toTop, 640);
-    });
   }
 
   function hasText(element, text) {
@@ -1261,7 +1245,6 @@
       }
       return;
     }
-    forceMoreServicesTopOnLoad();
     var main = document.querySelector("main");
     if (!main) return;
 
