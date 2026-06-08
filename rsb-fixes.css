@@ -1280,7 +1280,7 @@ body.contact-page .contact-hero {
   padding: clamp(98px, 8vw, 118px) clamp(24px, 5vw, 84px) clamp(38px, 4vw, 56px) !important;
   background:
     linear-gradient(90deg, rgba(7, 13, 11, .95) 0%, rgba(7, 13, 11, .84) 38%, rgba(7, 13, 11, .38) 68%, rgba(7, 13, 11, .08) 100%),
-    url("reformas/contacto-fondo.png") 62% center / cover no-repeat !important;
+    url("reformas/contacto-visita.png") 62% center / cover no-repeat !important;
   border-bottom: 1px solid rgba(16, 23, 20, .12) !important;
 }
 
@@ -1578,7 +1578,7 @@ body.contact-page .contact-trust-card {
     padding: 82px 12px 28px !important;
     background:
       linear-gradient(180deg, rgba(7, 13, 11, .72) 0%, rgba(7, 13, 11, .54) 34%, rgba(7, 13, 11, .88) 100%),
-      url("reformas/contacto-fondo.png") 69% center / cover no-repeat !important;
+      url("reformas/contacto-visita.png") 69% center / cover no-repeat !important;
   }
 
   body.contact-page .contact-copy,
