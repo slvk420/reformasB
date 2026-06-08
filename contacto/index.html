@@ -374,6 +374,96 @@
       background: var(--contact-paper);
     }
 
+    .contact-back-to-top {
+      width: min(720px, 100%);
+      margin: clamp(48px, 6vw, 76px) auto 0;
+      display: grid;
+      grid-template-columns: minmax(36px, 1fr) auto minmax(36px, 1fr);
+      gap: clamp(14px, 2.4vw, 24px);
+      align-items: center;
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .contact-back-to-top::before,
+    .contact-back-to-top::after {
+      content: "";
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .26));
+    }
+
+    .contact-back-to-top::after {
+      background: linear-gradient(90deg, rgba(255, 255, 255, .26), transparent);
+    }
+
+    .contact-back-to-top a {
+      min-width: 132px;
+      min-height: 72px;
+      display: grid;
+      grid-template-columns: auto 38px;
+      gap: 13px;
+      align-items: center;
+      padding: 8px 9px 8px 18px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .035);
+      box-shadow: inset 0 1px rgba(255, 255, 255, .04);
+      transition:
+        color .24s ease,
+        background-color .24s ease,
+        border-color .24s ease,
+        transform .24s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .contact-back-to-top span {
+      font-size: .73rem;
+      font-weight: 850;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .contact-back-to-top i {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--contact-copper);
+      border-radius: 50%;
+      box-shadow: 0 10px 28px rgba(166, 95, 63, .28);
+      transition: transform .24s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .contact-back-to-top svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-back-to-top a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, .07);
+      border-color: rgba(255, 255, 255, .3);
+      transform: translateY(-2px);
+    }
+
+    .contact-back-to-top a:hover i {
+      transform: translateY(-2px);
+    }
+
+    .contact-back-to-top a:active {
+      transform: translateY(0) scale(.98);
+    }
+
+    .contact-back-to-top a:focus-visible {
+      outline: 2px solid var(--contact-warm);
+      outline-offset: 5px;
+    }
+
     .contact-reveal {
       opacity: 1;
       transform: none;
@@ -521,6 +611,36 @@
         min-height: 0;
         padding: 18px;
       }
+
+      .contact-back-to-top {
+        margin-top: 42px;
+        grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr);
+        gap: 12px;
+      }
+
+      .contact-back-to-top a {
+        min-width: 0;
+        min-height: 60px;
+        grid-template-columns: auto 34px;
+        gap: 10px;
+        padding: 7px 7px 7px 15px;
+      }
+
+      .contact-back-to-top i {
+        width: 34px;
+        height: 34px;
+      }
+
+      .contact-back-to-top span {
+        font-size: .67rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .contact-back-to-top a,
+      .contact-back-to-top i {
+        transition: none;
+      }
     }
   </style>
   <link rel="stylesheet" href="../rsb-fixes.css?v=contact-photo-20260608" />
@@ -621,6 +741,17 @@
             <p>Menos ruido, menos llamadas cruzadas y una persona clara para avanzar.</p>
           </article>
         </div>
+        <div id="contact-back-to-top" class="contact-back-to-top contact-reveal" style="--reveal-delay: 120ms">
+          <a href="#main" aria-label="Volver al inicio de la pagina">
+            <span>Volver arriba</span>
+            <i aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="m7 13 5-5 5 5"></path>
+                <path d="M12 8v9"></path>
+              </svg>
+            </i>
+          </a>
+        </div>
       </div>
     </section>
   </main>
@@ -668,6 +799,17 @@
       window.addEventListener("hashchange", function () {
         setTimeout(revealVisibleItems, 80);
       });
+
+      var backToTop = document.querySelector(".contact-back-to-top a");
+      if (backToTop) {
+        backToTop.addEventListener("click", function (event) {
+          event.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+          });
+        });
+      }
     })();
   </script>
 </body>
