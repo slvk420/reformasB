@@ -3,6 +3,14 @@
   var isGithubPages = window.location.pathname.indexOf("/reformasB") === 0;
   var moreServicesLoadPending = false;
 
+  function dismissBrandIntro() {
+    document.documentElement.classList.add("rsb-skip-intro");
+    var intro = document.querySelector(".brand-intro");
+    if (intro) intro.setAttribute("aria-hidden", "true");
+  }
+
+  window.setTimeout(dismissBrandIntro, 1800);
+
   var isSubpage = /\/(?:contacto|mas-servicios)\//.test(window.location.pathname.replace(/\\/g, "/"));
   var rootUrl = isGithubPages
     ? new URL("/reformasB/", window.location.origin)
