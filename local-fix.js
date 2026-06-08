@@ -47,10 +47,10 @@
   function fixAssets() {
     document.querySelectorAll("img").forEach(function (img) {
       if (img.classList.contains("brand-logo")) {
-        var logoSrc = rootPath("_next/static/media/logo-rsb-transparent.png");
+        var logoSrc = rootPath("_next/static/media/logo-rsb-wood-transparent.png");
         if (img.src !== logoSrc) img.setAttribute("src", logoSrc);
         img.setAttribute("width", "420");
-        img.setAttribute("height", "355");
+        img.setAttribute("height", "420");
       }
       var src = normalizeAsset(img.getAttribute("src"));
       if (src && src !== img.getAttribute("src")) img.setAttribute("src", src);
@@ -411,9 +411,7 @@
     if (!realBadge) {
       realBadge = document.createElement("span");
       realBadge.className = "rsb-project-real-badge";
-      realBadge.textContent = "Proyecto real";
-      realBadge.style.cssText =
-        "position:absolute;z-index:3;top:16px;left:16px;padding:7px 10px;background:rgba(16,23,20,.58);color:#fff;border:0;border-radius:3px;font-size:12px;font-weight:700;line-height:1;letter-spacing:0;text-transform:uppercase;backdrop-filter:blur(8px) saturate(112%);-webkit-backdrop-filter:blur(8px) saturate(112%);text-shadow:0 1px 6px rgba(0,0,0,.55);pointer-events:none;";
+      realBadge.textContent = "Obra real";
       media.appendChild(realBadge);
     }
 
