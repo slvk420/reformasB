@@ -1,8 +1,6 @@
 (function () {
   var isFile = window.location.protocol === "file:";
-  var isGithubPages =
-    window.location.hostname === "slvk420.github.io" &&
-    window.location.pathname.indexOf("/reformasB") === 0;
+  var isGithubPages = window.location.pathname.indexOf("/reformasB") === 0;
 
   var isSubpage = /\/(?:contacto|mas-servicios)\//.test(window.location.pathname.replace(/\\/g, "/"));
   var rootUrl = isGithubPages
