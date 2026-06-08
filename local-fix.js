@@ -407,6 +407,16 @@
     var image = media.querySelector("img");
     if (!image) return;
 
+    var realBadge = media.querySelector(".rsb-project-real-badge");
+    if (!realBadge) {
+      realBadge = document.createElement("span");
+      realBadge.className = "rsb-project-real-badge";
+      realBadge.textContent = "Proyecto real";
+      realBadge.style.cssText =
+        "position:absolute;z-index:3;top:16px;left:16px;padding:7px 10px;background:rgba(16,23,20,.58);color:#fff;border:0;border-radius:3px;font-size:12px;font-weight:700;line-height:1;letter-spacing:0;text-transform:uppercase;backdrop-filter:blur(8px) saturate(112%);-webkit-backdrop-filter:blur(8px) saturate(112%);text-shadow:0 1px 6px rgba(0,0,0,.55);pointer-events:none;";
+      media.appendChild(realBadge);
+    }
+
     var controls = ensureWorkControls(media, slides[0].label, previousLabel, nextLabel);
     var label = controls.querySelector("span");
     var buttons = Array.prototype.slice.call(controls.querySelectorAll("button"));
@@ -424,6 +434,7 @@
       if (image.getAttribute("loading") !== "eager") image.setAttribute("loading", "eager");
       if (image.getAttribute("decoding") !== "async") image.setAttribute("decoding", "async");
       if (label && label.textContent !== slides[index].label) label.textContent = slides[index].label;
+      realBadge.hidden = !slides[index].isReal;
     };
 
     if (!media.dataset[readyKey]) {
@@ -458,7 +469,8 @@
         {
           src: rootPath("reformas/cocina-madera-negra.png"),
           label: "Cocina madera y negro",
-          alt: "Cocina reformada con madera, frentes negros e iluminacion calida"
+          alt: "Cocina reformada con madera, frentes negros e iluminacion calida",
+          isReal: true
         },
         {
           src: rootPath("reformas/ejemplo-cocina-rsb-real.webp"),
@@ -477,7 +489,8 @@
         {
           src: rootPath("reformas/bano-blanco-ducha.png"),
           label: "Baño claro",
-          alt: "Baño renovado con ducha de cristal, mueble blanco y revestimiento gris"
+          alt: "Baño renovado con ducha de cristal, mueble blanco y revestimiento gris",
+          isReal: true
         },
         {
           src: rootPath("reformas/ejemplo-bano-real.jpg"),
@@ -496,7 +509,8 @@
         {
           src: rootPath("reformas/salon-blanco-chimenea.jpg"),
           label: "Salón luminoso",
-          alt: "Salón luminoso con chimenea lineal, sofás grises y ventanales"
+          alt: "Salón luminoso con chimenea lineal, sofás grises y ventanales",
+          isReal: true
         },
         {
           src: rootPath("reformas/ejemplo-salon-real.jpg"),
