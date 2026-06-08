@@ -1,13 +1,12 @@
 (function () {
   var isFile = window.location.protocol === "file:";
   var isGithubPages = window.location.pathname.indexOf("/reformasB") === 0;
+  var moreServicesLoadPending = false;
 
   var isSubpage = /\/(?:contacto|mas-servicios)\//.test(window.location.pathname.replace(/\\/g, "/"));
   var rootUrl = isGithubPages
     ? new URL("/reformasB/", window.location.origin)
     : new URL(isSubpage ? "../" : "./", window.location.href);
-
-  document.documentElement.classList.add("rsb-skip-intro");
 
   function rootPath(path) {
     return new URL(path, rootUrl).href;
@@ -1247,11 +1246,12 @@
   function updateMoreServicesPage() {
     document.documentElement.classList.add("rsb-more-services-page");
     if (document.readyState !== "complete") {
-      if (!document.documentElement.dataset.rsbMoreServicesLoadReady) {
-        document.documentElement.dataset.rsbMoreServicesLoadReady = "1";
+      if (!moreServicesLoadPending) {
+        moreServicesLoadPending = true;
         window.addEventListener(
           "load",
           function () {
+            moreServicesLoadPending = false;
             window.requestAnimationFrame(updateMoreServicesPage);
           },
           { once: true }
@@ -1499,24 +1499,34 @@
     true
   );
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", runFixes);
-  }
-
-  window.setTimeout(runFixes, 0);
-  window.setTimeout(runFixes, 600);
-  window.setTimeout(runFixes, 1600);
-
   var resizeTimer = null;
   window.addEventListener("resize", function () {
     window.clearTimeout(resizeTimer);
     resizeTimer = window.setTimeout(runFixes, 120);
   });
 
-  new MutationObserver(runFixes).observe(document.documentElement, {
-    subtree: true,
-    childList: true,
-    attributes: true,
-    attributeFilter: ["src", "srcset"]
-  });
+  var fixesStarted = false;
+  function startFixes() {
+    if (fixesStarted) return;
+    fixesStarted = true;
+
+    window.requestAnimationFrame(function () {
+      runFixes();
+      window.setTimeout(runFixes, 600);
+      window.setTimeout(runFixes, 1600);
+
+      new MutationObserver(runFixes).observe(document.documentElement, {
+        subtree: true,
+        childList: true,
+        attributes: true,
+        attributeFilter: ["src", "srcset"]
+      });
+    });
+  }
+
+  if (document.readyState === "complete") {
+    window.setTimeout(startFixes, 0);
+  } else {
+    window.addEventListener("load", startFixes, { once: true });
+  }
 })();
