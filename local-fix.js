@@ -84,6 +84,10 @@
     return window.location.pathname.replace(/\\/g, "/");
   }
 
+  function isMoreServicesPath() {
+    return /\/mas-servicios\/?$/.test(pagePath()) || /\/reformasB\/mas-servicios\/?$/.test(pagePath());
+  }
+
   function hasText(element, text) {
     return element && element.textContent && element.textContent.toLowerCase().indexOf(text.toLowerCase()) !== -1;
   }
@@ -1289,7 +1293,8 @@
     if (isSubpage || document.documentElement.classList.contains("rsb-more-services-page")) return;
 
     var hero = document.querySelector(".editorial-hero");
-    if (!hero || hero.dataset.rsbHeroCarouselReady) return;
+    var heroContent = hero && hero.querySelector(".hero-content");
+    if (!hero || !heroContent || hero.dataset.rsbHeroCarouselReady) return;
     hero.dataset.rsbHeroCarouselReady = "1";
     hero.classList.add("rsb-hero-carousel-ready");
 
@@ -1361,7 +1366,7 @@
       })
       .join("");
     if (actions) actions.insertAdjacentElement("afterend", controls);
-    else hero.querySelector(".hero-content").appendChild(controls);
+    else heroContent.appendChild(controls);
 
     var slideElements = Array.prototype.slice.call(carousel.querySelectorAll(".rsb-home-hero-slide"));
     var controlElements = Array.prototype.slice.call(controls.querySelectorAll("button"));
