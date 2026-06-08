@@ -227,9 +227,11 @@
       '<div class="rsb-sate-carousel" aria-label="Ejemplos de fachadas para SATE">',
       '<img class="is-active" src="' + rootPath("reformas/magazine-fachada-ventana.webp") + '" alt="Fachada preparada para mejorar aislamiento exterior"/>',
       '<img src="' + rootPath("reformas/hero-rsb.jpg") + '" alt="Edificio con fachada renovada y volumen exterior definido"/>',
+      '<img src="' + rootPath("reformas/sate-instalacion-andamios.webp") + '" alt="Instalaci&oacute;n de aislamiento SATE en una fachada de ladrillo con andamios"/>',
       '<div class="rsb-sate-controls">',
       '<button type="button" class="is-active" aria-label="Ver ejemplo SATE 1"></button>',
       '<button type="button" aria-label="Ver ejemplo SATE 2"></button>',
+      '<button type="button" aria-label="Ver ejemplo SATE 3"></button>',
       '</div>',
       '</div>',
       '</div>',
@@ -298,9 +300,11 @@
       '<div class="rsb-sate-carousel" aria-label="Ejemplos de fachadas para SATE">',
       '<img class="is-active" src="' + rootPath("reformas/sate-casa-blanca-hq.png") + '" alt="Casa blanca con fachada exterior renovada mediante SATE"/>',
       '<img src="' + rootPath("reformas/sate-fachada-piedra.jpg") + '" alt="Vivienda moderna con fachada preparada para aislamiento exterior SATE"/>',
+      '<img src="' + rootPath("reformas/sate-instalacion-andamios.webp") + '" alt="Instalaci&oacute;n de aislamiento SATE en una fachada de ladrillo con andamios"/>',
       '<div class="rsb-sate-controls">',
       '<button type="button" class="is-active" aria-label="Ver ejemplo SATE 1"></button>',
       '<button type="button" aria-label="Ver ejemplo SATE 2"></button>',
+      '<button type="button" aria-label="Ver ejemplo SATE 3"></button>',
       '</div>',
       '</div>',
       '</div>',
@@ -1244,6 +1248,19 @@
 
   function updateMoreServicesPage() {
     document.documentElement.classList.add("rsb-more-services-page");
+    if (document.readyState !== "complete") {
+      if (!document.documentElement.dataset.rsbMoreServicesLoadReady) {
+        document.documentElement.dataset.rsbMoreServicesLoadReady = "1";
+        window.addEventListener(
+          "load",
+          function () {
+            window.requestAnimationFrame(updateMoreServicesPage);
+          },
+          { once: true }
+        );
+      }
+      return;
+    }
     forceMoreServicesTopOnLoad();
     var main = document.querySelector("main");
     if (!main) return;
