@@ -429,13 +429,7 @@
     var image = media.querySelector("img");
     if (!image) return;
 
-    var realBadge = media.querySelector(".rsb-project-real-badge");
-    if (!realBadge) {
-      realBadge = document.createElement("span");
-      realBadge.className = "rsb-project-real-badge";
-      realBadge.textContent = "Obra real";
-      media.appendChild(realBadge);
-    }
+    var realBadge = null;
 
     var controls = ensureWorkControls(media, slides[0].label, previousLabel, nextLabel);
     var label = controls.querySelector("span");
@@ -454,7 +448,7 @@
       if (image.getAttribute("loading") !== "eager") image.setAttribute("loading", "eager");
       if (image.getAttribute("decoding") !== "async") image.setAttribute("decoding", "async");
       if (label && label.textContent !== slides[index].label) label.textContent = slides[index].label;
-      realBadge.hidden = !slides[index].isReal;
+      if (realBadge) realBadge.hidden = !slides[index].isReal;
     };
 
     if (!media.dataset[readyKey]) {
@@ -796,9 +790,10 @@
           })
           .join("") +
         "</div>" +
-        '<button class="rsb-process-arrow is-previous" type="button" aria-label="Ver paso anterior">&#8592;</button>' +
-        '<button class="rsb-process-arrow is-next" type="button" aria-label="Ver paso siguiente">&#8594;</button>' +
+        '<button class="rsb-process-arrow is-previous" type="button" aria-label="Ver paso anterior"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>' +
+        '<button class="rsb-process-arrow is-next" type="button" aria-label="Ver paso siguiente"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>' +
         '<div class="rsb-process-dots" aria-label="Seleccionar paso del proceso"></div>' +
+        '<button class="rsb-process-playpause" type="button" aria-label="Pausar presentación" aria-pressed="false"><svg class="rsb-icon-pause" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg><svg class="rsb-icon-play" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" style="display:none"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>' +
         "</div>";
       section.appendChild(carousel);
 
@@ -963,7 +958,7 @@
         if (!visible || document.visibilityState === "hidden") return;
         timer = window.setInterval(function () {
           render(index + 1, 1);
-        }, 5000);
+        }, 8000);
       };
 
       var move = function (amount) {
@@ -984,10 +979,37 @@
         });
       });
 
+      // Play/Pause button (rsb-carousel)
+      var playPauseBtn = carousel.querySelector(".rsb-process-playpause");
+      var paused = false;
+      if (playPauseBtn) {
+        var pauseIcon = playPauseBtn.querySelector(".rsb-icon-pause");
+        var playIcon = playPauseBtn.querySelector(".rsb-icon-play");
+        playPauseBtn.addEventListener("click", function () {
+          paused = !paused;
+          playPauseBtn.setAttribute("aria-pressed", String(paused));
+          playPauseBtn.setAttribute("aria-label", paused ? "Reanudar presentación" : "Pausar presentación");
+          if (pauseIcon) pauseIcon.style.display = paused ? "none" : "";
+          if (playIcon) playIcon.style.display = paused ? "" : "none";
+          if (paused) stop();
+          else start();
+        });
+      }
+
+      // Touch swipe (rsb-carousel)
+      var touchStartX = 0;
+      carousel.addEventListener("touchstart", function (e) {
+        touchStartX = e.changedTouches[0].clientX;
+      }, { passive: true });
+      carousel.addEventListener("touchend", function (e) {
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 48) { move(dx < 0 ? 1 : -1); }
+      }, { passive: true });
+
       var updateVisibility = function () {
         var rect = section.getBoundingClientRect();
         visible = rect.top < window.innerHeight * 0.85 && rect.bottom > window.innerHeight * 0.15;
-        if (visible) start();
+        if (visible && !paused) start();
         else stop();
       };
 
@@ -1023,7 +1045,7 @@
 
       var timer = null;
       var isVisible = false;
-      var delay = 6000;
+      var delay = 8000;
       var forcedSteps = [
         {
           eyebrow: "01 / Punto de partida",
@@ -1260,6 +1282,50 @@
         if (document.visibilityState === "hidden") stop();
         else if (isVisible) start();
       });
+
+      // Play/Pause button (cinematic process)
+      var cinematicPaused = false;
+      var existingPP = section.querySelector(".rsb-cinematic-playpause");
+      if (!existingPP) {
+        var ppBtn = document.createElement("button");
+        ppBtn.className = "rsb-cinematic-playpause";
+        ppBtn.type = "button";
+        ppBtn.setAttribute("aria-label", "Pausar presentación");
+        ppBtn.setAttribute("aria-pressed", "false");
+        ppBtn.innerHTML = '<svg class="rsb-icon-pause" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg><svg class="rsb-icon-play" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" style="display:none"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+        var arrowsContainer = section.querySelector(".cinematic-arrows");
+        if (arrowsContainer) arrowsContainer.appendChild(ppBtn);
+        else section.querySelector(".cinematic-sticky").appendChild(ppBtn);
+        ppBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          cinematicPaused = !cinematicPaused;
+          ppBtn.setAttribute("aria-pressed", String(cinematicPaused));
+          ppBtn.setAttribute("aria-label", cinematicPaused ? "Reanudar presentación" : "Pausar presentación");
+          var pi = ppBtn.querySelector(".rsb-icon-pause");
+          var pl = ppBtn.querySelector(".rsb-icon-play");
+          if (pi) pi.style.display = cinematicPaused ? "none" : "";
+          if (pl) pl.style.display = cinematicPaused ? "" : "none";
+          if (cinematicPaused) stop();
+          else if (isVisible) start();
+        }, true);
+      }
+
+      // Touch swipe (cinematic process)
+      var cTouchStartX = 0;
+      var cTouchStartY = 0;
+      section.addEventListener("touchstart", function (e) {
+        cTouchStartX = e.changedTouches[0].clientX;
+        cTouchStartY = e.changedTouches[0].clientY;
+      }, { passive: true });
+      section.addEventListener("touchend", function (e) {
+        var dx = e.changedTouches[0].clientX - cTouchStartX;
+        var dy = e.changedTouches[0].clientY - cTouchStartY;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 48 && forcedMode()) {
+          showForcedStep(forcedIndex() + (dx < 0 ? 1 : -1));
+          window.setTimeout(function () { if (!cinematicPaused && isVisible) restart(); }, 0);
+        }
+      }, { passive: true });
 
       window.addEventListener("scroll", updateVisibility, { passive: true });
       window.addEventListener("resize", updateVisibility);
@@ -1554,5 +1620,40 @@
     window.setTimeout(startFixes, 0);
   } else {
     window.addEventListener("load", startFixes, { once: true });
+  }
+})();
+
+// === RSB DOM PATCHES v3 2026-06-12 ===
+(function () {
+  function applyDomPatches() {
+    // 1. Confianza sin rodeos: swap cards 1 and 2 (Claridad before Obra)
+    var trustGrid = document.querySelector(".grid-4");
+    if (trustGrid && !trustGrid.dataset.rsbSwapped) {
+      var cards = trustGrid.querySelectorAll(".trust-card");
+      if (cards.length >= 2) {
+        trustGrid.insertBefore(cards[1], cards[0]);
+        trustGrid.dataset.rsbSwapped = "1";
+      }
+    }
+
+    // 2. Email button in pedir visita form
+    var form = document.querySelector("#presupuesto form");
+    if (form && !form.querySelector(".rsb-email-action")) {
+      var acts = form.querySelector(".form-actions, .hero-actions");
+      if (acts) {
+        var emailA = document.createElement("a");
+        emailA.className = "rsb-email-action";
+        emailA.href = "mailto:reformasb.oficial@gmail.com?subject=Solicitud%20de%20visita%20RSB";
+        emailA.textContent = "Enviar email";
+        acts.appendChild(emailA);
+      }
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", applyDomPatches);
+  } else {
+    applyDomPatches();
+    window.setTimeout(applyDomPatches, 600);
   }
 })();
