@@ -724,7 +724,7 @@
       });
       window.setInterval(function () {
         show(index + 1);
-      }, 4200);
+      }, 6000);
     });
   }
 
@@ -1023,7 +1023,7 @@
 
       var timer = null;
       var isVisible = false;
-      var delay = 4000;
+      var delay = 6000;
       var forcedSteps = [
         {
           eyebrow: "01 / Punto de partida",
@@ -1455,7 +1455,7 @@
       if (document.visibilityState === "hidden") return;
       timer = window.setInterval(function () {
         showSlide(activeIndex + 1);
-      }, 5000);
+      }, 6000);
     };
 
     controlElements.forEach(function (button, index) {
