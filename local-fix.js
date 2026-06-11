@@ -20,6 +20,23 @@
     return new URL(path, rootUrl).href;
   }
 
+  var _origPushState = window.history.pushState;
+  window.history.pushState = function (state, title, url) {
+    if (url && /\/mas-servicios(?:\/|$)/.test(String(url))) {
+      window.location.href = rootPath("mas-servicios/");
+      return;
+    }
+    return _origPushState.apply(this, arguments);
+  };
+  var _origReplaceState = window.history.replaceState;
+  window.history.replaceState = function (state, title, url) {
+    if (url && /\/mas-servicios(?:\/|$)/.test(String(url))) {
+      window.location.href = rootPath("mas-servicios/");
+      return;
+    }
+    return _origReplaceState.apply(this, arguments);
+  };
+
   function normalizeAsset(value) {
     if (!value) return value;
     var clean = value
