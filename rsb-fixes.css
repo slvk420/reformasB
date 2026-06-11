@@ -2492,26 +2492,24 @@ body.contact-page .contact-trust-card {
 
 /* Fix 1: hero carousel controls (3 dashes) always visible in viewport */
 .editorial-hero.rsb-hero-carousel-ready .hero-content {
-  padding-bottom: clamp(44px, 5vh, 68px) !important;
+  padding-top: clamp(80px, 10vh, 120px) !important;
+  padding-bottom: clamp(32px, 4vh, 56px) !important;
 }
 
-@media (min-width: 761px) and (max-width: 1280px) {
-  .editorial-hero.rsb-hero-carousel-ready .hero-content {
-    padding-bottom: 32px !important;
-  }
+.editorial-hero.rsb-hero-carousel-ready .hero-description {
+  min-height: 88px !important;
 }
 
 @media (max-width: 760px) {
   .editorial-hero.rsb-hero-carousel-ready .hero-content {
-    padding-bottom: calc(40px + env(safe-area-inset-bottom)) !important;
+    padding-bottom: calc(32px + env(safe-area-inset-bottom)) !important;
   }
 
   .editorial-hero.rsb-hero-carousel-ready .hero-description {
-    min-height: 88px !important;
     line-height: 1.42 !important;
   }
 
   .rsb-home-hero-controls {
-    margin-top: 10px !important;
+    margin-top: 8px !important;
   }
 }
