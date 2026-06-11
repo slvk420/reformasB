@@ -91,13 +91,13 @@
         link.setAttribute("href", rootPath("contacto/"));
       }
       if (href === "/" || href === "/reformasB/" || href === "./?skipIntro=1" || href === "../?skipIntro=1" || href === "?skipIntro=1") {
-        link.setAttribute("href", rootPath("?skipIntro=1"));
+        link.setAttribute("href", rootPath(""));
       }
       if (href === "?skipIntro=1#presupuesto" || href === "/#presupuesto" || href === "/reformasB/#presupuesto") {
-        link.setAttribute("href", rootPath("?skipIntro=1#presupuesto"));
+        link.setAttribute("href", rootPath("#presupuesto"));
       }
       if (href === "?skipIntro=1#proceso" || href === "/#proceso" || href === "/reformasB/#proceso") {
-        link.setAttribute("href", rootPath("?skipIntro=1#proceso"));
+        link.setAttribute("href", rootPath("#proceso"));
       }
     });
   }
@@ -1494,19 +1494,19 @@
 
       if (href === "/" || href === "/reformasB/" || href === "./?skipIntro=1" || href === "../?skipIntro=1" || href === "?skipIntro=1") {
         event.preventDefault();
-        window.location.href = rootPath("?skipIntro=1");
+        window.location.href = rootPath("");
         return;
       }
 
       if (href === "?skipIntro=1#presupuesto" || href === "/#presupuesto" || href === "#presupuesto") {
         event.preventDefault();
-        window.location.href = rootPath("?skipIntro=1#presupuesto");
+        window.location.href = rootPath("#presupuesto");
         return;
       }
 
       if (href === "?skipIntro=1#proceso" || href === "/#proceso" || href === "#proceso") {
         event.preventDefault();
-        window.location.href = rootPath("?skipIntro=1#proceso");
+        window.location.href = rootPath("#proceso");
         return;
       }
 
