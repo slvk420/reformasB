@@ -1342,7 +1342,7 @@
       {
         image: "reformas/hero-planificacion.webp",
         alt: "Planificación de una reforma integral con selección de materiales y revisión de planos",
-        text: "Diseñamos reformas integrales en Lleida con una planificación clara, materiales bien elegidos y decisiones tomadas antes de empezar la obra."
+        text: "Realizamos reformas integrales en Lleida con una planificación clara, materiales bien elegidos y decisiones tomadas antes de empezar la obra."
       },
       {
         image: "reformas/hero-reforma-integral.webp",
