@@ -1495,6 +1495,7 @@
 
       if (href === "mas-servicios/" || href === "/mas-servicios" || href === "/mas-servicios/" || href.indexOf("/reformasB/mas-servicios") === 0) {
         event.preventDefault();
+        event.stopPropagation();
         window.location.href = rootPath("mas-servicios/");
         return;
       }
