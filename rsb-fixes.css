@@ -1897,6 +1897,7 @@ body.contact-page .contact-trust-card {
 .rsb-process-carousel {
   color: #fff;
   min-height: 100dvh;
+  overflow: visible;
   position: relative;
 }
 
@@ -2711,34 +2712,44 @@ html, body {
   color: #fff;
 }
 
-/* ─── Process carousel: arrows at bottom on all breakpoints ─── */
-/* Desktop (>1024px): compact trio [← | ⏸ | →] centered under image column
-   Visual column center ≈ 50% + 283px (verified at 1200px and 1440px viewports)
-   Group width: 66 + 10 + 40 + 10 + 66 = 192px → group left = 50% + 283 - 96 = 50% + 187px */
-@media (min-width: 1025px) {
-  /* Dots replaced by progress bar in copy area */
-  .rsb-process-dots {
-    display: none !important;
-  }
-  .rsb-process-arrow {
-    top: auto !important;
-    bottom: 22px !important;
-  }
-  .rsb-process-arrow.is-previous {
-    left: calc(50% + 187px) !important;
-    right: auto !important;
-    transform: none !important;
-  }
-  .rsb-process-arrow.is-next {
-    left: calc(50% + 313px) !important;
-    right: auto !important;
-    transform: none !important;
-  }
-  /* Pause centered vertically with 66px arrows: bottom = 22 + (66-40)/2 = 35px */
-  .rsb-process-playpause {
-    bottom: 35px !important;
-    left: calc(50% + 263px) !important;
-    transform: none !important;
+/* ─── Process nav: controls bar anchored to bottom of visual column ─── */
+/* Buttons are now INSIDE .rsb-process-visual via .rsb-process-nav wrapper */
+.rsb-process-nav {
+  position: absolute;
+  bottom: -63px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  pointer-events: none;
+  z-index: 6;
+}
+.rsb-process-nav > * {
+  pointer-events: auto;
+}
+.rsb-process-nav .rsb-process-arrow {
+  position: static !important;
+  top: auto !important;
+  transform: none !important;
+}
+.rsb-process-nav .rsb-process-playpause {
+  position: static !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+}
+/* Dots hidden on all sizes (progress bar in copy replaces them) */
+.rsb-process-nav .rsb-process-dots {
+  display: none !important;
+}
+/* Mobile: centered row */
+@media (max-width: 760px) {
+  .rsb-process-nav {
+    justify-content: center !important;
+    gap: 16px !important;
+    bottom: -56px !important;
   }
 }
 
