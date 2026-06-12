@@ -978,9 +978,11 @@ html.rsb-more-services-page .more-services-editorial-section {
 }
 
 @media (max-width: 760px) {
+  /* Hero: auto height so it fits content, no empty space below */
+  .editorial-hero,
   .editorial-hero.rsb-hero-carousel-ready,
   .editorial-hero.rsb-hero-carousel-ready .hero-content {
-    min-height: 100dvh !important;
+    min-height: auto !important;
   }
 
   .rsb-home-hero-carousel::after {
@@ -995,7 +997,7 @@ html.rsb-more-services-page .more-services-editorial-section {
 
   .editorial-hero.rsb-hero-carousel-ready .hero-content {
     justify-content: flex-start !important;
-    padding: 76px 0 calc(60px + env(safe-area-inset-bottom)) !important;
+    padding: 76px 0 48px !important;
     width: min(100% - 24px, 520px) !important;
   }
 
