@@ -1650,12 +1650,30 @@
         acts.appendChild(emailA);
       }
     }
+
+    // 3. Contact form heading and description (React hydrates old strings from chunk)
+    var contactH2 = document.querySelector("#presupuesto h2");
+    if (contactH2 && contactH2.textContent.indexOf("encaja") !== -1) {
+      contactH2.textContent = "Pide una visita y cuéntanos tu proyecto.";
+    }
+    var contactP = document.querySelector("#presupuesto h2 + p");
+    if (contactP && contactP.textContent.indexOf("espacio") !== -1) {
+      contactP.textContent = "Cuéntanos lo básico y te responderemos para valorar tu idea, resolver dudas y decidir el siguiente paso";
+    }
+
+    // 4. Footer year
+    var footerSpan = document.querySelector(".footer-brand span");
+    if (footerSpan && footerSpan.textContent.indexOf("2017") !== -1) {
+      footerSpan.textContent = footerSpan.textContent.replace("2017", "2004");
+    }
   }
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", applyDomPatches);
+    window.addEventListener("load", function () { window.setTimeout(applyDomPatches, 600); });
   } else {
     applyDomPatches();
     window.setTimeout(applyDomPatches, 600);
+    window.setTimeout(applyDomPatches, 1400);
   }
 })();
