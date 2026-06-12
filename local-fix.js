@@ -152,10 +152,10 @@
 
   function removeHomeOnlySections() {
     var trust = findSectionByEyebrow("Confianza sin rodeos");
-    if (trust) trust.remove();
+    if (trust) trust.style.display = "none";
 
     document.querySelectorAll(".webgl-reveal-section").forEach(function (section) {
-      section.remove();
+      section.style.display = "none";
     });
   }
 
@@ -1403,8 +1403,8 @@
 
     var oldMedia = hero.querySelector(".hero-editorial-media");
     var oldBrandType = hero.querySelector(".hero-brand-type");
-    if (oldMedia) oldMedia.remove();
-    if (oldBrandType) oldBrandType.remove();
+    if (oldMedia) oldMedia.style.display = "none";
+    if (oldBrandType) oldBrandType.style.display = "none";
 
     var slides = [
       {
@@ -1608,13 +1608,6 @@
       runFixes();
       window.setTimeout(runFixes, 600);
       window.setTimeout(runFixes, 1600);
-
-      new MutationObserver(runFixes).observe(document.documentElement, {
-        subtree: true,
-        childList: true,
-        attributes: true,
-        attributeFilter: ["src", "srcset"]
-      });
     });
   }
 
