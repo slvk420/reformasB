@@ -994,8 +994,8 @@ html.rsb-more-services-page .more-services-editorial-section {
   }
 
   .editorial-hero.rsb-hero-carousel-ready .hero-content {
-    justify-content: flex-end !important;
-    padding: 100px 0 calc(96px + env(safe-area-inset-bottom)) !important;
+    justify-content: flex-start !important;
+    padding: 76px 0 calc(60px + env(safe-area-inset-bottom)) !important;
     width: min(100% - 24px, 520px) !important;
   }
 
@@ -2759,5 +2759,13 @@ html, body {
 @media (max-width: 760px) {
   .editorial-hero .hero-actions {
     display: none !important;
+  }
+}
+
+/* ─── Logo: prevent GPU compositing blur on mobile (caused by backdrop-filter on hero) ─── */
+@media (max-width: 760px) {
+  .brand-logo {
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .55)) !important;
+    image-rendering: -webkit-optimize-contrast;
   }
 }
