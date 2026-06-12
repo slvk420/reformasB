@@ -789,13 +789,13 @@
             );
           })
           .join("") +
+        "</div>" +
         '<div class="rsb-process-nav" role="group" aria-label="Controles del proceso">' +
         '<button class="rsb-process-arrow is-previous" type="button" aria-label="Ver paso anterior"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>' +
         '<button class="rsb-process-playpause" type="button" aria-label="Pausar presentación" aria-pressed="false"><svg class="rsb-icon-pause" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg><svg class="rsb-icon-play" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" style="display:none"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>' +
         '<div class="rsb-process-dots" aria-label="Seleccionar paso del proceso"></div>' +
         '<button class="rsb-process-arrow is-next" type="button" aria-label="Ver paso siguiente"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>' +
         '</div>' +
-        "</div>" +
         "</div>";
       section.appendChild(carousel);
 
