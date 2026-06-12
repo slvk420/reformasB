@@ -2744,12 +2744,16 @@ html, body {
 .rsb-process-nav .rsb-process-dots {
   display: none !important;
 }
-/* Mobile: centered row */
-@media (max-width: 760px) {
+/* Tablet + mobile: relative flow so it doesn't overlap copy text */
+@media (max-width: 1024px) {
   .rsb-process-nav {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
     justify-content: center !important;
     gap: 16px !important;
-    bottom: -56px !important;
+    padding: 14px 20px !important;
   }
 }
 
