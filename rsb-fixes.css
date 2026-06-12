@@ -2597,9 +2597,12 @@ html, body {
   color: rgba(255, 255, 255, .82);
   cursor: pointer;
   display: flex;
+  flex-shrink: 0;
   height: 40px;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 0;
+  order: 2;
+  pointer-events: auto;
   transition: background .18s ease, border-color .18s ease;
   width: 40px;
   z-index: 5;
@@ -2611,10 +2614,61 @@ html, body {
   color: #fff;
 }
 
-/* Gestión integral: reduce section height */
+/* Cinematic arrows: desktop — centered row at section bottom */
+@media (min-width: 1025px) {
+  .cinematic-arrows {
+    inset: auto 0 28px !important;
+    transform: none !important;
+    justify-content: center !important;
+    gap: 14px !important;
+    align-items: center !important;
+  }
+  .cinematic-arrows > button:first-child { order: 1 !important; }
+  .cinematic-arrows > button:nth-child(2) { order: 3 !important; }
+  .cinematic-arrows .rsb-cinematic-playpause { order: 2 !important; }
+}
+
+/* Cinematic arrows: tablet — relative flow, centered row below images */
+@media (min-width: 761px) and (max-width: 1024px) {
+  .cinematic-arrows {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 14px !important;
+    padding: 18px 0 32px !important;
+    pointer-events: auto !important;
+  }
+  .cinematic-arrows > button:first-child { order: 1 !important; }
+  .cinematic-arrows > button:nth-child(2) { order: 3 !important; }
+  .cinematic-arrows .rsb-cinematic-playpause { order: 2 !important; }
+}
+
+/* Cinematic arrows: mobile — relative flow, centered row below content */
+@media (max-width: 760px) {
+  .cinematic-arrows {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 14px !important;
+    padding: 14px 0 24px !important;
+    pointer-events: auto !important;
+  }
+  .cinematic-arrows > button:first-child { order: 1 !important; }
+  .cinematic-arrows > button:nth-child(2) { order: 3 !important; }
+  .cinematic-arrows .rsb-cinematic-playpause { order: 2 !important; }
+}
+
+/* Gestión integral: center cards vertically within section */
 .turnkey-strip {
   padding-top: clamp(48px, 6vh, 72px) !important;
   padding-bottom: clamp(48px, 6vh, 72px) !important;
+}
+.turnkey-grid {
+  align-items: center !important;
 }
 
 /* Contacto: card-top now has only h2 — remove 2-col grid */
