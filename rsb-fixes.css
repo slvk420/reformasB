@@ -2710,3 +2710,26 @@ html, body {
   background: var(--color-copper, #a65f3f);
   color: #fff;
 }
+
+/* ─── Process carousel: arrows at bottom on all breakpoints ─── */
+/* Desktop (>1024px): move from top:50% to bottom bar */
+@media (min-width: 1025px) {
+  .rsb-process-arrow {
+    top: auto !important;
+    transform: none !important;
+    bottom: 20px !important;
+  }
+  .rsb-process-arrow.is-previous {
+    left: clamp(28px, 3vw, 52px) !important;
+  }
+  .rsb-process-arrow.is-next {
+    right: clamp(28px, 3vw, 52px) !important;
+  }
+}
+
+/* ─── Hero CTA buttons: hide on mobile (sticky bar covers them) ─── */
+@media (max-width: 760px) {
+  .editorial-hero .hero-actions {
+    display: none !important;
+  }
+}
