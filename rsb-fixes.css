@@ -2712,23 +2712,33 @@ html, body {
 }
 
 /* ─── Process carousel: arrows at bottom on all breakpoints ─── */
-/* Desktop (>1024px): arrows in bottom control bar beside dots/pause */
-/* 4 dots × 44px + 3 × 8px = 200px wide → dots span 50%±100px
-   Pause center at 50%+56px → right edge at 50%+76px
-   Arrows placed 16px outside the dots boundary on each side */
+/* Desktop (>1024px): compact trio [← | ⏸ | →] centered under image column
+   Visual column center ≈ 50% + 283px (verified at 1200px and 1440px viewports)
+   Group width: 66 + 10 + 40 + 10 + 66 = 192px → group left = 50% + 283 - 96 = 50% + 187px */
 @media (min-width: 1025px) {
+  /* Dots replaced by progress bar in copy area */
+  .rsb-process-dots {
+    display: none !important;
+  }
   .rsb-process-arrow {
     top: auto !important;
-    transform: none !important;
-    bottom: 10px !important;
+    bottom: 22px !important;
   }
   .rsb-process-arrow.is-previous {
-    left: calc(50% - 182px) !important;
+    left: calc(50% + 187px) !important;
     right: auto !important;
+    transform: none !important;
   }
   .rsb-process-arrow.is-next {
-    left: calc(50% + 116px) !important;
+    left: calc(50% + 313px) !important;
     right: auto !important;
+    transform: none !important;
+  }
+  /* Pause centered vertically with 66px arrows: bottom = 22 + (66-40)/2 = 35px */
+  .rsb-process-playpause {
+    bottom: 35px !important;
+    left: calc(50% + 263px) !important;
+    transform: none !important;
   }
 }
 
