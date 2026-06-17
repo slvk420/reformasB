@@ -344,24 +344,27 @@ html.rsb-skip-intro .brand-intro {
   padding: clamp(76px, 8vw, 118px) 0;
 }
 
-/* Home: follows work-examples — reduce double-padding */
+/* Home: bring SATE closer to work-examples */
+html:not(.rsb-more-services-page) .work-examples-section {
+  padding-bottom: clamp(32px, 3.5vw, 44px);
+}
 html:not(.rsb-more-services-page) .rsb-sate-section {
-  padding-top: clamp(48px, 5vw, 72px);
-  padding-bottom: clamp(44px, 5vw, 68px);
+  padding-top: clamp(32px, 3.5vw, 44px);
+  padding-bottom: clamp(36px, 4vw, 52px);
 }
 
 /* Button standalone block after SATE on home */
 .rsb-sate-section + .work-more-cta {
   background: var(--color-paper);
-  padding: clamp(44px, 5vw, 68px) clamp(16px, 5vw, 24px);
+  padding: clamp(40px, 4.5vw, 60px) clamp(16px, 5vw, 24px);
   margin-top: 0;
 }
 
 .rsb-sate-grid {
   display: grid;
-  grid-template-columns: minmax(420px, .62fr) minmax(280px, .48fr);
+  grid-template-columns: minmax(0, .78fr) minmax(300px, .62fr);
   align-items: center;
-  gap: clamp(28px, 5vw, 68px);
+  gap: clamp(24px, 4vw, 58px);
 }
 
 .rsb-sate-copy h2,
@@ -400,10 +403,10 @@ html:not(.rsb-more-services-page) .rsb-sate-section {
 }
 
 .rsb-sate-carousel {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3;
   background: var(--color-soft);
-  box-shadow: 0 24px 70px rgba(24, 32, 29, .22);
-  min-height: 340px;
+  box-shadow: 0 20px 54px rgba(24, 32, 29, .12);
+  min-height: 0;
   overflow: hidden;
   position: relative;
 }
@@ -648,7 +651,7 @@ html:not(.rsb-more-services-page) .rsb-sate-section {
 
   .rsb-sate-carousel,
   .rsb-ba-frame {
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 4 / 3;
     min-height: 0;
     width: 100%;
   }
@@ -1695,61 +1698,13 @@ body.contact-page .contact-trust-card {
   }
 }
 
-/* Home: escala profesional de la imagen de baño. */
-.work-example-bath {
-  grid-template-columns: minmax(280px, 0.58fr) minmax(0, 0.88fr) !important;
-  align-items: center !important;
-  gap: clamp(36px, 5vw, 78px) !important;
-}
-
+/* Bath: same aspect-ratio as kitchen (4/3 landscape) */
 .work-example-bath .work-example-media {
-  width: min(100%, 680px) !important;
-  max-height: 540px !important;
-  min-height: 0 !important;
   aspect-ratio: 4 / 3 !important;
-  justify-self: end !important;
-}
-
-.work-example-bath .work-example-media img {
-  object-fit: cover !important;
-  object-position: center center !important;
-}
-
-@media (min-width: 1281px) {
-  .work-example-bath .work-example-media {
-    width: min(100%, 700px) !important;
-    max-height: 560px !important;
-  }
-}
-
-@media (min-width: 901px) and (max-width: 1280px) {
-  .work-example-bath {
-    grid-template-columns: minmax(250px, 0.66fr) minmax(0, 0.94fr) !important;
-    gap: clamp(28px, 4vw, 54px) !important;
-  }
-
-  .work-example-bath .work-example-media {
-    width: min(100%, 560px) !important;
-    max-height: 440px !important;
-  }
-}
-
-@media (max-width: 900px) {
-  .work-example-bath {
-    grid-template-columns: 1fr !important;
-    gap: 24px !important;
-  }
-
-  .work-example-bath .work-example-copy {
-    max-width: 680px !important;
-  }
-
-  .work-example-bath .work-example-media {
-    width: 100% !important;
-    max-height: none !important;
-    aspect-ratio: 4 / 3 !important;
-    justify-self: stretch !important;
-  }
+  min-height: 0 !important;
+  max-height: none !important;
+  width: 100% !important;
+  justify-self: auto !important;
 }
 
 /* Tablet: recorta aire muerto del hero y del proceso horizontal. */
