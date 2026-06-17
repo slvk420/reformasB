@@ -484,7 +484,7 @@
     var isMobile = window.matchMedia && window.matchMedia("(max-width: 760px)").matches;
     var labels = [
       { desktop: "Pedir visita", mobile: "Solicitar visita" },
-      { desktop: "Llamar ahora", mobile: "Llamar" }
+      { desktop: "WhatsApp", mobile: "Llamar" }
     ];
 
     links.forEach(function (link, index) {
@@ -506,6 +506,20 @@
       if (text.textContent !== label) text.textContent = label;
       link.setAttribute("aria-label", label);
     });
+
+    // Desktop: send call button to WhatsApp Web (tel: doesn't work on PC)
+    var callBtn = links[1];
+    if (callBtn) {
+      if (!isMobile) {
+        callBtn.href = "https://wa.me/34605065700?text=Hola%2C%20me%20gustar%C3%ADa%20hablar%20sobre%20una%20reforma";
+        callBtn.setAttribute("target", "_blank");
+        callBtn.setAttribute("rel", "noopener noreferrer");
+      } else {
+        callBtn.href = "tel:+34605065700";
+        callBtn.removeAttribute("target");
+        callBtn.removeAttribute("rel");
+      }
+    }
   }
 
   function initBeforeAfter() {
