@@ -3043,3 +3043,103 @@ html, body {
     font-size: clamp(1rem, 5vw, 1.35rem) !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   PROCESO HORIZONTAL — LAYOUT MÓVIL DEFINITIVO
+   Debe estar al final para ganar la cascada contra todo lo anterior
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 760px) {
+
+  /* 1. Grid de 1 columna — anula el 2-col del desktop y el 1024px block */
+  .rsb-process-inner {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto auto !important;
+    min-height: 0 !important;
+    gap: 14px !important;
+    padding: 32px 16px 24px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2. Orden de filas */
+  .rsb-process-heading {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
+  }
+
+  .rsb-process-visual {
+    grid-row: 2 !important;
+    grid-column: 1 !important;
+    aspect-ratio: 4 / 3 !important;
+    max-height: none !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  /* Nav en la misma celda que el visual → se superpone encima */
+  .rsb-process-nav {
+    grid-row: 2 !important;
+    grid-column: 1 !important;
+    align-self: end !important;
+    justify-content: center !important;
+    gap: clamp(18px, 4.5vw, 28px) !important;
+    padding: 0 16px clamp(16px, 3svh, 24px) !important;
+    z-index: 8 !important;
+  }
+
+  .rsb-process-copy {
+    grid-row: 3 !important;
+    grid-column: 1 !important;
+  }
+
+  /* 3. Gradiente inferior para legibilidad de botones */
+  .rsb-process-visual::after {
+    display: block !important;
+    background: linear-gradient(to top, rgba(7, 13, 11, .70) 0%, transparent 52%) !important;
+  }
+
+  /* 4. Botones: círculos semitransparentes, tamaño igual */
+  .rsb-process-nav .rsb-process-arrow,
+  .rsb-process-nav .rsb-process-playpause {
+    background: rgba(10, 17, 14, .56) !important;
+    border: 1px solid rgba(255, 255, 255, .32) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    border-radius: 50% !important;
+    color: #fff !important;
+    height: clamp(44px, 10.5vw, 54px) !important;
+    width: clamp(44px, 10.5vw, 54px) !important;
+    position: static !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* 5. Tarjeta: con borde sutil y esquinas redondeadas */
+  .rsb-process-card {
+    border: 1px solid rgba(255, 255, 255, .12) !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+    padding: clamp(14px, 3svh, 20px) clamp(14px, 4vw, 20px) !important;
+  }
+
+  /* 6. Barra de progreso: visible */
+  .rsb-process-progress {
+    display: block !important;
+    height: 3px !important;
+    margin-top: 14px !important;
+  }
+
+  /* 7. Título h2: más grande, como en la referencia */
+  .rsb-process-heading > h2 {
+    font-size: clamp(2.1rem, 9.5vw, 3rem) !important;
+    line-height: 1.03 !important;
+    margin-bottom: 0 !important;
+  }
+}
