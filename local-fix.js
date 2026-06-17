@@ -159,6 +159,15 @@
     });
   }
 
+  function fixHomeSectionOrder() {
+    var pedir = document.querySelector("section.section-soft");
+    var proceso = document.querySelector("section.cinematic-process");
+    if (!pedir || !proceso || !pedir.parentNode) return;
+    if (proceso.compareDocumentPosition(pedir) & Node.DOCUMENT_POSITION_FOLLOWING) {
+      pedir.parentNode.insertBefore(pedir, proceso);
+    }
+  }
+
   function trustSectionHtml() {
     return [
       '<section class="section rsb-contact-trust" aria-labelledby="contact-trust-title">',
@@ -1305,6 +1314,7 @@
 
     removeTurnkeyHabitability();
     removeHomeOnlySections();
+    fixHomeSectionOrder();
     updateHomeMarketingCopy();
     updateHomeHeroActions();
   }
