@@ -862,7 +862,7 @@
         if (!visible || document.visibilityState === "hidden") return;
         timer = window.setInterval(function () {
           render(index + 1, 1);
-        }, 8000);
+        }, 12000);
       };
 
       var move = function (amount) {
@@ -949,7 +949,7 @@
 
       var timer = null;
       var isVisible = false;
-      var delay = 8000;
+      var delay = 12000;
       var forcedSteps = [
         {
           eyebrow: "01 / Punto de partida",
