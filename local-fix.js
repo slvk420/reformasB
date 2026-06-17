@@ -157,6 +157,9 @@
     document.querySelectorAll(".webgl-reveal-section").forEach(function (section) {
       section.remove();
     });
+
+    var living = document.querySelector(".work-example-living");
+    if (living) living.remove();
   }
 
   function fixHomeSectionOrder() {
@@ -1299,6 +1302,12 @@
       if (workExSection) workExSection.insertAdjacentHTML("afterend", sateSectionHtmlV2());
     }
     initSateCarousel();
+
+    var moreCta = document.querySelector(".work-more-cta");
+    var sateSection = document.querySelector(".rsb-sate-section");
+    if (moreCta && sateSection && moreCta.previousElementSibling !== sateSection) {
+      sateSection.insertAdjacentElement("afterend", moreCta);
+    }
   }
 
   function initHomeHeroCarousel() {
