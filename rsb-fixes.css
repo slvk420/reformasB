@@ -2115,7 +2115,10 @@ body.contact-page .contact-trust-card {
 
   .rsb-process-inner {
     gap: 12px;
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
     padding: 48px 12px 36px;
+    width: 100% !important;
   }
 
   .rsb-process-heading h2,
@@ -2171,6 +2174,8 @@ body.contact-page .contact-trust-card {
   .rsb-process-visual {
     grid-row: 2 !important;
     grid-column: 1 !important;
+    overflow: hidden !important;
+    width: 100% !important;
   }
 
   /* Nav overlaid at the bottom of the image */
