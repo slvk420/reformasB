@@ -3200,3 +3200,29 @@ html, body {
     width: 60px !important;
   }
 }
+
+/* ─── MOBILE: baños — texto antes que imagen ─────────────────────
+   Main CSS (@media ≤1024px) sets copy order:2 / media order:1,
+   which flips bath to show image before text on mobile.
+   Override so text appears above the image (matching kitchen).
+   ─────────────────────────────────────────────────────────────── */
+@media (max-width: 760px) {
+  .work-example-bath .work-example-copy {
+    order: -1 !important;
+  }
+}
+
+/* ─── MOBILE: SATE — espaciado compacto justo debajo del baño ────
+   Reduce the 54px bottom padding of work-examples and the 45px
+   top padding of rsb-sate-section so the two sections sit tight.
+   Higher specificity wins over the !important padding-block rules
+   set earlier in this file (lines 2952 / 2988).
+   ─────────────────────────────────────────────────────────────── */
+@media (max-width: 760px) {
+  html:not(.rsb-more-services-page) .work-examples-section {
+    padding-bottom: clamp(8px, 1.5svh, 14px) !important;
+  }
+  html:not(.rsb-more-services-page) .rsb-sate-section {
+    padding-top: clamp(8px, 1.5svh, 14px) !important;
+  }
+}
