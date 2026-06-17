@@ -1389,7 +1389,8 @@
         );
       })
       .join("");
-    if (actions) actions.insertAdjacentElement("afterend", controls);
+    if (description) description.insertAdjacentElement("afterend", controls);
+    else if (actions) actions.insertAdjacentElement("beforebegin", controls);
     else heroContent.appendChild(controls);
 
     var slideElements = Array.prototype.slice.call(carousel.querySelectorAll(".rsb-home-hero-slide"));

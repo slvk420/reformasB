@@ -882,7 +882,7 @@ html.rsb-more-services-page .more-services-editorial-section {
   -webkit-backdrop-filter: blur(14px) !important;
   align-items: center !important;
   background: rgba(7, 13, 11, .68) !important;
-  border: 1px solid rgba(255, 255, 255, .14) !important;
+  border: none !important;
   border-radius: 6px !important;
   bottom: auto !important;
   color: rgba(255, 255, 255, .9) !important;
@@ -1061,7 +1061,7 @@ html.rsb-more-services-page .more-services-editorial-section {
 /* Lighter glass surfaces so photography remains visible underneath. */
 .editorial-hero.rsb-hero-carousel-ready .hero-description {
   background: rgba(7, 13, 11, .34) !important;
-  border-color: rgba(255, 255, 255, .22) !important;
+  border-color: transparent !important;
   box-shadow: 0 16px 42px rgba(0, 0, 0, .16) !important;
   backdrop-filter: blur(8px) saturate(112%) !important;
   -webkit-backdrop-filter: blur(8px) saturate(112%) !important;
