@@ -442,25 +442,6 @@
       "Ver baño siguiente"
     );
 
-    setupWorkGallery(
-      ".work-example-living",
-      "Living",
-      [
-        {
-          src: rootPath("reformas/salon-blanco-chimenea.jpg"),
-          label: "Salón luminoso",
-          alt: "Salón luminoso con chimenea lineal, sofás grises y ventanales",
-          isReal: true
-        },
-        {
-          src: rootPath("reformas/ejemplo-salon-real.jpg"),
-          label: "Salón cálido",
-          alt: "Salón reformado con chimenea, estanterías de madera y cortinas claras"
-        }
-      ],
-      "Ver salón anterior",
-      "Ver salón siguiente"
-    );
   }
 
   function updateHomeMarketingCopy() {
@@ -477,11 +458,6 @@
         title: "Reformas de baños pensadas para durar.",
         text: "Renovamos distribución, fontanería, impermeabilización, revestimientos y sanitarios para conseguir baños cómodos, seguros y fáciles de mantener."
       },
-      {
-        selector: ".work-example-living",
-        title: "Salones con más luz y mejor distribución.",
-        text: "Mejoramos la distribución, iluminación, pavimentos, carpintería y acabados para aprovechar mejor el espacio y crear una estancia cómoda."
-      }
     ];
 
     content.forEach(function (item) {
@@ -1317,6 +1293,12 @@
     fixHomeSectionOrder();
     updateHomeMarketingCopy();
     updateHomeHeroActions();
+
+    if (!document.querySelector(".rsb-sate-section")) {
+      var workExSection = document.querySelector(".work-examples-section");
+      if (workExSection) workExSection.insertAdjacentHTML("afterend", sateSectionHtmlV2());
+    }
+    initSateCarousel();
   }
 
   function initHomeHeroCarousel() {
@@ -1450,7 +1432,7 @@
       if (document.visibilityState === "hidden") return;
       timer = window.setInterval(function () {
         showSlide(activeIndex + 1);
-      }, 6000);
+      }, 10000);
     };
 
     controlElements.forEach(function (button, index) {
@@ -1466,6 +1448,20 @@
     });
 
     start();
+
+    if (description) {
+      var origVis = description.style.visibility;
+      description.style.visibility = "hidden";
+      var maxDescH = 0;
+      slides.forEach(function (slide) {
+        description.textContent = slide.text;
+        var h = description.offsetHeight;
+        if (h > maxDescH) maxDescH = h;
+      });
+      description.textContent = slides[0].text;
+      description.style.visibility = origVis;
+      if (maxDescH > 0) description.style.minHeight = maxDescH + "px";
+    }
   }
 
   function runFixes() {

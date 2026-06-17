@@ -864,17 +864,22 @@ html.rsb-more-services-page .more-services-editorial-section {
 .editorial-hero.rsb-hero-carousel-ready .hero-description {
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
+  align-items: center !important;
   background: rgba(7, 13, 11, .68) !important;
   border: 1px solid rgba(255, 255, 255, .14) !important;
   border-radius: 6px !important;
   bottom: auto !important;
   color: rgba(255, 255, 255, .9) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  text-align: center !important;
   font-size: clamp(1rem, 1.24vw, 1.2rem) !important;
   left: auto !important;
   line-height: 1.55 !important;
   margin: clamp(22px, 3vh, 32px) 0 0 !important;
   max-width: 680px !important;
-  min-height: 118px;
+  min-height: 165px;
   padding: 18px 20px !important;
   position: relative !important;
   transition: opacity .28s ease, transform .28s ease !important;
@@ -957,6 +962,12 @@ html.rsb-more-services-page .more-services-editorial-section {
 
   .editorial-hero.rsb-hero-carousel-ready .hero-description {
     max-width: 620px !important;
+    min-height: 165px;
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    text-align: center !important;
   }
 }
 
@@ -996,11 +1007,16 @@ html.rsb-more-services-page .more-services-editorial-section {
   }
 
   .editorial-hero.rsb-hero-carousel-ready .hero-description {
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    text-align: center !important;
     font-size: .94rem !important;
     line-height: 1.46 !important;
     margin-top: 16px !important;
     max-width: 100% !important;
-    min-height: 132px;
+    min-height: 200px;
     padding: 14px 15px !important;
   }
 
