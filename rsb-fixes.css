@@ -988,43 +988,27 @@ html.rsb-more-services-page .more-services-editorial-section {
 }
 
 @media (max-width: 760px) {
-  /* Hero: stacked layout — image block above, dark content area below */
+  /* Hero: auto height so it fits content, no empty space below */
   .editorial-hero,
-  .editorial-hero.rsb-hero-carousel-ready {
-    display: flex !important;
-    flex-direction: column !important;
+  .editorial-hero.rsb-hero-carousel-ready,
+  .editorial-hero.rsb-hero-carousel-ready .hero-content {
     min-height: auto !important;
-    background: #0e1612 !important;
   }
 
-  /* Carousel becomes a contained block, not full-screen overlay */
-  .editorial-hero.rsb-hero-carousel-ready .rsb-home-hero-carousel {
-    position: relative !important;
-    inset: auto !important;
-    width: 100% !important;
-    aspect-ratio: 16 / 10 !important;
-    flex-shrink: 0 !important;
-  }
-
-  /* Lighter gradient since no text sits on the image anymore */
   .rsb-home-hero-carousel::after {
-    background: linear-gradient(180deg, rgba(5, 10, 9, .14) 0%, rgba(5, 10, 9, .06) 55%, rgba(5, 10, 9, .28) 100%);
+    background:
+      linear-gradient(180deg, rgba(5, 10, 9, .52) 0%, rgba(5, 10, 9, .5) 35%, rgba(5, 10, 9, .84) 100%),
+      linear-gradient(90deg, rgba(5, 10, 9, .72), rgba(5, 10, 9, .12));
   }
 
   .rsb-home-hero-slide {
-    object-position: center center;
+    object-position: 68% center;
   }
 
-  /* Content area sits below the image on solid dark background */
   .editorial-hero.rsb-hero-carousel-ready .hero-content {
-    background: #0e1612 !important;
     justify-content: flex-start !important;
-    min-height: auto !important;
-    padding: 18px 18px 26px !important;
-    position: relative !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    z-index: 1 !important;
+    padding: 76px 0 48px !important;
+    width: min(100% - 24px, 520px) !important;
   }
 
   .editorial-hero.rsb-hero-carousel-ready .hero-copy {
@@ -1033,36 +1017,30 @@ html.rsb-more-services-page .more-services-editorial-section {
   }
 
   .editorial-hero.rsb-hero-carousel-ready h1 {
-    font-size: clamp(1.85rem, 9vw, 2.7rem) !important;
+    font-size: clamp(2.18rem, 10.2vw, 3.15rem) !important;
     line-height: .96 !important;
-    max-width: 100% !important;
+    max-width: 22rem !important;
   }
 
-  /* Description: plain text on dark bg — no glass, no border */
   .editorial-hero.rsb-hero-carousel-ready .hero-description {
-    align-items: flex-start !important;
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    color: rgba(255, 255, 255, .7) !important;
-    display: block !important;
-    font-size: .91rem !important;
-    line-height: 1.52 !important;
-    margin-top: 10px !important;
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    text-align: center !important;
+    font-size: .94rem !important;
+    line-height: 1.46 !important;
+    margin-top: 16px !important;
     max-width: 100% !important;
-    min-height: auto !important;
-    padding: 0 !important;
-    text-align: left !important;
-    text-shadow: none !important;
+    min-height: 200px;
+    padding: 14px 15px !important;
   }
 
   .editorial-hero.rsb-hero-carousel-ready .hero-actions {
     flex-direction: row !important;
     gap: 10px !important;
-    margin-top: 18px !important;
-    width: 100% !important;
+    margin-top: 14px !important;
+    width: 100%;
   }
 
   .editorial-hero.rsb-hero-carousel-ready .hero-actions a {
@@ -1071,20 +1049,12 @@ html.rsb-more-services-page .more-services-editorial-section {
     padding-inline: 12px !important;
   }
 
-  /* Navigation dots: bigger, left-aligned, below description */
   .rsb-home-hero-controls {
-    gap: 6px !important;
-    justify-content: flex-start !important;
-    margin-top: 16px !important;
+    margin-top: 12px;
   }
 
   .rsb-home-hero-controls button {
-    width: 40px !important;
-  }
-
-  .rsb-home-hero-controls button span {
-    height: 4px !important;
-    border-radius: 2px !important;
+    width: 36px;
   }
 }
 
@@ -1146,7 +1116,7 @@ html.rsb-more-services-page .more-services-editorial-section {
 
 @media (max-width: 760px) {
   .editorial-hero.rsb-hero-carousel-ready .hero-description {
-    background: transparent !important;
+    background: rgba(7, 13, 11, .4) !important;
   }
 
   .work-image-controls {
