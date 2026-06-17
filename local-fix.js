@@ -1,4 +1,7 @@
 (function () {
+  if (history.scrollRestoration) history.scrollRestoration = "manual";
+  window.scrollTo(0, 0);
+
   var isFile = window.location.protocol === "file:";
   var isGithubPages = window.location.pathname.indexOf("/reformasB") === 0;
   var moreServicesLoadPending = false;
