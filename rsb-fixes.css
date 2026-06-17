@@ -2160,6 +2160,39 @@ body.contact-page .contact-trust-card {
   .rsb-process-dots button {
     width: 30px;
   }
+
+  /* Overlay the nav controls at the bottom of the image */
+  .rsb-process-nav {
+    grid-row: 1 !important;
+    align-self: end !important;
+    justify-content: center !important;
+    gap: 20px !important;
+    padding: 0 16px 14px !important;
+    z-index: 8 !important;
+  }
+
+  .rsb-process-copy {
+    grid-row: 2 !important;
+  }
+
+  /* Bottom gradient so buttons are readable against the photo */
+  .rsb-process-visual::after {
+    background:
+      linear-gradient(180deg, transparent 52%, rgba(7, 13, 11, .58) 100%),
+      linear-gradient(90deg, rgba(7, 13, 11, .12), transparent 52%) !important;
+  }
+
+  /* Remove card border on mobile */
+  .rsb-process-card {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Uniform size for all 3 nav buttons on mobile */
+  .rsb-process-playpause {
+    height: 46px !important;
+    width: 46px !important;
+  }
 }
 
 /* Process composition refined from the Figma reference. */
