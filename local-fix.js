@@ -690,11 +690,11 @@
       carousel.className = "rsb-process-carousel";
       carousel.innerHTML =
         '<div class="rsb-process-inner">' +
-        '<div class="rsb-process-copy">' +
         '<div class="rsb-process-heading">' +
         '<p class="eyebrow">Proceso horizontal</p>' +
         '<h2>La reforma se cuenta avanzando hacia el resultado.</h2>' +
         '</div>' +
+        '<div class="rsb-process-copy">' +
         '<article class="rsb-process-card" aria-live="polite" aria-atomic="true">' +
         '<span class="rsb-process-eyebrow"></span>' +
         '<h3></h3>' +

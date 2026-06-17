@@ -1,4 +1,4 @@
-html.rsb-skip-intro .brand-intro {
+﻿html.rsb-skip-intro .brand-intro {
   display: none !important;
 }
 
@@ -1881,11 +1881,11 @@ body.contact-page .contact-trust-card {
   z-index: 2;
 }
 
-.rsb-process-copy > .eyebrow {
+.rsb-process-copy > .eyebrow, .rsb-process-heading > .eyebrow {
   color: #efb58f;
 }
 
-.rsb-process-copy > h2 {
+.rsb-process-copy > h2, .rsb-process-heading > h2 {
   font-family: "Nippo", var(--font-sans), Arial, sans-serif;
   font-size: clamp(2.9rem, 4.2vw, 5rem);
   font-weight: 700;
@@ -2078,7 +2078,7 @@ body.contact-page .contact-trust-card {
     width: min(100%, 780px);
   }
 
-  .rsb-process-copy > h2 {
+  .rsb-process-copy > h2, .rsb-process-heading > h2 {
     font-size: clamp(2.5rem, 7vw, 4rem);
   }
 
@@ -2119,7 +2119,7 @@ body.contact-page .contact-trust-card {
   }
 
   .rsb-process-heading h2,
-  .rsb-process-copy > h2 {
+  .rsb-process-copy > h2, .rsb-process-heading > h2 {
     font-size: clamp(1.8rem, 8vw, 2.4rem) !important;
     line-height: 1.04 !important;
   }
@@ -2163,12 +2163,7 @@ body.contact-page .contact-trust-card {
     width: 30px;
   }
 
-  /* Heading (eyebrow + h2) above the image */
-  .rsb-process-copy {
-    display: contents !important;
-  }
-
-  .rsb-process-heading {
+.rsb-process-heading {
     grid-row: 1 !important;
     grid-column: 1 !important;
   }
@@ -2189,9 +2184,12 @@ body.contact-page .contact-trust-card {
     z-index: 8 !important;
   }
 
-  .rsb-process-card {
+  .rsb-process-copy {
     grid-row: 3 !important;
     grid-column: 1 !important;
+  }
+
+  .rsb-process-card {
     border: none !important;
     box-shadow: none !important;
   }
@@ -2203,20 +2201,19 @@ body.contact-page .contact-trust-card {
   /* Bottom gradient so buttons are readable against the photo */
   .rsb-process-visual::after {
     background:
-      linear-gradient(180deg, transparent 52%, rgba(7, 13, 11, .58) 100%),
+      linear-gradient(180deg, transparent 52%, rgba(7, 13, 11, .62) 100%),
       linear-gradient(90deg, rgba(7, 13, 11, .12), transparent 52%) !important;
   }
 
-  /* Buttons transparent — only symbols visible */
+  /* Semi-transparent circle buttons over image */
   .rsb-process-nav .rsb-process-arrow,
   .rsb-process-nav .rsb-process-playpause {
-    background: transparent !important;
-    border: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+    background: rgba(10, 17, 14, .52) !important;
+    border: 1px solid rgba(255, 255, 255, .28) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
     box-shadow: none !important;
     color: #fff !important;
-    filter: drop-shadow(0 1px 5px rgba(0, 0, 0, .7)) !important;
     height: 46px !important;
     width: 46px !important;
   }
@@ -2240,7 +2237,7 @@ body.contact-page .contact-trust-card {
   width: min(100%, 1320px);
 }
 
-.cinematic-process.rsb-stable-process .rsb-process-copy > h2 {
+.cinematic-process.rsb-stable-process .rsb-process-copy > h2, .rsb-process-heading > h2 {
   font-size: clamp(2.6rem, 3.5vw, 3.7rem);
   max-width: 540px;
 }
@@ -2388,7 +2385,7 @@ body.contact-page .contact-trust-card {
     transform: translate3d(27px, -21px, 0) rotate(4.2deg) scale(.94);
   }
 
-  .cinematic-process.rsb-stable-process .rsb-process-copy > h2 {
+  .cinematic-process.rsb-stable-process .rsb-process-copy > h2, .rsb-process-heading > h2 {
     font-size: clamp(1.95rem, 8.3vw, 2.5rem);
   }
 
@@ -2888,7 +2885,7 @@ html, body {
     font-size: clamp(.7rem, 3vw, .85rem) !important;
   }
   .rsb-process-heading h2,
-  .rsb-process-copy > h2 {
+  .rsb-process-copy > h2, .rsb-process-heading > h2 {
     font-size: clamp(1.55rem, 7vw, 2.05rem) !important;
     line-height: 1.06 !important;
     margin: 0 0 clamp(2px, .6svh, 6px) !important;
@@ -3006,7 +3003,7 @@ html, body {
 /* ── 7. Extra-small screens ≤ 390 px ── */
 @media (max-width: 390px) {
   .rsb-process-heading h2,
-  .rsb-process-copy > h2 {
+  .rsb-process-copy > h2, .rsb-process-heading > h2 {
     font-size: clamp(1.35rem, 9vw, 1.65rem) !important;
   }
   .rsb-process-visual {
@@ -3034,7 +3031,7 @@ html, body {
     max-height: 52svh !important;
   }
   .rsb-process-heading h2,
-  .rsb-process-copy > h2 {
+  .rsb-process-copy > h2, .rsb-process-heading > h2 {
     font-size: clamp(1.1rem, 5.5vw, 1.5rem) !important;
   }
   .rsb-process-card h3 {
