@@ -3143,3 +3143,60 @@ html, body {
     margin-bottom: 0 !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   PROCESO HORIZONTAL — LAYOUT DESKTOP DEFINITIVO (≥ 761 px)
+   Sin este bloque el auto-placement de grid pone copy en col 2
+   y visual en col 1 — al revés de la referencia.
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 761px) {
+
+  /* Columnas proporcionales: izquierda ~42%, derecha el resto */
+  .cinematic-process.rsb-stable-process .rsb-process-inner {
+    grid-template-columns: minmax(320px, 44%) 1fr;
+    grid-template-rows: auto auto;
+    align-items: start;
+  }
+
+  /* Col izquierda fila 1: eyebrow + h2 */
+  .cinematic-process.rsb-stable-process .rsb-process-heading {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  /* Col derecha fila 1: imagen con efecto de capas apiladas */
+  .cinematic-process.rsb-stable-process .rsb-process-visual {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  /* Col izquierda fila 2: tarjeta + barra de progreso */
+  .cinematic-process.rsb-stable-process .rsb-process-copy {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+  }
+
+  /* Col derecha fila 2: botones nav centrados bajo la imagen */
+  .cinematic-process.rsb-stable-process .rsb-process-nav {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    align-self: center !important;
+    justify-content: center !important;
+    gap: 20px !important;
+    padding: 28px 0 0 !important;
+  }
+
+  /* Tarjeta altura mínima fija — misma caja en todos los pasos */
+  .cinematic-process.rsb-stable-process .rsb-process-card {
+    min-height: 264px;
+  }
+
+  /* Playpause mismo tamaño que las flechas */
+  .cinematic-process.rsb-stable-process .rsb-process-nav .rsb-process-playpause {
+    height: 60px !important;
+    width: 60px !important;
+  }
+}
