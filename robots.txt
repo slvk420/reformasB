@@ -1,4 +1,5 @@
 User-Agent: *
 Allow: /
+Disallow: /gracias/
 
-Sitemap: https://www.reformasb.es/sitemap.xml
+Sitemap: https://www.reformasb.com/sitemap.xml

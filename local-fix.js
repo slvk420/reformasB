@@ -117,12 +117,6 @@
     return element && element.textContent && element.textContent.toLowerCase().indexOf(text.toLowerCase()) !== -1;
   }
 
-  function removeContactIntroParagraph() {
-    document.querySelectorAll(".contact-panel p:not(.eyebrow)").forEach(function (p) {
-      if (p.textContent.indexOf("valorar el espacio") !== -1) p.remove();
-    });
-  }
-
   function removeTurnkeyHabitability() {
     var turnkey = document.querySelector(".turnkey-strip");
     if (!turnkey) return;
@@ -167,8 +161,6 @@
       section.remove();
     });
 
-    var living = document.querySelector(".work-example-living");
-    if (living) living.remove();
   }
 
   function fixHomeSectionOrder() {
@@ -177,35 +169,6 @@
     if (!pedir || !proceso || !pedir.parentNode) return;
     if (proceso.compareDocumentPosition(pedir) & Node.DOCUMENT_POSITION_FOLLOWING) {
       pedir.parentNode.insertBefore(pedir, proceso);
-    }
-  }
-
-  function trustSectionHtml() {
-    return [
-      '<section class="section rsb-contact-trust" aria-labelledby="contact-trust-title">',
-      '<div class="container">',
-      '<div class="section-header">',
-      '<p class="eyebrow">Confianza sin rodeos</p>',
-      '<h2 id="contact-trust-title">Primero claridad. Después obra.</h2>',
-      '<p class="section-lead">Antes de hablar de partidas, miramos el espacio, ordenamos prioridades y definimos si la reforma tiene sentido para ti.</p>',
-      '</div>',
-      '<div class="grid-4">',
-      '<article class="trust-card"><div class="icon-chip">04</div><h3>Lectura visual previa</h3><p>Vemos potencial, límites y prioridades antes de hablar de precios a ciegas.</p></article>',
-      '<article class="trust-card"><div class="icon-chip">05</div><h3>Plan claro antes de obra</h3><p>Ordenamos alcance, fases y decisiones importantes antes de empezar a romper.</p></article>',
-      '<article class="trust-card"><div class="icon-chip">06</div><h3>Un interlocutor</h3><p>Menos ruido, menos llamadas cruzadas y una persona clara para avanzar.</p></article>',
-      '<article class="trust-card"><div class="icon-chip">07</div><h3>Visita sin mareos</h3><p>Si el proyecto encaja, pasamos de fotos e ideas a una visita con criterio.</p></article>',
-      '</div>',
-      '</div>',
-      '</section>'
-    ].join("");
-  }
-
-  function updateContactPage() {
-    var fixedTitle = document.getElementById("contact-title");
-    if (fixedTitle) fixedTitle.textContent = "Ll\u00e1manos y vemos tu reforma contigo.";
-    if (!document.querySelector(".rsb-contact-trust")) {
-      var fixedSteps = document.querySelector(".contact-steps");
-      if (fixedSteps) fixedSteps.insertAdjacentHTML("afterend", trustSectionHtml());
     }
   }
 
@@ -965,12 +928,20 @@
     initMoreServicesTextReveal();
   }
 
+  function addEmailButton() {
+    var form = document.querySelector("#presupuesto form");
+    if (!form || form.querySelector(".rsb-email-action")) return;
+    var acts = form.querySelector(".form-actions, .hero-actions");
+    if (!acts) return;
+    var emailA = document.createElement("a");
+    emailA.className = "rsb-email-action";
+    emailA.href = "mailto:reformasb.oficial@gmail.com?subject=Solicitud%20de%20visita%20RSB";
+    emailA.textContent = "Enviar email";
+    acts.appendChild(emailA);
+  }
+
   function applyRequestedChanges() {
     var path = pagePath();
-    if (/\/contacto(?:\/|\/index\.html)?$/.test(path) || /\/reformasB\/contacto\/?$/.test(path)) {
-      updateContactPage();
-      return;
-    }
     if (/\/mas-servicios(?:\/|\/index\.html)?$/.test(path) || /\/reformasB\/mas-servicios\/?$/.test(path)) {
       updateMoreServicesPage();
       return;
@@ -981,7 +952,7 @@
     fixHomeSectionOrder();
     updateHomeMarketingCopy();
     updateHomeHeroActions();
-    removeContactIntroParagraph();
+    addEmailButton();
 
     if (!document.querySelector(".rsb-sate-section")) {
       var workExSection = document.querySelector(".work-examples-section");
@@ -1241,40 +1212,5 @@
     window.setTimeout(startFixes, 0);
   } else {
     window.addEventListener("load", startFixes, { once: true });
-  }
-})();
-
-// === RSB DOM PATCHES v3 2026-06-12 ===
-(function () {
-  function applyDomPatches() {
-    // 1. Confianza sin rodeos: swap cards 1 and 2 (Claridad before Obra)
-    var trustGrid = document.querySelector(".grid-4");
-    if (trustGrid && !trustGrid.dataset.rsbSwapped) {
-      var cards = trustGrid.querySelectorAll(".trust-card");
-      if (cards.length >= 2) {
-        trustGrid.insertBefore(cards[1], cards[0]);
-        trustGrid.dataset.rsbSwapped = "1";
-      }
-    }
-
-    // 2. Email button in pedir visita form
-    var form = document.querySelector("#presupuesto form");
-    if (form && !form.querySelector(".rsb-email-action")) {
-      var acts = form.querySelector(".form-actions, .hero-actions");
-      if (acts) {
-        var emailA = document.createElement("a");
-        emailA.className = "rsb-email-action";
-        emailA.href = "mailto:reformasb.oficial@gmail.com?subject=Solicitud%20de%20visita%20RSB";
-        emailA.textContent = "Enviar email";
-        acts.appendChild(emailA);
-      }
-    }
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", applyDomPatches);
-  } else {
-    applyDomPatches();
-    window.setTimeout(applyDomPatches, 600);
   }
 })();
