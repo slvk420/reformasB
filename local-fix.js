@@ -1196,14 +1196,17 @@
 
     window.requestAnimationFrame(function () {
       runFixes();
-      window.setTimeout(runFixes, 600);
       window.setTimeout(runFixes, 1600);
 
-      new MutationObserver(runFixes).observe(document.documentElement, {
+      var observerTimer = null;
+      new MutationObserver(function () {
+        window.clearTimeout(observerTimer);
+        observerTimer = window.setTimeout(runFixes, 150);
+      }).observe(document.body || document.documentElement, {
         subtree: true,
         childList: true,
         attributes: true,
-        attributeFilter: ["src", "srcset"]
+        attributeFilter: ["src"]
       });
     });
   }
