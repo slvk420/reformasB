@@ -137,14 +137,6 @@ html.rsb-skip-intro .brand-intro {
   position: relative !important;
   z-index: 3 !important;
 }
-
-.back-home-link {
-  width: fit-content !important;
-  max-width: 100% !important;
-  background: rgba(255, 253, 248, .92) !important;
-  box-shadow: 0 12px 30px rgba(24, 32, 29, .08) !important;
-}
-
 .more-services-magazine-layout {
   align-items: start !important;
   gap: clamp(22px, 3vw, 42px) !important;
@@ -263,26 +255,9 @@ html.rsb-skip-intro .brand-intro {
   width: min(1180px, 100% - 24px);
 }
 
-.rsb-contact-trust .section-header h2 {
-  color: #fff;
-  max-width: 760px;
-  overflow-wrap: anywhere;
-}
-
 .rsb-contact-trust .section-lead {
   color: rgba(255, 255, 255, .72);
 }
-
-.rsb-contact-trust .icon-chip {
-  color: var(--color-copper);
-  font-size: .78rem;
-  font-weight: 900;
-}
-
-.rsb-contact-trust .trust-card {
-  min-width: 0;
-}
-
 .contact-card,
 .step-card {
   min-width: 0;
@@ -305,8 +280,6 @@ html.rsb-skip-intro .brand-intro {
 .contact-card,
 .rsb-contact-trust,
 .rsb-contact-trust .container,
-.rsb-contact-trust .grid-4,
-.rsb-contact-trust .trust-card {
   max-width: calc(100vw - 24px) !important;
 }
 
@@ -317,8 +290,7 @@ html.rsb-skip-intro .brand-intro {
   width: calc(100vw - 24px) !important;
 }
 
-.contact-card,
-.rsb-contact-trust .trust-card {
+.contact-card {
   width: 100% !important;
 }
 
@@ -504,15 +476,6 @@ html:not(.rsb-more-services-page) .rsb-sate-section {
   user-select: none;
   width: min(100%, 1180px);
 }
-
-.rsb-ba-img {
-  height: 100%;
-  inset: 0;
-  object-fit: cover;
-  position: absolute;
-  width: 100%;
-}
-
 .rsb-ba-layer {
   background-position: center;
   background-repeat: no-repeat;
@@ -678,16 +641,6 @@ html:not(.rsb-more-services-page) .rsb-sate-section {
   .rsb-contact-trust {
     padding: 58px 0 calc(76px + env(safe-area-inset-bottom)) !important;
   }
-
-  .rsb-contact-trust .section-header h2 {
-    font-size: clamp(1.85rem, 8.4vw, 2.45rem);
-    line-height: 1.02;
-  }
-
-  .rsb-contact-trust .trust-card p {
-    overflow-wrap: anywhere;
-  }
-
   .contact-header,
   .contact-hero,
   .contact-steps,
@@ -696,16 +649,13 @@ html:not(.rsb-more-services-page) .rsb-sate-section {
     max-width: calc(100vw - 32px) !important;
   }
 
-  .contact-card,
-  .rsb-contact-trust .trust-card {
+  .contact-card {
     width: 100% !important;
     max-width: calc(100vw - 32px) !important;
   }
 
   .contact-hero h1,
   .contact-lead,
-  .rsb-contact-trust .section-header,
-  .rsb-contact-trust .section-header h2,
   .rsb-contact-trust .section-lead {
     max-width: min(100%, 20.5rem) !important;
     white-space: normal !important;
@@ -713,8 +663,6 @@ html:not(.rsb-more-services-page) .rsb-sate-section {
 
   .contact-card h2,
   .contact-card p,
-  .rsb-contact-trust .trust-card h3,
-  .rsb-contact-trust .trust-card p {
     max-width: min(100%, 18rem) !important;
     white-space: normal !important;
   }
@@ -1067,78 +1015,6 @@ html.rsb-more-services-page .more-services-editorial-section {
   -webkit-backdrop-filter: blur(8px) saturate(112%) !important;
   text-shadow: 0 2px 10px rgba(0, 0, 0, .62);
 }
-
-.work-image-controls {
-  background: rgba(16, 23, 20, .48) !important;
-  border: 0 !important;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, .16) !important;
-  backdrop-filter: blur(8px) saturate(112%) !important;
-  -webkit-backdrop-filter: blur(8px) saturate(112%) !important;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, .68);
-}
-
-.work-image-controls button {
-  border: 0 !important;
-  transition: background .18s ease, color .18s ease;
-}
-
-.work-image-controls button:hover,
-.work-image-controls button:focus-visible {
-  background: rgba(255, 255, 255, .14) !important;
-}
-
-.rsb-project-real-badge {
-  position: absolute;
-  z-index: 3;
-  top: 18px;
-  left: 0;
-  display: grid;
-  place-items: center;
-  width: 30px;
-  min-height: 108px;
-  padding: 12px 0;
-  background: var(--color-copper);
-  color: #111714;
-  font-size: 11px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: 0;
-  text-transform: uppercase;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  box-shadow: 8px 10px 24px rgba(0, 0, 0, .16);
-  pointer-events: none;
-}
-
-.rsb-project-real-badge[hidden] {
-  display: none !important;
-}
-
-@media (max-width: 760px) {
-  .editorial-hero.rsb-hero-carousel-ready .hero-description {
-    background: rgba(7, 13, 11, .4) !important;
-  }
-
-  .work-image-controls {
-    background: rgba(16, 23, 20, .52) !important;
-  }
-
-  .rsb-project-real-badge {
-    top: 12px;
-    width: 26px;
-    min-height: 94px;
-    font-size: 10px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .rsb-home-hero-slide,
-  .editorial-hero.rsb-hero-carousel-ready .hero-description {
-    transition: opacity .01ms linear !important;
-    transform: none !important;
-  }
-}
-
 html.rsb-more-services-page .more-services-topbar,
 html.rsb-more-services-page .more-services-hero .more-services-actions {
   display: none !important;
@@ -1419,36 +1295,9 @@ body.contact-page .contact-buttons a:first-child {
 }
 
 body.contact-page .contact-card,
-body.contact-page .step-card,
-body.contact-page .contact-trust-card {
+body.contact-page .step-card {
   border-radius: 8px !important;
 }
-
-.rsb-process-step-cta {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 10px !important;
-  width: fit-content !important;
-  min-height: 44px !important;
-  margin-top: 18px !important;
-  padding: 0 18px !important;
-  border-radius: 6px !important;
-  background: #f7f4ed !important;
-  color: #101714 !important;
-  font-family: var(--font-sans), Arial, sans-serif !important;
-  font-size: 0.95rem !important;
-  font-weight: 800 !important;
-  line-height: 1 !important;
-  text-decoration: none !important;
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24) !important;
-}
-
-.rsb-process-step-cta:hover {
-  background: #d9824b !important;
-  color: #fff !important;
-}
-
 
 body.contact-page .rsb-contact-trust {
   background: #101714 !important;
@@ -1471,29 +1320,6 @@ body.contact-page .rsb-contact-trust .contact-section-kicker {
 
 body.contact-page .rsb-contact-trust .section-lead {
   color: rgba(255, 255, 255, .72) !important;
-}
-
-body.contact-page .contact-trust-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
-}
-
-body.contact-page .contact-trust-card {
-  width: 100% !important;
-  min-height: 0 !important;
-  color: #101714 !important;
-  background: #fffdf8 !important;
-}
-
-@media (max-width: 980px) {
-  body.contact-page .rsb-contact-trust .contact-section-head {
-    grid-template-columns: 1fr !important;
-  }
-
-  body.contact-page .contact-trust-grid {
-    grid-template-columns: 1fr !important;
-  }
 }
 
 @media (max-width: 640px) {
@@ -2318,10 +2144,6 @@ html, body {
 }
 
 /* Hide obra real badge (removed from JS; hide any remnant) */
-.rsb-project-real-badge {
-  display: none !important;
-}
-
 /* Bigger process arrows (rsb-carousel) */
 .rsb-process-arrow {
   height: 66px !important;
