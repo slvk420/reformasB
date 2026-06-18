@@ -69,13 +69,13 @@
     return href;
   }
 
-  function fixAssets() {
+  function fixImages() {
     document.querySelectorAll("img").forEach(function (img) {
       if (img.classList.contains("brand-logo")) {
         var logoSrc = rootPath("_next/static/media/logo-rsb-wood-transparent.png");
         if (img.src !== logoSrc) img.setAttribute("src", logoSrc);
-        img.setAttribute("width", "420");
-        img.setAttribute("height", "420");
+        if (img.getAttribute("width") !== "420") img.setAttribute("width", "420");
+        if (img.getAttribute("height") !== "420") img.setAttribute("height", "420");
       }
       var src = normalizeAsset(img.getAttribute("src"));
       if (src && src !== img.getAttribute("src")) img.setAttribute("src", src);
@@ -83,7 +83,9 @@
       if (img.getAttribute("loading") === "lazy") img.setAttribute("loading", "eager");
       if (!img.getAttribute("decoding")) img.setAttribute("decoding", "async");
     });
+  }
 
+  function fixLinks() {
     document.querySelectorAll('a[href]').forEach(function (link) {
       var href = normalizeInternalHref(link.getAttribute("href"));
       if (!href) return;
@@ -103,6 +105,11 @@
         link.setAttribute("href", rootPath("#proceso"));
       }
     });
+  }
+
+  function fixAssets() {
+    fixImages();
+    fixLinks();
   }
 
   function pagePath() {
@@ -1199,9 +1206,10 @@
       window.setTimeout(runFixes, 1600);
 
       var observerTimer = null;
-      new MutationObserver(function () {
+      new MutationObserver(function (mutations) {
+        var hasStructural = mutations.some(function (m) { return m.type === "childList"; });
         window.clearTimeout(observerTimer);
-        observerTimer = window.setTimeout(runFixes, 150);
+        observerTimer = window.setTimeout(hasStructural ? runFixes : fixImages, 150);
       }).observe(document.body || document.documentElement, {
         subtree: true,
         childList: true,
