@@ -311,63 +311,31 @@
     });
   }
 
-  function makeWorkArrow(direction) {
-    var path =
-      direction === "prev"
-        ? "M19 12H5m7 7-7-7 7-7"
-        : "M5 12h14m-7-7 7 7-7 7";
-    return (
-      '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
-      '<path d="' +
-      path +
-      '"></path></svg>'
-    );
-  }
-
-  function ensureWorkControls(media, labelText, previousLabel, nextLabel) {
-    var controls = media.querySelector(".work-image-controls");
-    if (!controls) {
-      controls = document.createElement("div");
-      controls.className = "work-image-controls";
-      controls.innerHTML =
-        '<button type="button" aria-label="' +
-        previousLabel +
-        '">' +
-        makeWorkArrow("prev") +
-        "</button><span>" +
-        labelText +
-        '</span><button type="button" aria-label="' +
-        nextLabel +
-        '">' +
-        makeWorkArrow("next") +
-        "</button>";
-      media.appendChild(controls);
-      return controls;
-    }
-
-    var label = controls.querySelector("span");
-    if (!label) {
-      label = document.createElement("span");
-      label.textContent = labelText;
-      var nextButton = controls.querySelectorAll("button")[1];
-      controls.insertBefore(label, nextButton || null);
-    }
-    return controls;
-  }
-
-  function setupWorkGallery(selector, key, slides, previousLabel, nextLabel) {
+  function setupWorkGallery(selector, key, slides) {
     var media = document.querySelector(selector + " .work-example-media");
     if (!media) return;
     var image = media.querySelector("img");
     if (!image) return;
 
-    var realBadge = null;
+    // Remove old arrow-bar controls and replace with dot controls
+    var oldBar = media.querySelector(".work-image-controls");
+    if (oldBar) oldBar.remove();
 
-    var controls = ensureWorkControls(media, slides[0].label, previousLabel, nextLabel);
-    var label = controls.querySelector("span");
-    var buttons = Array.prototype.slice.call(controls.querySelectorAll("button"));
-    if (buttons.length < 2) return;
+    var dots = media.querySelector(".rsb-sate-controls");
+    if (!dots) {
+      dots = document.createElement("div");
+      dots.className = "rsb-sate-controls";
+      slides.forEach(function (slide, i) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.setAttribute("aria-label", slide.label);
+        if (i === 0) btn.classList.add("is-active");
+        dots.appendChild(btn);
+      });
+      media.appendChild(dots);
+    }
 
+    var dotButtons = Array.prototype.slice.call(dots.querySelectorAll("button"));
     var indexKey = "rsb" + key + "Index";
     var readyKey = "rsb" + key + "Ready";
 
@@ -377,32 +345,25 @@
       if (image.getAttribute("src") !== slides[index].src) image.setAttribute("src", slides[index].src);
       if (image.getAttribute("alt") !== slides[index].alt) image.setAttribute("alt", slides[index].alt);
       if (image.hasAttribute("srcset")) image.removeAttribute("srcset");
-      if (image.getAttribute("loading") !== "eager") image.setAttribute("loading", "eager");
-      if (image.getAttribute("decoding") !== "async") image.setAttribute("decoding", "async");
-      if (label && label.textContent !== slides[index].label) label.textContent = slides[index].label;
-      if (realBadge) realBadge.hidden = !slides[index].isReal;
+      image.setAttribute("loading", "eager");
+      image.setAttribute("decoding", "async");
+      dotButtons.forEach(function (btn, i) {
+        btn.classList.toggle("is-active", i === index);
+      });
     };
 
     if (!media.dataset[readyKey]) {
       media.dataset[readyKey] = "1";
-      buttons[0].setAttribute("aria-label", previousLabel);
-      buttons[1].setAttribute("aria-label", nextLabel);
-      buttons.forEach(function (button, buttonIndex) {
-        button.addEventListener(
-          "click",
-          function (event) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            var current = Number(media.dataset[indexKey] || 0);
-            show(current + (buttonIndex === 0 ? -1 : 1));
-          },
-          true
-        );
+      dotButtons.forEach(function (btn, i) {
+        btn.addEventListener("click", function (event) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          show(i);
+        }, true);
       });
     }
 
-    var current = Math.max(0, Math.min(slides.length - 1, Number(media.dataset[indexKey] || 0)));
-    show(current);
+    show(Math.max(0, Math.min(slides.length - 1, Number(media.dataset[indexKey] || 0))));
   }
 
   function updateHomeWorkGalleries() {
@@ -423,9 +384,7 @@
           label: "Cocina blanca",
           alt: "Cocina reformada blanca con encimera clara y electrodomesticos de acero"
         }
-      ],
-      "Ver cocina anterior",
-      "Ver cocina siguiente"
+      ]
     );
 
     setupWorkGallery(
@@ -443,9 +402,7 @@
           label: "Baño gris",
           alt: "Baño reformado con revestimiento gris, lavabo negro y ducha acristalada"
         }
-      ],
-      "Ver baño anterior",
-      "Ver baño siguiente"
+      ]
     );
 
   }
