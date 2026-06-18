@@ -1294,6 +1294,29 @@ body.contact-page .contact-buttons a:first-child {
   border-color: rgba(255, 255, 255, .5) !important;
 }
 
+body.contact-page main {
+  padding-top: 0 !important;
+}
+
+body.contact-page .site-header,
+body.contact-page .site-header.is-page,
+body.contact-page .site-header.is-scrolled,
+body.contact-page .site-header.menu-open {
+  color: var(--color-ink) !important;
+  background: linear-gradient(180deg, rgba(255, 253, 248, .97), rgba(255, 253, 248, .92)) !important;
+  box-shadow: 0 12px 32px rgba(24, 32, 29, .08) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+body.contact-page .site-header .desktop-nav a,
+body.contact-page .site-header .phone-link,
+body.contact-page .site-header .mobile-menu-button {
+  color: var(--color-ink) !important;
+  background: rgba(16, 23, 20, .06) !important;
+  border-color: rgba(16, 23, 20, .14) !important;
+}
+
 body.contact-page .contact-card,
 body.contact-page .step-card {
   border-radius: 8px !important;

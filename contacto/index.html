@@ -69,68 +69,6 @@
         var(--contact-paper);
     }
 
-    .contact-header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 20;
-      width: min(100% - 48px, 1680px);
-      min-height: 86px;
-      margin-inline: auto;
-      display: grid;
-      grid-template-columns: minmax(96px, 1fr) auto minmax(190px, 1fr);
-      gap: 18px;
-      align-items: center;
-      background: transparent;
-    }
-
-    .contact-logo {
-      width: 94px;
-      height: 72px;
-      display: inline-grid;
-      place-items: center;
-    }
-
-    .contact-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      filter: drop-shadow(0 12px 22px rgba(0, 0, 0, .38));
-    }
-
-    .contact-nav,
-    .contact-top-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .contact-nav {
-      justify-self: center;
-    }
-
-    .contact-top-actions {
-      justify-self: end;
-    }
-
-    .contact-nav a,
-    .contact-phone {
-      min-height: 46px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 18px;
-      color: #fff;
-      background: rgba(255, 255, 255, .08);
-      border: 1px solid rgba(255, 255, 255, .28);
-      border-radius: 999px;
-      font-weight: 950;
-      box-shadow: 0 18px 42px rgba(0, 0, 0, .18);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
     .contact-shell {
       width: min(100% - 48px, 1680px);
       margin-inline: auto;
@@ -501,14 +439,6 @@
     }
 
     @media (max-width: 980px) {
-      .contact-header {
-        grid-template-columns: minmax(72px, 1fr) auto;
-      }
-
-      .contact-nav {
-        display: none;
-      }
-
       .contact-section-head {
         grid-template-columns: 1fr;
       }
@@ -520,22 +450,8 @@
     }
 
     @media (max-width: 640px) {
-      .contact-header,
       .contact-shell {
         width: min(100% - 24px, 1680px);
-      }
-
-      .contact-header {
-        min-height: 72px;
-      }
-
-      .contact-logo {
-        width: 72px;
-        height: 58px;
-      }
-
-      .contact-top-actions {
-        display: none;
       }
 
       .contact-hero {
@@ -659,24 +575,10 @@
       }
     }
   </style>
-  <link rel="stylesheet" href="../rsb-fixes.css?v=ux31-20260618" />
+  <link rel="stylesheet" href="../rsb-fixes.css?v=ux35-20260618" />
 </head>
 <body class="contact-page">
-  <header class="contact-header" aria-label="Cabecera RSB">
-    <a class="contact-logo" href="../" aria-label="RSB - inicio">
-      <img src="../_next/static/media/logo-rsb-wood-transparent.png" alt="RSB Reformas" />
-    </a>
-
-    <nav class="contact-nav" aria-label="Navegacion principal">
-      <a href="../#presupuesto">Pedir visita</a>
-      <a href="../#proceso">Proceso</a>
-      <a href="index.html">Contacto</a>
-    </nav>
-
-    <div class="contact-top-actions">
-      <a class="contact-phone" href="tel:+34605065700">+34 605 065 700</a>
-    </div>
-  </header>
+  <header class="site-header is-page  "><a class="brand" aria-label="RSB - inicio" href="../?skipIntro=1"><span class="brand-logo-shell" aria-hidden="true"><img alt="" width="1144" height="998" decoding="async" class="brand-logo" style="color:transparent" src="../_next/static/media/logo-rsb-wood-transparent.png"/></span></a><nav class="desktop-nav" aria-label="Navegación principal"><a href="../?skipIntro=1#presupuesto">Pedir visita</a><a href="../?skipIntro=1#proceso">Proceso</a><a href="index.html">Contacto</a></nav><div class="header-actions"><a class="phone-link" href="tel:+34605065700" aria-label="Llamar a +34 605 065 700"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span>+34 605 065 700</span></a><button class="mobile-menu-button" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-navigation"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button></div><nav id="mobile-navigation" class="mobile-nav" aria-label="Navegación móvil"><a href="../?skipIntro=1#presupuesto">Pedir visita</a><a href="../?skipIntro=1#proceso">Proceso</a><a href="index.html">Contacto</a><a href="tel:+34605065700">Llamar</a></nav></header>
 
   <main id="main">
     <section class="contact-shell contact-hero" aria-labelledby="contact-title">
@@ -753,6 +655,7 @@
       </div>
     </section>
   </main>
+  <script src="../local-fix.js?v=fix30-20260618"></script>
   <script>
     (function () {
       var items = Array.prototype.slice.call(document.querySelectorAll(".contact-reveal"));
