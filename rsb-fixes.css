@@ -556,6 +556,24 @@ html:not(.rsb-more-services-page) .rsb-sate-section {
   }
 }
 
+html.rsb-more-services-page .site-header .desktop-nav a,
+html.rsb-more-services-page .site-header.is-page .desktop-nav a,
+html.rsb-more-services-page .site-header.is-scrolled .desktop-nav a,
+html.rsb-more-services-page .site-header.menu-open .desktop-nav a,
+html.rsb-more-services-page .site-header .phone-link,
+html.rsb-more-services-page .site-header.is-page .phone-link,
+html.rsb-more-services-page .site-header.is-scrolled .phone-link,
+html.rsb-more-services-page .site-header.menu-open .phone-link,
+html.rsb-more-services-page .site-header .mobile-menu-button,
+html.rsb-more-services-page .site-header.is-page .mobile-menu-button,
+html.rsb-more-services-page .site-header.is-scrolled .mobile-menu-button,
+html.rsb-more-services-page .site-header.menu-open .mobile-menu-button {
+  color: #18201d !important;
+  background: rgba(16, 23, 20, .06) !important;
+  border-color: rgba(24, 32, 29, .13) !important;
+  text-shadow: none !important;
+}
+
 html.rsb-more-services-page .more-services-editorial-section {
   padding-bottom: clamp(16px, 2.4vw, 28px) !important;
 }
