@@ -164,74 +164,6 @@ html.rsb-skip-intro .brand-intro {
   min-height: clamp(270px, 35vh, 405px) !important;
 }
 
-@media (max-width: 1024px) {
-  .site-header,
-  .site-header.is-page,
-  .site-header.is-scrolled,
-  .site-header.menu-open {
-    min-height: 72px !important;
-  }
-
-  .more-services-hero {
-    padding: 16px 0 34px !important;
-  }
-
-  .more-services-magazine-layout {
-    grid-template-columns: 1fr !important;
-    transform: none !important;
-    margin-bottom: 0 !important;
-  }
-
-  .magazine-photo-left {
-    min-height: 270px !important;
-  }
-}
-
-@media (max-width: 720px) {
-  .site-header,
-  .site-header.is-page,
-  .site-header.is-scrolled,
-  .site-header.menu-open {
-    min-height: 66px !important;
-  }
-
-  .editorial-hero .hero-content {
-    padding-top: 86px !important;
-  }
-
-  .editorial-hero .hero-copy {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  .editorial-hero h1 {
-    width: min(100%, 21rem) !important;
-    max-width: 100% !important;
-    font-size: clamp(2rem, 8.6vw, 2.4rem) !important;
-    line-height: 1.04 !important;
-    text-wrap: balance;
-    white-space: normal !important;
-    overflow-wrap: normal;
-  }
-
-  .editorial-hero h1 span {
-    display: block !important;
-    max-width: 100% !important;
-    white-space: normal !important;
-  }
-
-  .editorial-hero .hero-description {
-    width: min(100%, 21rem) !important;
-    max-width: 100% !important;
-    font-size: 1rem !important;
-    line-height: 1.5 !important;
-  }
-
-  .more-services-hero h1 {
-    font-size: clamp(2.25rem, 10vw, 3.25rem) !important;
-  }
-}
-
 @media (max-width: 380px) {
   .editorial-hero h1 {
     width: min(100%, 20rem) !important;
@@ -279,7 +211,7 @@ html.rsb-skip-intro .brand-intro {
 .contact-steps,
 .contact-card,
 .rsb-contact-trust,
-.rsb-contact-trust .container,
+.rsb-contact-trust .container {
   max-width: calc(100vw - 24px) !important;
 }
 
@@ -624,83 +556,6 @@ html:not(.rsb-more-services-page) .rsb-sate-section {
   }
 }
 
-@media (max-width: 1100px) {
-  html.rsb-more-services-page .more-service-editorial-card:has(.rsb-construction-inline),
-  html.rsb-more-services-page .rsb-exterior-construction-card {
-    grid-template-columns: 1fr !important;
-    gap: clamp(22px, 5vw, 34px) !important;
-  }
-
-  html.rsb-more-services-page .rsb-construction-inline {
-    justify-self: start !important;
-    max-width: min(100%, 620px) !important;
-  }
-}
-
-@media (max-width: 720px) {
-  .rsb-contact-trust {
-    padding: 58px 0 calc(76px + env(safe-area-inset-bottom)) !important;
-  }
-  .contact-header,
-  .contact-hero,
-  .contact-steps,
-  .rsb-contact-trust .container {
-    width: calc(100vw - 32px) !important;
-    max-width: calc(100vw - 32px) !important;
-  }
-
-  .contact-card {
-    width: 100% !important;
-    max-width: calc(100vw - 32px) !important;
-  }
-
-  .contact-hero h1,
-  .contact-lead,
-  .rsb-contact-trust .section-lead {
-    max-width: min(100%, 20.5rem) !important;
-    white-space: normal !important;
-  }
-
-  .contact-card h2,
-  .contact-card p,
-    max-width: min(100%, 18rem) !important;
-    white-space: normal !important;
-  }
-
-  .rsb-sate-section {
-    padding: 64px 0;
-  }
-
-  .rsb-sate-carousel {
-    aspect-ratio: 1.22 / 1;
-  }
-
-  .rsb-before-after-section {
-    padding: 64px 0 calc(104px + env(safe-area-inset-bottom));
-  }
-
-  .rsb-sate-copy h2,
-  .rsb-before-after-copy h2 {
-    font-size: clamp(2rem, 9vw, 2.75rem);
-  }
-
-  .rsb-ba-frame {
-    aspect-ratio: 1 / 1.08;
-    border: 1px solid rgba(255, 255, 255, .18);
-  }
-
-  .rsb-ba-handle {
-    height: 44px;
-    width: 44px;
-  }
-
-  .rsb-ba-label {
-    bottom: 12px;
-    font-size: .78rem;
-    padding: 7px 10px;
-  }
-}
-
 html.rsb-more-services-page .site-header .desktop-nav a,
 html.rsb-more-services-page .site-header.is-page .desktop-nav a,
 html.rsb-more-services-page .site-header.is-scrolled .desktop-nav a,
@@ -904,108 +759,6 @@ html.rsb-more-services-page .more-services-editorial-section {
   outline-offset: 3px;
 }
 
-@media (min-width: 761px) and (max-width: 1280px) {
-  .editorial-hero.rsb-hero-carousel-ready,
-  .editorial-hero.rsb-hero-carousel-ready .hero-content {
-    min-height: 100dvh !important;
-  }
-
-  .editorial-hero.rsb-hero-carousel-ready .hero-content {
-    padding: 100px 0 44px !important;
-    width: min(100% - 48px, 980px) !important;
-  }
-
-  .editorial-hero.rsb-hero-carousel-ready .hero-copy {
-    max-width: min(720px, 76vw) !important;
-  }
-
-  .editorial-hero.rsb-hero-carousel-ready h1 {
-    font-size: clamp(3rem, 6.2vw, 4.8rem) !important;
-    max-width: 720px !important;
-  }
-
-  .editorial-hero.rsb-hero-carousel-ready .hero-description {
-    max-width: 620px !important;
-    min-height: 165px;
-    align-items: center !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    text-align: center !important;
-  }
-}
-
-@media (max-width: 760px) {
-  /* Hero: auto height so it fits content, no empty space below */
-  .editorial-hero,
-  .editorial-hero.rsb-hero-carousel-ready,
-  .editorial-hero.rsb-hero-carousel-ready .hero-content {
-    min-height: auto !important;
-  }
-
-  .rsb-home-hero-carousel::after {
-    background:
-      linear-gradient(180deg, rgba(5, 10, 9, .52) 0%, rgba(5, 10, 9, .5) 35%, rgba(5, 10, 9, .84) 100%),
-      linear-gradient(90deg, rgba(5, 10, 9, .72), rgba(5, 10, 9, .12));
-  }
-
-  .rsb-home-hero-slide {
-    object-position: 68% center;
-  }
-
-  .editorial-hero.rsb-hero-carousel-ready .hero-content {
-    justify-content: flex-start !important;
-    padding: 76px 0 48px !important;
-    width: min(100% - 24px, 520px) !important;
-  }
-
-  .editorial-hero.rsb-hero-carousel-ready .hero-copy {
-    max-width: 100% !important;
-    width: 100% !important;
-  }
-
-  .editorial-hero.rsb-hero-carousel-ready h1 {
-    font-size: clamp(2.18rem, 10.2vw, 3.15rem) !important;
-    line-height: .96 !important;
-    max-width: 22rem !important;
-  }
-
-  .editorial-hero.rsb-hero-carousel-ready .hero-description {
-    align-items: center !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    text-align: center !important;
-    font-size: .94rem !important;
-    line-height: 1.46 !important;
-    margin-top: 16px !important;
-    max-width: 100% !important;
-    min-height: 200px;
-    padding: 14px 15px !important;
-  }
-
-  .editorial-hero.rsb-hero-carousel-ready .hero-actions {
-    flex-direction: row !important;
-    gap: 10px !important;
-    margin-top: 14px !important;
-    width: 100%;
-  }
-
-  .editorial-hero.rsb-hero-carousel-ready .hero-actions a {
-    flex: 1 1 0;
-    min-width: 0;
-    padding-inline: 12px !important;
-  }
-
-  .rsb-home-hero-controls {
-    margin-top: 12px;
-  }
-
-  .rsb-home-hero-controls button {
-    width: 36px;
-  }
-}
-
 /* Lighter glass surfaces so photography remains visible underneath. */
 .editorial-hero.rsb-hero-carousel-ready .hero-description {
   background: rgba(7, 13, 11, .34) !important;
@@ -1029,18 +782,6 @@ html.rsb-more-services-page .rsb-sate-section {
   scroll-margin-top: 96px;
 }
 
-@media (max-width: 1100px) {
-  html.rsb-more-services-page .site-header,
-  html.rsb-more-services-page .site-header.is-page,
-  html.rsb-more-services-page .site-header.is-scrolled,
-  html.rsb-more-services-page .site-header.menu-open {
-    background: linear-gradient(180deg, rgba(255, 253, 248, .99), rgba(255, 253, 248, .94)) !important;
-    box-shadow: 0 12px 32px rgba(24, 32, 29, .08) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-  }
-}
-
 html.rsb-more-services-page .more-services-editorial-list > .rsb-exterior-construction-card {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
@@ -1057,18 +798,6 @@ html.rsb-more-services-page .more-services-editorial-list > .rsb-exterior-constr
 html.rsb-more-services-page .more-services-editorial-list > .rsb-exterior-construction-card > .rsb-construction-inline {
   justify-self: end !important;
   max-width: 560px !important;
-}
-
-@media (max-width: 1100px) {
-  html.rsb-more-services-page .more-services-editorial-list > .rsb-exterior-construction-card {
-    grid-template-columns: minmax(0, 1fr) !important;
-    gap: clamp(24px, 5vw, 36px) !important;
-  }
-
-  html.rsb-more-services-page .more-services-editorial-list > .rsb-exterior-construction-card > .rsb-construction-inline {
-    justify-self: start !important;
-    max-width: min(100%, 680px) !important;
-  }
 }
 
 html.rsb-more-services-page .rsb-slide-text {
@@ -1089,80 +818,6 @@ html.rsb-more-services-page .more-services-hero .rsb-slide-text {
   opacity: 1 !important;
   transform: none !important;
   transition: none !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html.rsb-more-services-page .rsb-slide-text {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-}
-
-@media (max-width: 640px) {
-  .more-services-hero,
-  .more-services-hero-inner,
-  .more-services-magazine-layout,
-  .more-services-hero-copy {
-    max-width: 100% !important;
-    min-width: 0 !important;
-    overflow-x: clip !important;
-  }
-
-  .more-services-hero-copy {
-    box-sizing: border-box !important;
-    padding-right: 12px !important;
-  }
-
-  .more-services-hero-copy h1 {
-    max-width: calc(100vw - 36px) !important;
-    overflow-wrap: break-word !important;
-  }
-
-  .more-services-hero-copy > p:not(.eyebrow) {
-    display: block !important;
-    width: calc(100vw - 72px) !important;
-    max-width: calc(100vw - 72px) !important;
-    overflow-wrap: break-word !important;
-  }
-
-  html.rsb-more-services-page .more-services-hero,
-  html.rsb-more-services-page .more-services-hero-inner,
-  html.rsb-more-services-page .more-services-magazine-layout,
-  html.rsb-more-services-page .more-services-hero-copy {
-    max-width: 100% !important;
-    min-width: 0 !important;
-    overflow-x: clip !important;
-  }
-
-  html.rsb-more-services-page .more-services-hero-copy {
-    box-sizing: border-box !important;
-    padding-right: 12px !important;
-  }
-
-  html.rsb-more-services-page .more-services-hero-copy h1,
-  html.rsb-more-services-page .more-services-hero-copy > p:not(.eyebrow) {
-    max-width: calc(100vw - 36px) !important;
-    overflow-wrap: break-word !important;
-  }
-
-  html.rsb-more-services-page .more-services-hero-copy > p:not(.eyebrow) {
-    display: block !important;
-    width: calc(100vw - 72px) !important;
-    max-width: calc(100vw - 72px) !important;
-  }
-
-  html.rsb-more-services-page .more-services-actions {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-    max-width: 100% !important;
-  }
-
-  html.rsb-more-services-page .more-services-actions > a {
-    width: 100% !important;
-    min-width: 0 !important;
-  }
 }
 
 .cinematic-process {
@@ -1345,85 +1000,6 @@ body.contact-page .rsb-contact-trust .section-lead {
   color: rgba(255, 255, 255, .72) !important;
 }
 
-@media (max-width: 640px) {
-  body.contact-page .contact-header,
-  body.contact-page .contact-shell,
-  body.contact-page .contact-steps,
-  body.contact-page .rsb-contact-trust .contact-shell {
-    width: min(100% - 24px, 1680px) !important;
-    max-width: calc(100vw - 24px) !important;
-  }
-
-  body.contact-page .contact-hero {
-    width: 100% !important;
-    max-width: none !important;
-    min-height: 100svh !important;
-    align-items: flex-start !important;
-    padding: 82px 12px 28px !important;
-    background:
-      linear-gradient(180deg, rgba(7, 13, 11, .72) 0%, rgba(7, 13, 11, .54) 34%, rgba(7, 13, 11, .88) 100%),
-      url("reformas/contacto-visita.png") 69% center / cover no-repeat !important;
-  }
-
-  body.contact-page .contact-copy,
-  body.contact-page .contact-proof-lines,
-  body.contact-page .contact-card {
-    width: calc(100vw - 48px) !important;
-    max-width: 360px !important;
-    min-width: 0 !important;
-  }
-  body.contact-page .contact-copy {
-    max-width: calc(100vw - 24px) !important;
-  }
-
-  body.contact-page .contact-hero h1 {
-    font-size: clamp(2rem, 9.6vw, 2.65rem) !important;
-    line-height: .98 !important;
-  }
-
-  body.contact-page .contact-lead {
-    margin-top: 12px !important;
-    font-size: .94rem !important;
-    line-height: 1.42 !important;
-  }
-
-  body.contact-page .contact-card {
-    margin-top: 14px !important;
-    padding: 14px !important;
-  }
-
-  body.contact-page .contact-card-top {
-    display: block !important;
-  }
-
-  body.contact-page .contact-card-top p {
-    display: none !important;
-  }
-
-  body.contact-page .contact-card h2 {
-    font-size: 1.55rem !important;
-  }
-
-  body.contact-page .contact-buttons {
-    gap: 8px !important;
-    margin-top: 12px !important;
-  }
-
-  body.contact-page .contact-buttons a {
-    min-height: 46px !important;
-  }
-
-  body.contact-page .contact-proof-lines {
-    margin-top: 12px !important;
-  }
-
-  body.contact-page .contact-proof-lines p,
-  body.contact-page .contact-card p,
-  body.contact-page .contact-buttons a {
-    overflow-wrap: anywhere !important;
-  }
-}
-
 /* Bath: same aspect-ratio as kitchen (4/3 landscape) */
 .work-example-bath .work-example-media {
   aspect-ratio: 4 / 3 !important;
@@ -1434,26 +1010,6 @@ body.contact-page .rsb-contact-trust .section-lead {
 }
 
 /* Tablet: recorta aire muerto del hero y del proceso horizontal. */
-@media (min-width: 761px) and (max-width: 1280px) {
-  .editorial-hero,
-  .editorial-hero .hero-content {
-    min-height: auto !important;
-  }
-
-  .editorial-hero .hero-content {
-    padding-top: clamp(78px, 8vw, 104px) !important;
-    padding-bottom: clamp(34px, 4vw, 52px) !important;
-    gap: clamp(16px, 2.4vw, 26px) !important;
-  }
-
-  .editorial-hero .hero-description {
-    margin-top: 12px !important;
-  }
-
-  .editorial-hero .hero-actions {
-    margin-top: 12px !important;
-  }
-}
 
 @media (min-width: 761px) and (max-width: 1024px) {
   .cinematic-process {
@@ -1687,160 +1243,6 @@ body.contact-page .rsb-contact-trust .section-lead {
   transform: scaleY(2);
 }
 
-@media (max-width: 1024px) {
-  .rsb-process-inner {
-    gap: 28px;
-    grid-template-columns: 1fr;
-    padding: 92px 24px 92px;
-    width: min(100%, 780px);
-  }
-
-  .rsb-process-copy > h2, .rsb-process-heading > h2 {
-    font-size: clamp(2.5rem, 7vw, 4rem);
-  }
-
-  .rsb-process-card {
-    min-height: 226px;
-  }
-
-  .rsb-process-visual {
-    aspect-ratio: 16 / 9;
-    grid-row: 1;
-  }
-
-  .rsb-process-arrow {
-    bottom: 24px;
-    top: auto;
-    transform: none;
-  }
-
-  .rsb-process-arrow.is-previous {
-    left: 24px;
-  }
-
-  .rsb-process-arrow.is-next {
-    right: 24px;
-  }
-}
-
-@media (max-width: 760px) {
-  .cinematic-process.rsb-stable-process,
-  .rsb-process-carousel,
-  .rsb-process-inner {
-    min-height: auto;
-  }
-
-  .rsb-process-inner {
-    gap: 12px;
-    grid-template-columns: 1fr !important;
-    min-height: 0 !important;
-    padding: 48px 12px 36px;
-    width: 100% !important;
-  }
-
-  .rsb-process-heading h2,
-  .rsb-process-copy > h2, .rsb-process-heading > h2 {
-    font-size: clamp(1.8rem, 8vw, 2.4rem) !important;
-    line-height: 1.04 !important;
-  }
-
-  .rsb-process-card {
-    margin-top: 0;
-    min-height: 0;
-    padding: 16px;
-  }
-
-  .rsb-process-card h3 {
-    font-size: clamp(1.7rem, 7.5vw, 2.2rem);
-    margin-top: 8px;
-  }
-
-  .rsb-process-card > p {
-    font-size: .9rem;
-    line-height: 1.46;
-  }
-
-  .rsb-process-progress {
-    margin-top: 14px;
-  }
-
-  .rsb-process-visual {
-    aspect-ratio: 4 / 3;
-  }
-
-  .rsb-process-arrow {
-    bottom: 36px;
-    height: 46px;
-    width: 46px;
-  }
-
-  .rsb-process-dots {
-    bottom: 44px;
-    gap: 5px;
-  }
-
-  .rsb-process-dots button {
-    width: 30px;
-  }
-
-.rsb-process-heading {
-    grid-row: 1 !important;
-    grid-column: 1 !important;
-  }
-
-  .rsb-process-visual {
-    grid-row: 2 !important;
-    grid-column: 1 !important;
-    overflow: hidden !important;
-    width: 100% !important;
-  }
-
-  /* Nav overlaid at the bottom of the image */
-  .rsb-process-nav {
-    grid-row: 2 !important;
-    grid-column: 1 !important;
-    align-self: end !important;
-    justify-content: center !important;
-    gap: 20px !important;
-    padding: 0 16px 14px !important;
-    z-index: 8 !important;
-  }
-
-  .rsb-process-copy {
-    grid-row: 3 !important;
-    grid-column: 1 !important;
-  }
-
-  .rsb-process-card {
-    border: none !important;
-    box-shadow: none !important;
-  }
-
-  .rsb-process-progress {
-    display: none !important;
-  }
-
-  /* Bottom gradient so buttons are readable against the photo */
-  .rsb-process-visual::after {
-    background:
-      linear-gradient(180deg, transparent 52%, rgba(7, 13, 11, .62) 100%),
-      linear-gradient(90deg, rgba(7, 13, 11, .12), transparent 52%) !important;
-  }
-
-  /* Semi-transparent circle buttons over image */
-  .rsb-process-nav .rsb-process-arrow,
-  .rsb-process-nav .rsb-process-playpause {
-    background: rgba(10, 17, 14, .52) !important;
-    border: 1px solid rgba(255, 255, 255, .28) !important;
-    backdrop-filter: blur(6px) !important;
-    -webkit-backdrop-filter: blur(6px) !important;
-    box-shadow: none !important;
-    color: #fff !important;
-    height: 46px !important;
-    width: 46px !important;
-  }
-}
-
 /* Process composition refined from the Figma reference. */
 .cinematic-process.rsb-stable-process {
   min-height: 760px;
@@ -1959,72 +1361,6 @@ body.contact-page .rsb-contact-trust .section-lead {
   min-height: 260px;
 }
 
-@media (max-width: 1024px) {
-  .cinematic-process.rsb-stable-process,
-  .cinematic-process.rsb-stable-process .rsb-process-carousel {
-    min-height: auto;
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-inner {
-    gap: 34px;
-    grid-template-columns: 1fr;
-    min-height: auto;
-    padding: 92px 24px 106px;
-    width: min(100%, 760px);
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-visual {
-    grid-row: 1;
-    margin-inline: auto;
-    width: min(88%, 580px);
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-carousel.is-final .rsb-process-inner {
-    min-height: 620px;
-  }
-}
-
-@media (max-width: 760px) {
-  .cinematic-process.rsb-stable-process .rsb-process-inner {
-    gap: 24px;
-    padding: 82px 12px 104px;
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-visual {
-    aspect-ratio: 4 / 3;
-    width: calc(100% - 38px);
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-photo-2 {
-    transform: translate3d(10px, -8px, 0) rotate(1.6deg) scale(.98);
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-photo-3 {
-    transform: translate3d(19px, -15px, 0) rotate(3deg) scale(.96);
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-photo-4 {
-    transform: translate3d(27px, -21px, 0) rotate(4.2deg) scale(.94);
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-copy > h2, .rsb-process-heading > h2 {
-    font-size: clamp(1.95rem, 8.3vw, 2.5rem);
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-card {
-    min-height: 210px;
-    padding: 17px;
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-card h3 {
-    font-size: clamp(1.8rem, 8vw, 2.35rem);
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-carousel.is-final .rsb-process-inner {
-    min-height: 570px;
-  }
-}
-
 /* Natural card-dealing motion: fixed photos move between depth slots. */
 .cinematic-process.rsb-stable-process .rsb-process-photo {
   backface-visibility: hidden;
@@ -2109,31 +1445,6 @@ body.contact-page .rsb-contact-trust .section-lead {
     transform 1180ms cubic-bezier(.2, .72, .22, 1);
 }
 
-@media (max-width: 760px) {
-  .cinematic-process.rsb-stable-process .rsb-process-photo[data-slot="1"] {
-    transform: translate3d(10px, -8px, 0) rotate(1.6deg) scale(.98);
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-photo[data-slot="2"] {
-    transform: translate3d(19px, -15px, 0) rotate(3deg) scale(.96);
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-photo[data-slot="3"] {
-    transform: translate3d(27px, -21px, 0) rotate(4.2deg) scale(.94);
-  }
-
-  .cinematic-process.rsb-stable-process .rsb-process-photo.is-exiting-forward {
-    transform: translate3d(-28px, 10px, 0) rotate(-1.8deg) scale(.99);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cinematic-process.rsb-stable-process .rsb-process-photo,
-  .cinematic-process.rsb-stable-process .rsb-process-visual {
-    transition-duration: .01ms !important;
-  }
-}
-
 /* Fix 1: hero carousel controls (3 dashes) always visible in viewport */
 .editorial-hero.rsb-hero-carousel-ready .hero-content {
   padding-top: clamp(80px, 10vh, 120px) !important;
@@ -2142,20 +1453,6 @@ body.contact-page .rsb-contact-trust .section-lead {
 
 .editorial-hero.rsb-hero-carousel-ready .hero-description {
   min-height: 88px !important;
-}
-
-@media (max-width: 760px) {
-  .editorial-hero.rsb-hero-carousel-ready .hero-content {
-    padding-bottom: calc(32px + env(safe-area-inset-bottom)) !important;
-  }
-
-  .editorial-hero.rsb-hero-carousel-ready .hero-description {
-    line-height: 1.42 !important;
-  }
-
-  .rsb-home-hero-controls {
-    margin-top: 8px !important;
-  }
 }
 
 /* ===== RSB UI PATCHES v3 2026-06-12 ===== */
@@ -2265,43 +1562,12 @@ html, body {
   display: none !important;
 }
 /* Tablet + mobile: single-column grid, reorder rows: visual=1, nav=2, copy=3 */
-@media (max-width: 1024px) {
-  .rsb-process-nav {
-    grid-column: auto !important;
-    grid-row: 2 !important;
-    justify-content: center !important;
-    gap: 16px !important;
-    padding: 14px 20px !important;
-  }
-  .rsb-process-copy {
-    grid-row: 3 !important;
-  }
-}
 
 /* ─── Hero CTA buttons: hide on mobile (sticky bar covers them) ─── */
-@media (max-width: 760px) {
-  .editorial-hero .hero-actions {
-    display: none !important;
-  }
-}
 
 /* ─── Logo: prevent GPU compositing blur on mobile (caused by backdrop-filter on hero) ─── */
-@media (max-width: 760px) {
-  .brand-logo {
-    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .55)) !important;
-    image-rendering: -webkit-optimize-contrast;
-  }
-}
 
 /* ─── Process section: override late-cascade min-height on mobile ─── */
-@media (max-width: 760px) {
-  .cinematic-process.rsb-stable-process,
-  .cinematic-process.rsb-stable-process .rsb-process-carousel,
-  .cinematic-process.rsb-stable-process .rsb-process-inner {
-    min-height: 0 !important;
-    overflow: visible !important;
-  }
-}
 
 
 /* ─── SATE eyebrow: same warm colour as kitchen/bath ─── */
@@ -2315,7 +1581,583 @@ html, body {
    ══════════════════════════════════════════════════════════════════ */
 
 /* ── 1. Global: stop horizontal overflow, safe box-sizing ── */
+
+/* ── 2. Sticky CTA bar: safe area for notch / home-indicator ── */
+
+/* ── 3. Hero section ── */
+
+/* ── 4. Process section: fluid, fits any screen height ── */
+
+/* ── 5. Work examples: fluid images, safe copy size ── */
+
+/* ── 6. SATE section fluid ── */
+
+/* ── 7. Extra-small screens ≤ 390 px ── */
+@media (max-width: 390px) {
+  .rsb-process-heading h2,
+  .rsb-process-copy > h2, .rsb-process-heading > h2 {
+    font-size: clamp(1.35rem, 9vw, 1.65rem) !important;
+  }
+  .rsb-process-visual {
+    max-height: clamp(155px, 34svh, 230px) !important;
+  }
+  .rsb-process-card h3 {
+    font-size: clamp(1.2rem, 8.5vw, 1.5rem) !important;
+  }
+  .work-example-copy h2,
+  .rsb-sate-copy h2 {
+    font-size: clamp(1.3rem, 8.5vw, 1.75rem) !important;
+  }
+  .editorial-hero.rsb-hero-carousel-ready h1 {
+    font-size: clamp(1.9rem, 11vw, 2.6rem) !important;
+  }
+}
+
+/* ── 8. Landscape mobile: redistribute vertical space ── */
+@media (max-width: 760px) and (orientation: landscape) and (max-height: 500px) {
+  .rsb-process-inner {
+    padding: 28px clamp(12px, 4vw, 20px) 16px !important;
+    gap: 8px !important;
+  }
+  .rsb-process-visual {
+    max-height: 52svh !important;
+  }
+  .rsb-process-heading h2,
+  .rsb-process-copy > h2, .rsb-process-heading > h2 {
+    font-size: clamp(1.1rem, 5.5vw, 1.5rem) !important;
+  }
+  .rsb-process-card h3 {
+    font-size: clamp(1rem, 5vw, 1.35rem) !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PROCESO HORIZONTAL — LAYOUT MÓVIL DEFINITIVO
+   Debe estar al final para ganar la cascada contra todo lo anterior
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════
+   PROCESO HORIZONTAL — LAYOUT DESKTOP DEFINITIVO (≥ 761 px)
+   Sin este bloque el auto-placement de grid pone copy en col 2
+   y visual en col 1 — al revés de la referencia.
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 761px) {
+
+  /* Columnas proporcionales: izquierda ~42%, derecha el resto */
+  .cinematic-process.rsb-stable-process .rsb-process-inner {
+    grid-template-columns: minmax(320px, 44%) 1fr;
+    grid-template-rows: auto auto;
+    align-items: start;
+  }
+
+  /* Col izquierda fila 1: eyebrow + h2 */
+  .cinematic-process.rsb-stable-process .rsb-process-heading {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  /* Col derecha fila 1: imagen con efecto de capas apiladas */
+  .cinematic-process.rsb-stable-process .rsb-process-visual {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  /* Col izquierda fila 2: tarjeta + barra de progreso */
+  .cinematic-process.rsb-stable-process .rsb-process-copy {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+  }
+
+  /* Col derecha fila 2: botones nav centrados bajo la imagen */
+  .cinematic-process.rsb-stable-process .rsb-process-nav {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    align-self: center !important;
+    justify-content: center !important;
+    gap: 20px !important;
+    padding: 28px 0 0 !important;
+  }
+
+  /* Tarjeta altura mínima fija — misma caja en todos los pasos */
+  .cinematic-process.rsb-stable-process .rsb-process-card {
+    min-height: 264px;
+  }
+
+  /* Playpause mismo tamaño que las flechas */
+  .cinematic-process.rsb-stable-process .rsb-process-nav .rsb-process-playpause {
+    height: 60px !important;
+    width: 60px !important;
+  }
+}
+
+/* ─── MOBILE: Work examples — orden texto/imagen (bloque único autoritativo)
+   El CSS principal (≤1024px) fuerza bath copy:order:2 / media:order:1.
+   Estas reglas al final del archivo ganan en cascada.
+   ─────────────────────────────────────────────────────────────────────── */
+
+/* ─── MOBILE: Espaciado compacto work-examples → SATE
+   Especificidad mayor que padding-block anteriores para ganar en cascada.
+   ─────────────────────────────────────────────────────────────────────── */
+
+/* ─── Scroll-hide header — mobile/tablet ───────────────────────────────── */
+.site-header {
+  transition: transform 0.28s cubic-bezier(.4, 0, .2, 1) !important;
+}
+.site-header.rsb-header-hidden {
+  transform: translateY(-100%) !important;
+  pointer-events: none !important;
+}
+.site-header.menu-open.rsb-header-hidden {
+  transform: none !important;
+  pointer-events: auto !important;
+}
+
+@media (max-width: 1100px) {
+  html.rsb-more-services-page .more-service-editorial-card:has(.rsb-construction-inline),
+  html.rsb-more-services-page .rsb-exterior-construction-card {
+    grid-template-columns: 1fr !important;
+    gap: clamp(22px, 5vw, 34px) !important;
+  }
+
+  html.rsb-more-services-page .rsb-construction-inline {
+    justify-self: start !important;
+    max-width: min(100%, 620px) !important;
+  }
+
+  html.rsb-more-services-page .site-header,
+  html.rsb-more-services-page .site-header.is-page,
+  html.rsb-more-services-page .site-header.is-scrolled,
+  html.rsb-more-services-page .site-header.menu-open {
+    background: linear-gradient(180deg, rgba(255, 253, 248, .99), rgba(255, 253, 248, .94)) !important;
+    box-shadow: 0 12px 32px rgba(24, 32, 29, .08) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+
+  html.rsb-more-services-page .more-services-editorial-list > .rsb-exterior-construction-card {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: clamp(24px, 5vw, 36px) !important;
+  }
+
+  html.rsb-more-services-page .more-services-editorial-list > .rsb-exterior-construction-card > .rsb-construction-inline {
+    justify-self: start !important;
+    max-width: min(100%, 680px) !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .site-header,
+  .site-header.is-page,
+  .site-header.is-scrolled,
+  .site-header.menu-open {
+    min-height: 72px !important;
+  }
+
+  .more-services-hero {
+    padding: 16px 0 34px !important;
+  }
+
+  .more-services-magazine-layout {
+    grid-template-columns: 1fr !important;
+    transform: none !important;
+    margin-bottom: 0 !important;
+  }
+
+  .magazine-photo-left {
+    min-height: 270px !important;
+  }
+
+  .rsb-process-inner {
+    gap: 28px;
+    grid-template-columns: 1fr;
+    padding: 92px 24px 92px;
+    width: min(100%, 780px);
+  }
+
+  .rsb-process-copy > h2, .rsb-process-heading > h2 {
+    font-size: clamp(2.5rem, 7vw, 4rem);
+  }
+
+  .rsb-process-card {
+    min-height: 226px;
+  }
+
+  .rsb-process-visual {
+    aspect-ratio: 16 / 9;
+    grid-row: 1;
+  }
+
+  .rsb-process-arrow {
+    bottom: 24px;
+    top: auto;
+    transform: none;
+  }
+
+  .rsb-process-arrow.is-previous {
+    left: 24px;
+  }
+
+  .rsb-process-arrow.is-next {
+    right: 24px;
+  }
+
+  .cinematic-process.rsb-stable-process,
+  .cinematic-process.rsb-stable-process .rsb-process-carousel {
+    min-height: auto;
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-inner {
+    gap: 34px;
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 92px 24px 106px;
+    width: min(100%, 760px);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-visual {
+    grid-row: 1;
+    margin-inline: auto;
+    width: min(88%, 580px);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-carousel.is-final .rsb-process-inner {
+    min-height: 620px;
+  }
+
+  .rsb-process-nav {
+    grid-column: auto !important;
+    grid-row: 2 !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    padding: 14px 20px !important;
+  }
+  .rsb-process-copy {
+    grid-row: 3 !important;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1280px) {
+  .editorial-hero.rsb-hero-carousel-ready,
+  .editorial-hero.rsb-hero-carousel-ready .hero-content {
+    min-height: 100dvh !important;
+  }
+
+  .editorial-hero.rsb-hero-carousel-ready .hero-content {
+    padding: 100px 0 44px !important;
+    width: min(100% - 48px, 980px) !important;
+  }
+
+  .editorial-hero.rsb-hero-carousel-ready .hero-copy {
+    max-width: min(720px, 76vw) !important;
+  }
+
+  .editorial-hero.rsb-hero-carousel-ready h1 {
+    font-size: clamp(3rem, 6.2vw, 4.8rem) !important;
+    max-width: 720px !important;
+  }
+
+  .editorial-hero.rsb-hero-carousel-ready .hero-description {
+    max-width: 620px !important;
+    min-height: 165px;
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .editorial-hero,
+  .editorial-hero .hero-content {
+    min-height: auto !important;
+  }
+
+  .editorial-hero .hero-content {
+    padding-top: clamp(78px, 8vw, 104px) !important;
+    padding-bottom: clamp(34px, 4vw, 52px) !important;
+    gap: clamp(16px, 2.4vw, 26px) !important;
+  }
+
+  .editorial-hero .hero-description {
+    margin-top: 12px !important;
+  }
+
+  .editorial-hero .hero-actions {
+    margin-top: 12px !important;
+  }
+}
+
 @media (max-width: 760px) {
+  /* Hero: auto height so it fits content, no empty space below */
+  .editorial-hero,
+  .editorial-hero.rsb-hero-carousel-ready,
+  .editorial-hero.rsb-hero-carousel-ready .hero-content {
+    min-height: auto !important;
+  }
+
+  .rsb-home-hero-carousel::after {
+    background:
+      linear-gradient(180deg, rgba(5, 10, 9, .52) 0%, rgba(5, 10, 9, .5) 35%, rgba(5, 10, 9, .84) 100%),
+      linear-gradient(90deg, rgba(5, 10, 9, .72), rgba(5, 10, 9, .12));
+  }
+
+  .rsb-home-hero-slide {
+    object-position: 68% center;
+  }
+
+  .editorial-hero.rsb-hero-carousel-ready .hero-content {
+    justify-content: flex-start !important;
+    padding: 76px 0 48px !important;
+    width: min(100% - 24px, 520px) !important;
+  }
+
+  .editorial-hero.rsb-hero-carousel-ready .hero-copy {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .editorial-hero.rsb-hero-carousel-ready h1 {
+    font-size: clamp(2.18rem, 10.2vw, 3.15rem) !important;
+    line-height: .96 !important;
+    max-width: 22rem !important;
+  }
+
+  .editorial-hero.rsb-hero-carousel-ready .hero-description {
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    text-align: center !important;
+    font-size: .94rem !important;
+    line-height: 1.46 !important;
+    margin-top: 16px !important;
+    max-width: 100% !important;
+    min-height: 200px;
+    padding: 14px 15px !important;
+  }
+
+  .editorial-hero.rsb-hero-carousel-ready .hero-actions {
+    flex-direction: row !important;
+    gap: 10px !important;
+    margin-top: 14px !important;
+    width: 100%;
+  }
+
+  .editorial-hero.rsb-hero-carousel-ready .hero-actions a {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 12px !important;
+  }
+
+  .rsb-home-hero-controls {
+    margin-top: 12px;
+  }
+
+  .rsb-home-hero-controls button {
+    width: 36px;
+  }
+
+  .cinematic-process.rsb-stable-process,
+  .rsb-process-carousel,
+  .rsb-process-inner {
+    min-height: auto;
+  }
+
+  .rsb-process-inner {
+    gap: 12px;
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+    padding: 48px 12px 36px;
+    width: 100% !important;
+  }
+
+  .rsb-process-heading h2,
+  .rsb-process-copy > h2, .rsb-process-heading > h2 {
+    font-size: clamp(1.8rem, 8vw, 2.4rem) !important;
+    line-height: 1.04 !important;
+  }
+
+  .rsb-process-card {
+    margin-top: 0;
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .rsb-process-card h3 {
+    font-size: clamp(1.7rem, 7.5vw, 2.2rem);
+    margin-top: 8px;
+  }
+
+  .rsb-process-card > p {
+    font-size: .9rem;
+    line-height: 1.46;
+  }
+
+  .rsb-process-progress {
+    margin-top: 14px;
+  }
+
+  .rsb-process-visual {
+    aspect-ratio: 4 / 3;
+  }
+
+  .rsb-process-arrow {
+    bottom: 36px;
+    height: 46px;
+    width: 46px;
+  }
+
+  .rsb-process-dots {
+    bottom: 44px;
+    gap: 5px;
+  }
+
+  .rsb-process-dots button {
+    width: 30px;
+  }
+
+.rsb-process-heading {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
+  }
+
+  .rsb-process-visual {
+    grid-row: 2 !important;
+    grid-column: 1 !important;
+    overflow: hidden !important;
+    width: 100% !important;
+  }
+
+  /* Nav overlaid at the bottom of the image */
+  .rsb-process-nav {
+    grid-row: 2 !important;
+    grid-column: 1 !important;
+    align-self: end !important;
+    justify-content: center !important;
+    gap: 20px !important;
+    padding: 0 16px 14px !important;
+    z-index: 8 !important;
+  }
+
+  .rsb-process-copy {
+    grid-row: 3 !important;
+    grid-column: 1 !important;
+  }
+
+  .rsb-process-card {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .rsb-process-progress {
+    display: none !important;
+  }
+
+  /* Bottom gradient so buttons are readable against the photo */
+  .rsb-process-visual::after {
+    background:
+      linear-gradient(180deg, transparent 52%, rgba(7, 13, 11, .62) 100%),
+      linear-gradient(90deg, rgba(7, 13, 11, .12), transparent 52%) !important;
+  }
+
+  /* Semi-transparent circle buttons over image */
+  .rsb-process-nav .rsb-process-arrow,
+  .rsb-process-nav .rsb-process-playpause {
+    background: rgba(10, 17, 14, .52) !important;
+    border: 1px solid rgba(255, 255, 255, .28) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    box-shadow: none !important;
+    color: #fff !important;
+    height: 46px !important;
+    width: 46px !important;
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-inner {
+    gap: 24px;
+    padding: 82px 12px 104px;
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-visual {
+    aspect-ratio: 4 / 3;
+    width: calc(100% - 38px);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-photo-2 {
+    transform: translate3d(10px, -8px, 0) rotate(1.6deg) scale(.98);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-photo-3 {
+    transform: translate3d(19px, -15px, 0) rotate(3deg) scale(.96);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-photo-4 {
+    transform: translate3d(27px, -21px, 0) rotate(4.2deg) scale(.94);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-copy > h2, .rsb-process-heading > h2 {
+    font-size: clamp(1.95rem, 8.3vw, 2.5rem);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-card {
+    min-height: 210px;
+    padding: 17px;
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-card h3 {
+    font-size: clamp(1.8rem, 8vw, 2.35rem);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-carousel.is-final .rsb-process-inner {
+    min-height: 570px;
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-photo[data-slot="1"] {
+    transform: translate3d(10px, -8px, 0) rotate(1.6deg) scale(.98);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-photo[data-slot="2"] {
+    transform: translate3d(19px, -15px, 0) rotate(3deg) scale(.96);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-photo[data-slot="3"] {
+    transform: translate3d(27px, -21px, 0) rotate(4.2deg) scale(.94);
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-photo.is-exiting-forward {
+    transform: translate3d(-28px, 10px, 0) rotate(-1.8deg) scale(.99);
+  }
+
+  .editorial-hero.rsb-hero-carousel-ready .hero-content {
+    padding-bottom: calc(32px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .editorial-hero.rsb-hero-carousel-ready .hero-description {
+    line-height: 1.42 !important;
+  }
+
+  .rsb-home-hero-controls {
+    margin-top: 8px !important;
+  }
+
+  .editorial-hero .hero-actions {
+    display: none !important;
+  }
+
+  .brand-logo {
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .55)) !important;
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  .cinematic-process.rsb-stable-process,
+  .cinematic-process.rsb-stable-process .rsb-process-carousel,
+  .cinematic-process.rsb-stable-process .rsb-process-inner {
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
   html, body {
     overflow-x: hidden;
     max-width: 100%;
@@ -2323,19 +2165,13 @@ html, body {
   img, video, iframe {
     max-width: 100%;
   }
-}
 
-/* ── 2. Sticky CTA bar: safe area for notch / home-indicator ── */
-@media (max-width: 760px) {
   .sticky-cta {
     padding-bottom: max(10px, env(safe-area-inset-bottom, 0px)) !important;
     padding-left:  max(12px, env(safe-area-inset-left,   0px)) !important;
     padding-right: max(12px, env(safe-area-inset-right,  0px)) !important;
   }
-}
 
-/* ── 3. Hero section ── */
-@media (max-width: 760px) {
   .editorial-hero.rsb-hero-carousel-ready {
     min-height: 100svh !important;
     min-height: 100dvh !important;
@@ -2358,10 +2194,7 @@ html, body {
   .rsb-home-hero-controls {
     margin-top: clamp(8px, 1.5svh, 14px) !important;
   }
-}
 
-/* ── 4. Process section: fluid, fits any screen height ── */
-@media (max-width: 760px) {
   .rsb-process-inner {
     padding: clamp(44px, 9svh, 68px) clamp(12px, 4vw, 20px)
              clamp(20px, 4svh, 36px) !important;
@@ -2429,10 +2262,7 @@ html, body {
     margin-top: clamp(10px, 2svh, 16px) !important;
     font-size: clamp(.84rem, 3.6vw, .93rem) !important;
   }
-}
 
-/* ── 5. Work examples: fluid images, safe copy size ── */
-@media (max-width: 760px) {
   .work-examples-section {
     padding-block: clamp(32px, 6svh, 56px) !important;
   }
@@ -2465,10 +2295,7 @@ html, body {
   .work-example + .work-example {
     margin-top: clamp(24px, 4svh, 40px) !important;
   }
-}
 
-/* ── 6. SATE section fluid ── */
-@media (max-width: 760px) {
   .rsb-sate-section {
     padding-block: clamp(28px, 5svh, 48px) !important;
   }
@@ -2487,52 +2314,7 @@ html, body {
   .rsb-sate-copy p {
     font-size: clamp(.84rem, 3.8vw, .95rem) !important;
   }
-}
 
-/* ── 7. Extra-small screens ≤ 390 px ── */
-@media (max-width: 390px) {
-  .rsb-process-heading h2,
-  .rsb-process-copy > h2, .rsb-process-heading > h2 {
-    font-size: clamp(1.35rem, 9vw, 1.65rem) !important;
-  }
-  .rsb-process-visual {
-    max-height: clamp(155px, 34svh, 230px) !important;
-  }
-  .rsb-process-card h3 {
-    font-size: clamp(1.2rem, 8.5vw, 1.5rem) !important;
-  }
-  .work-example-copy h2,
-  .rsb-sate-copy h2 {
-    font-size: clamp(1.3rem, 8.5vw, 1.75rem) !important;
-  }
-  .editorial-hero.rsb-hero-carousel-ready h1 {
-    font-size: clamp(1.9rem, 11vw, 2.6rem) !important;
-  }
-}
-
-/* ── 8. Landscape mobile: redistribute vertical space ── */
-@media (max-width: 760px) and (orientation: landscape) and (max-height: 500px) {
-  .rsb-process-inner {
-    padding: 28px clamp(12px, 4vw, 20px) 16px !important;
-    gap: 8px !important;
-  }
-  .rsb-process-visual {
-    max-height: 52svh !important;
-  }
-  .rsb-process-heading h2,
-  .rsb-process-copy > h2, .rsb-process-heading > h2 {
-    font-size: clamp(1.1rem, 5.5vw, 1.5rem) !important;
-  }
-  .rsb-process-card h3 {
-    font-size: clamp(1rem, 5vw, 1.35rem) !important;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   PROCESO HORIZONTAL — LAYOUT MÓVIL DEFINITIVO
-   Debe estar al final para ganar la cascada contra todo lo anterior
-   ═══════════════════════════════════════════════════════════════ */
-@media (max-width: 760px) {
 
   /* 1. Grid de 1 columna — anula el 2-col del desktop y el 1024px block */
   .rsb-process-inner {
@@ -2626,79 +2408,11 @@ html, body {
     line-height: 1.03 !important;
     margin-bottom: 0 !important;
   }
-}
 
-/* ═══════════════════════════════════════════════════════════════
-   PROCESO HORIZONTAL — LAYOUT DESKTOP DEFINITIVO (≥ 761 px)
-   Sin este bloque el auto-placement de grid pone copy en col 2
-   y visual en col 1 — al revés de la referencia.
-   ═══════════════════════════════════════════════════════════════ */
-@media (min-width: 761px) {
-
-  /* Columnas proporcionales: izquierda ~42%, derecha el resto */
-  .cinematic-process.rsb-stable-process .rsb-process-inner {
-    grid-template-columns: minmax(320px, 44%) 1fr;
-    grid-template-rows: auto auto;
-    align-items: start;
-  }
-
-  /* Col izquierda fila 1: eyebrow + h2 */
-  .cinematic-process.rsb-stable-process .rsb-process-heading {
-    grid-column: 1;
-    grid-row: 1;
-    align-self: start;
-  }
-
-  /* Col derecha fila 1: imagen con efecto de capas apiladas */
-  .cinematic-process.rsb-stable-process .rsb-process-visual {
-    grid-column: 2;
-    grid-row: 1;
-    align-self: start;
-  }
-
-  /* Col izquierda fila 2: tarjeta + barra de progreso */
-  .cinematic-process.rsb-stable-process .rsb-process-copy {
-    grid-column: 1;
-    grid-row: 2;
-    align-self: start;
-  }
-
-  /* Col derecha fila 2: botones nav centrados bajo la imagen */
-  .cinematic-process.rsb-stable-process .rsb-process-nav {
-    grid-column: 2 !important;
-    grid-row: 2 !important;
-    align-self: center !important;
-    justify-content: center !important;
-    gap: 20px !important;
-    padding: 28px 0 0 !important;
-  }
-
-  /* Tarjeta altura mínima fija — misma caja en todos los pasos */
-  .cinematic-process.rsb-stable-process .rsb-process-card {
-    min-height: 264px;
-  }
-
-  /* Playpause mismo tamaño que las flechas */
-  .cinematic-process.rsb-stable-process .rsb-process-nav .rsb-process-playpause {
-    height: 60px !important;
-    width: 60px !important;
-  }
-}
-
-/* ─── MOBILE: Work examples — orden texto/imagen (bloque único autoritativo)
-   El CSS principal (≤1024px) fuerza bath copy:order:2 / media:order:1.
-   Estas reglas al final del archivo ganan en cascada.
-   ─────────────────────────────────────────────────────────────────────── */
-@media (max-width: 760px) {
   .work-example-kitchen .work-example-copy { order: -1 !important; }
   .work-example-bath .work-example-copy    { order: -1 !important; }
   .rsb-sate-copy                           { order: -1 !important; }
-}
 
-/* ─── MOBILE: Espaciado compacto work-examples → SATE
-   Especificidad mayor que padding-block anteriores para ganar en cascada.
-   ─────────────────────────────────────────────────────────────────────── */
-@media (max-width: 760px) {
   html:not(.rsb-more-services-page) .work-examples-section {
     padding-bottom: clamp(8px, 1.5svh, 14px) !important;
   }
@@ -2707,15 +2421,265 @@ html, body {
   }
 }
 
-/* ─── Scroll-hide header — mobile/tablet ───────────────────────────────── */
-.site-header {
-  transition: transform 0.28s cubic-bezier(.4, 0, .2, 1) !important;
+@media (max-width: 720px) {
+  .site-header,
+  .site-header.is-page,
+  .site-header.is-scrolled,
+  .site-header.menu-open {
+    min-height: 66px !important;
+  }
+
+  .editorial-hero .hero-content {
+    padding-top: 86px !important;
+  }
+
+  .editorial-hero .hero-copy {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .editorial-hero h1 {
+    width: min(100%, 21rem) !important;
+    max-width: 100% !important;
+    font-size: clamp(2rem, 8.6vw, 2.4rem) !important;
+    line-height: 1.04 !important;
+    text-wrap: balance;
+    white-space: normal !important;
+    overflow-wrap: normal;
+  }
+
+  .editorial-hero h1 span {
+    display: block !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+
+  .editorial-hero .hero-description {
+    width: min(100%, 21rem) !important;
+    max-width: 100% !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .more-services-hero h1 {
+    font-size: clamp(2.25rem, 10vw, 3.25rem) !important;
+  }
+
+  .rsb-contact-trust {
+    padding: 58px 0 calc(76px + env(safe-area-inset-bottom)) !important;
+  }
+  .contact-header,
+  .contact-hero,
+  .contact-steps,
+  .rsb-contact-trust .container {
+    width: calc(100vw - 32px) !important;
+    max-width: calc(100vw - 32px) !important;
+  }
+
+  .contact-card {
+    width: 100% !important;
+    max-width: calc(100vw - 32px) !important;
+  }
+
+  .contact-hero h1,
+  .contact-lead,
+  .rsb-contact-trust .section-lead {
+    max-width: min(100%, 20.5rem) !important;
+    white-space: normal !important;
+  }
+
+  .contact-card h2,
+  .contact-card p {
+    max-width: min(100%, 18rem) !important;
+    white-space: normal !important;
+  }
+
+  .rsb-sate-section {
+    padding: 64px 0;
+  }
+
+  .rsb-sate-carousel {
+    aspect-ratio: 1.22 / 1;
+  }
+
+  .rsb-before-after-section {
+    padding: 64px 0 calc(104px + env(safe-area-inset-bottom));
+  }
+
+  .rsb-sate-copy h2,
+  .rsb-before-after-copy h2 {
+    font-size: clamp(2rem, 9vw, 2.75rem);
+  }
+
+  .rsb-ba-frame {
+    aspect-ratio: 1 / 1.08;
+    border: 1px solid rgba(255, 255, 255, .18);
+  }
+
+  .rsb-ba-handle {
+    height: 44px;
+    width: 44px;
+  }
+
+  .rsb-ba-label {
+    bottom: 12px;
+    font-size: .78rem;
+    padding: 7px 10px;
+  }
 }
-.site-header.rsb-header-hidden {
-  transform: translateY(-100%) !important;
-  pointer-events: none !important;
+
+@media (max-width: 640px) {
+  .more-services-hero,
+  .more-services-hero-inner,
+  .more-services-magazine-layout,
+  .more-services-hero-copy {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: clip !important;
+  }
+
+  .more-services-hero-copy {
+    box-sizing: border-box !important;
+    padding-right: 12px !important;
+  }
+
+  .more-services-hero-copy h1 {
+    max-width: calc(100vw - 36px) !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .more-services-hero-copy > p:not(.eyebrow) {
+    display: block !important;
+    width: calc(100vw - 72px) !important;
+    max-width: calc(100vw - 72px) !important;
+    overflow-wrap: break-word !important;
+  }
+
+  html.rsb-more-services-page .more-services-hero,
+  html.rsb-more-services-page .more-services-hero-inner,
+  html.rsb-more-services-page .more-services-magazine-layout,
+  html.rsb-more-services-page .more-services-hero-copy {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: clip !important;
+  }
+
+  html.rsb-more-services-page .more-services-hero-copy {
+    box-sizing: border-box !important;
+    padding-right: 12px !important;
+  }
+
+  html.rsb-more-services-page .more-services-hero-copy h1,
+  html.rsb-more-services-page .more-services-hero-copy > p:not(.eyebrow) {
+    max-width: calc(100vw - 36px) !important;
+    overflow-wrap: break-word !important;
+  }
+
+  html.rsb-more-services-page .more-services-hero-copy > p:not(.eyebrow) {
+    display: block !important;
+    width: calc(100vw - 72px) !important;
+    max-width: calc(100vw - 72px) !important;
+  }
+
+  html.rsb-more-services-page .more-services-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    max-width: 100% !important;
+  }
+
+  html.rsb-more-services-page .more-services-actions > a {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  body.contact-page .contact-header,
+  body.contact-page .contact-shell,
+  body.contact-page .contact-steps,
+  body.contact-page .rsb-contact-trust .contact-shell {
+    width: min(100% - 24px, 1680px) !important;
+    max-width: calc(100vw - 24px) !important;
+  }
+
+  body.contact-page .contact-hero {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 100svh !important;
+    align-items: flex-start !important;
+    padding: 82px 12px 28px !important;
+    background:
+      linear-gradient(180deg, rgba(7, 13, 11, .72) 0%, rgba(7, 13, 11, .54) 34%, rgba(7, 13, 11, .88) 100%),
+      url("reformas/contacto-visita.png") 69% center / cover no-repeat !important;
+  }
+
+  body.contact-page .contact-copy,
+  body.contact-page .contact-proof-lines,
+  body.contact-page .contact-card {
+    width: calc(100vw - 48px) !important;
+    max-width: 360px !important;
+    min-width: 0 !important;
+  }
+  body.contact-page .contact-copy {
+    max-width: calc(100vw - 24px) !important;
+  }
+
+  body.contact-page .contact-hero h1 {
+    font-size: clamp(2rem, 9.6vw, 2.65rem) !important;
+    line-height: .98 !important;
+  }
+
+  body.contact-page .contact-lead {
+    margin-top: 12px !important;
+    font-size: .94rem !important;
+    line-height: 1.42 !important;
+  }
+
+  body.contact-page .contact-card {
+    margin-top: 14px !important;
+    padding: 14px !important;
+  }
+
+  body.contact-page .contact-card-top {
+    display: block !important;
+  }
+
+  body.contact-page .contact-card-top p {
+    display: none !important;
+  }
+
+  body.contact-page .contact-card h2 {
+    font-size: 1.55rem !important;
+  }
+
+  body.contact-page .contact-buttons {
+    gap: 8px !important;
+    margin-top: 12px !important;
+  }
+
+  body.contact-page .contact-buttons a {
+    min-height: 46px !important;
+  }
+
+  body.contact-page .contact-proof-lines {
+    margin-top: 12px !important;
+  }
+
+  body.contact-page .contact-proof-lines p,
+  body.contact-page .contact-card p,
+  body.contact-page .contact-buttons a {
+    overflow-wrap: anywhere !important;
+  }
 }
-.site-header.menu-open.rsb-header-hidden {
-  transform: none !important;
-  pointer-events: auto !important;
+
+@media (prefers-reduced-motion: reduce) {
+  html.rsb-more-services-page .rsb-slide-text {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .cinematic-process.rsb-stable-process .rsb-process-photo,
+  .cinematic-process.rsb-stable-process .rsb-process-visual {
+    transition-duration: .01ms !important;
+  }
 }
