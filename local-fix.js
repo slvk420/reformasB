@@ -117,6 +117,12 @@
     return element && element.textContent && element.textContent.toLowerCase().indexOf(text.toLowerCase()) !== -1;
   }
 
+  function removeContactIntroParagraph() {
+    document.querySelectorAll(".contact-panel p:not(.eyebrow)").forEach(function (p) {
+      if (p.textContent.indexOf("valorar el espacio") !== -1) p.remove();
+    });
+  }
+
   function removeTurnkeyHabitability() {
     var turnkey = document.querySelector(".turnkey-strip");
     if (!turnkey) return;
@@ -1272,6 +1278,7 @@
     fixHomeSectionOrder();
     updateHomeMarketingCopy();
     updateHomeHeroActions();
+    removeContactIntroParagraph();
 
     if (!document.querySelector(".rsb-sate-section")) {
       var workExSection = document.querySelector(".work-examples-section");
