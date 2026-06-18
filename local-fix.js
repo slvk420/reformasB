@@ -1146,6 +1146,31 @@
     updateHomeWorkGalleries();
   }
 
+  function initScrollHideHeader() {
+    var header = document.querySelector(".site-header");
+    if (!header) return;
+    var lastY = window.scrollY || 0;
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        var y = window.scrollY;
+        if (y <= 8) {
+          header.classList.remove("rsb-header-hidden");
+        } else if (y > lastY + 4) {
+          if (!header.classList.contains("menu-open")) {
+            header.classList.add("rsb-header-hidden");
+          }
+        } else if (y < lastY - 4) {
+          header.classList.remove("rsb-header-hidden");
+        }
+        lastY = y;
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
   document.addEventListener(
     "click",
     function (event) {
@@ -1200,6 +1225,7 @@
   function startFixes() {
     if (fixesStarted) return;
     fixesStarted = true;
+    initScrollHideHeader();
 
     window.requestAnimationFrame(function () {
       runFixes();
@@ -1224,4 +1250,12 @@
   } else {
     window.addEventListener("load", startFixes, { once: true });
   }
+
+  window.addEventListener("pageshow", function (event) {
+    if (!event.persisted) return;
+    var header = document.querySelector(".site-header");
+    if (header) header.classList.remove("rsb-header-hidden");
+    window.dispatchEvent(new Event("resize"));
+    runFixes();
+  });
 })();

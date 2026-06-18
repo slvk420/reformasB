@@ -2883,3 +2883,16 @@ html, body {
     padding-top: clamp(8px, 1.5svh, 14px) !important;
   }
 }
+
+/* ─── Scroll-hide header — mobile/tablet ───────────────────────────────── */
+.site-header {
+  transition: transform 0.28s cubic-bezier(.4, 0, .2, 1) !important;
+}
+.site-header.rsb-header-hidden {
+  transform: translateY(-100%) !important;
+  pointer-events: none !important;
+}
+.site-header.menu-open.rsb-header-hidden {
+  transform: none !important;
+  pointer-events: auto !important;
+}
