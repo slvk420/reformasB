@@ -168,6 +168,8 @@
       section.remove();
     });
 
+    var living = document.querySelector(".work-example-living");
+    if (living) living.remove();
   }
 
   function fixHomeSectionOrder() {
@@ -935,18 +937,6 @@
     initMoreServicesTextReveal();
   }
 
-  function addEmailButton() {
-    var form = document.querySelector("#presupuesto form");
-    if (!form || form.querySelector(".rsb-email-action")) return;
-    var acts = form.querySelector(".form-actions, .hero-actions");
-    if (!acts) return;
-    var emailA = document.createElement("a");
-    emailA.className = "rsb-email-action";
-    emailA.href = "mailto:reformasb.oficial@gmail.com?subject=Solicitud%20de%20visita%20RSB";
-    emailA.textContent = "Enviar email";
-    acts.appendChild(emailA);
-  }
-
   function applyRequestedChanges() {
     var path = pagePath();
     if (/\/mas-servicios(?:\/|\/index\.html)?$/.test(path) || /\/reformasB\/mas-servicios\/?$/.test(path)) {
@@ -959,7 +949,6 @@
     fixHomeSectionOrder();
     updateHomeMarketingCopy();
     updateHomeHeroActions();
-    addEmailButton();
 
     if (!document.querySelector(".rsb-sate-section")) {
       var workExSection = document.querySelector(".work-examples-section");
