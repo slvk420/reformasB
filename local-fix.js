@@ -1266,6 +1266,10 @@
 
   window.addEventListener("pageshow", function (event) {
     if (!event.persisted) return;
+    if (!isSubpage) {
+      window.location.reload();
+      return;
+    }
     var header = document.querySelector(".site-header");
     if (header) {
       header.classList.remove("rsb-header-hidden");
