@@ -446,11 +446,11 @@
     var callBtn = links[1];
     if (callBtn) {
       if (!isMobile) {
-        callBtn.href = "https://wa.me/34605065700?text=Hola%2C%20me%20gustar%C3%ADa%20hablar%20sobre%20una%20reforma";
+        callBtn.href = "https://wa.me/34675518448?text=Hola%2C%20me%20gustar%C3%ADa%20hablar%20sobre%20una%20reforma";
         callBtn.setAttribute("target", "_blank");
         callBtn.setAttribute("rel", "noopener noreferrer");
       } else {
-        callBtn.href = "tel:+34605065700";
+        callBtn.href = "tel:+34675518448";
         callBtn.removeAttribute("target");
         callBtn.removeAttribute("rel");
       }
