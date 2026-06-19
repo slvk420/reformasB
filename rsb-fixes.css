@@ -1651,7 +1651,7 @@ html, body {
     justify-content: space-between !important;
     gap: 0 !important;
     padding: 0 !important;
-    margin-top: -72px !important;
+    margin-top: -107px !important;
   }
 
   /* Tarjeta sin margen extra arriba — ya tiene row-gap de 16px */
