@@ -1230,7 +1230,7 @@ body.contact-page .rsb-contact-trust .section-lead {
 }
 
 .cinematic-process.rsb-stable-process .rsb-process-copy > h2, .rsb-process-heading > h2 {
-  font-size: clamp(2.9rem, 4.2vw, 5rem);
+  font-size: clamp(2.2rem, 3.2vw, 3.8rem);
   max-width: 540px;
 }
 
@@ -1611,11 +1611,11 @@ html, body {
    ═══════════════════════════════════════════════════════════════ */
 @media (min-width: 761px) {
 
-  /* Grid 2 filas: col1=[heading|card], col2=[foto apaisada|flechas debajo] */
+  /* Grid 3 filas: col1=[heading/card/—], col2=[foto centrada (filas1-2)/flechas] */
   .cinematic-process.rsb-stable-process .rsb-process-inner {
     gap: 16px clamp(48px, 5vw, 76px);
-    grid-template-columns: minmax(300px, 37%) 1fr;
-    grid-template-rows: auto auto;
+    grid-template-columns: minmax(300px, 38%) 1fr;
+    grid-template-rows: auto auto auto;
     align-items: start;
     padding: 56px clamp(54px, 6vw, 92px) 24px;
   }
@@ -1627,35 +1627,36 @@ html, body {
     align-self: start;
   }
 
-  /* Col derecha fila 1: foto apaisada (16:10) */
+  /* Col derecha filas 1-2: foto centrada verticalmente */
   .cinematic-process.rsb-stable-process .rsb-process-visual {
     grid-column: 2 !important;
-    grid-row: 1;
-    align-self: start;
+    grid-row: 1 / span 2 !important;
+    align-self: center !important;
     aspect-ratio: 16 / 10 !important;
     width: 100% !important;
   }
 
-  /* Col izquierda fila 2: tarjeta + barra de progreso */
+  /* Col izquierda fila 2: tarjeta pegada al heading */
   .cinematic-process.rsb-stable-process .rsb-process-copy {
     grid-column: 1;
     grid-row: 2;
     align-self: start;
   }
 
-  /* Col derecha fila 2: flechas ← → justo debajo de la foto */
+  /* Col derecha fila 3: flechas ← → debajo de la foto */
   .cinematic-process.rsb-stable-process .rsb-process-nav {
     grid-column: 2 !important;
-    grid-row: 2 !important;
+    grid-row: 3 !important;
     align-self: start !important;
     justify-content: space-between !important;
     gap: 0 !important;
     padding: 4px 0 0 !important;
   }
 
-  /* Tarjeta altura mínima */
+  /* Tarjeta sin margen extra arriba — ya tiene row-gap de 16px */
   .cinematic-process.rsb-stable-process .rsb-process-card {
-    min-height: 220px;
+    margin-top: 0 !important;
+    min-height: 180px;
   }
 
   /* Playpause mismo tamaño que las flechas */
