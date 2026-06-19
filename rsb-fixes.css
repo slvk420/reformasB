@@ -1230,7 +1230,7 @@ body.contact-page .rsb-contact-trust .section-lead {
 }
 
 .cinematic-process.rsb-stable-process .rsb-process-copy > h2, .rsb-process-heading > h2 {
-  font-size: clamp(2.6rem, 3.5vw, 3.7rem);
+  font-size: clamp(2.9rem, 4.2vw, 5rem);
   max-width: 540px;
 }
 
@@ -1611,9 +1611,9 @@ html, body {
    ═══════════════════════════════════════════════════════════════ */
 @media (min-width: 761px) {
 
-  /* Columnas proporcionales: izquierda ~42%, derecha el resto */
+  /* Columnas: izquierda ~37%, derecha el resto (más espacio para la foto) */
   .cinematic-process.rsb-stable-process .rsb-process-inner {
-    grid-template-columns: minmax(320px, 44%) 1fr;
+    grid-template-columns: minmax(300px, 37%) 1fr;
     grid-template-rows: auto auto;
     align-items: start;
   }
