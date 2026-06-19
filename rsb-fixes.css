@@ -1288,25 +1288,21 @@ body.contact-page .rsb-contact-trust .section-lead {
 }
 
 .cinematic-process.rsb-stable-process .rsb-process-photo-1 {
-  opacity: 1;
   transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
   z-index: 4;
 }
 
 .cinematic-process.rsb-stable-process .rsb-process-photo-2 {
-  opacity: .72 !important;
   transform: translate3d(20px, -14px, 0) rotate(2.2deg) scale(.975);
   z-index: 3;
 }
 
 .cinematic-process.rsb-stable-process .rsb-process-photo-3 {
-  opacity: .50 !important;
   transform: translate3d(38px, -26px, 0) rotate(4deg) scale(.95);
   z-index: 2;
 }
 
 .cinematic-process.rsb-stable-process .rsb-process-photo-4 {
-  opacity: .30 !important;
   transform: translate3d(54px, -36px, 0) rotate(5.5deg) scale(.925);
   z-index: 1;
 }
