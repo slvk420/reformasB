@@ -1664,6 +1664,20 @@ html, body {
     border: none !important;
     box-shadow: none !important;
   }
+
+  /* Slide 5 final: mantener grid 2-col — la foto se desvanece donde está, sin salto de layout */
+  .cinematic-process.rsb-stable-process .rsb-process-carousel.is-final .rsb-process-inner {
+    grid-template-columns: minmax(300px, 38%) 1fr !important;
+    justify-content: unset !important;
+  }
+  .cinematic-process.rsb-stable-process .rsb-process-carousel.is-final .rsb-process-visual {
+    display: block !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: relative !important;
+    transform: none !important;
+    transition: opacity 600ms ease !important;
+  }
 }
 
 /* ─── MOBILE: Work examples — orden texto/imagen (bloque único autoritativo)
