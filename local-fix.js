@@ -761,7 +761,7 @@
         transitionToken += 1;
         var currentToken = transitionToken;
         var step = steps[index];
-        carousel.classList.toggle("is-final", !!step.cta);
+        if (!step.cta) carousel.classList.remove("is-final");
         carousel.classList.remove("is-forward", "is-backward");
         carousel.classList.add("is-changing", direction < 0 ? "is-backward" : "is-forward");
         animatePhotoStack(previousIndex, index, direction, currentToken);
@@ -787,6 +787,7 @@
           function () {
             if (currentToken !== transitionToken) return;
             carousel.classList.remove("is-changing", "is-forward", "is-backward");
+            if (step.cta) carousel.classList.add("is-final");
             changing = false;
           },
           reduceMotion ? 20 : 1420
