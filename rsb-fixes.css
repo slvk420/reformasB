@@ -1628,9 +1628,10 @@ html, body {
 
   /* Col derecha filas 1-2: visual ocupa toda la altura de las dos filas */
   .cinematic-process.rsb-stable-process .rsb-process-visual {
-    grid-column: 2;
+    grid-column: 2 !important;
     grid-row: 1 / span 2;
     align-self: stretch;
+    width: 100% !important;
   }
 
   /* Col izquierda fila 2: tarjeta + barra de progreso */
