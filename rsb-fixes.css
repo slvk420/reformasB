@@ -2660,3 +2660,8 @@ html, body {
     transition-duration: .01ms !important;
   }
 }
+
+/* Contact page: dark trust section covers full viewport width including scrollbar gap */
+html:has(body.contact-page) {
+  background-color: #101714;
+}
