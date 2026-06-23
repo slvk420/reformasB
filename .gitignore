@@ -1,7 +1,2 @@
 .agents/
 skills-lock.json
-node_modules/
-package.json
-package-lock.json
-screenshot-*.png
-live-*.png
