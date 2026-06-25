@@ -2667,8 +2667,8 @@ html:has(body.contact-page) {
 }
 
 /* ── Brick Loader (reuses .brand-intro) ─────────────────────────── */
-html.rsb-brick-active .brand-intro,
-html.rsb-brick-active .brand-intro.is-gone {
+html[data-rsb-brick] .brand-intro,
+html[data-rsb-brick] .brand-intro.is-gone {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -2680,32 +2680,32 @@ html.rsb-brick-active .brand-intro.is-gone {
   pointer-events: auto !important;
   transition: opacity 0.42s ease !important;
 }
-html.rsb-brick-active.rsb-skip-intro .brand-intro {
+html[data-rsb-brick].rsb-skip-intro .brand-intro {
   display: flex !important;
   opacity: 0 !important;
   pointer-events: none !important;
 }
-html.rsb-brick-active .brand-intro-inner {
+html[data-rsb-brick] .brand-intro-inner {
   position: relative !important;
 }
-html.rsb-brick-active .brand-intro-inner strong,
-html.rsb-brick-active .brand-intro-inner strong::after,
-html.rsb-brick-active .brand-intro-inner p {
+html[data-rsb-brick] .brand-intro-inner strong,
+html[data-rsb-brick] .brand-intro-inner strong::after,
+html[data-rsb-brick] .brand-intro-inner p {
   display: none !important;
 }
-html.rsb-brick-active .brand-loader {
+html[data-rsb-brick] .brand-loader {
   all: unset !important;
   display: block !important;
   width: 206px !important;
   height: 134px !important;
 }
-html.rsb-brick-active .brand-loader svg {
+html[data-rsb-brick] .brand-loader svg {
   display: none !important;
 }
-html.rsb-brick-active .brand-loader span {
+html[data-rsb-brick] .brand-loader span {
   display: none !important;
 }
-html.rsb-brick-active .brand-loader::before {
+html[data-rsb-brick] .brand-loader::before {
   content: "" !important;
   display: block !important;
   width: 206px !important;
@@ -2717,11 +2717,11 @@ html.rsb-brick-active .brand-loader::before {
   background: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 206 134'><rect x='35' y='0' width='64' height='40' rx='8' fill='transparent' stroke='%23444' stroke-width='2'><animate attributeName='fill' values='transparent;%23c06535' begin='0.4s' dur='0.22s' fill='freeze'/><animate attributeName='stroke' values='%23444;%238a3e1c' begin='0.4s' dur='0.22s' fill='freeze'/></rect><rect x='106' y='0' width='64' height='40' rx='8' fill='transparent' stroke='%23444' stroke-width='2'><animate attributeName='fill' values='transparent;%23c06535' begin='0.4s' dur='0.22s' fill='freeze'/><animate attributeName='stroke' values='%23444;%238a3e1c' begin='0.4s' dur='0.22s' fill='freeze'/></rect><rect x='0' y='47' width='64' height='40' rx='8' fill='transparent' stroke='%23444' stroke-width='2'><animate attributeName='fill' values='transparent;%23c06535' begin='0.7s' dur='0.22s' fill='freeze'/><animate attributeName='stroke' values='%23444;%238a3e1c' begin='0.7s' dur='0.22s' fill='freeze'/></rect><rect x='71' y='47' width='64' height='40' rx='8' fill='transparent' stroke='%23444' stroke-width='2'><animate attributeName='fill' values='transparent;%23c06535' begin='0.7s' dur='0.22s' fill='freeze'/><animate attributeName='stroke' values='%23444;%238a3e1c' begin='0.7s' dur='0.22s' fill='freeze'/></rect><rect x='142' y='47' width='64' height='40' rx='8' fill='transparent' stroke='%23444' stroke-width='2'><animate attributeName='fill' values='transparent;%23c06535' begin='1.0s' dur='0.22s' fill='freeze'/><animate attributeName='stroke' values='%23444;%238a3e1c' begin='1.0s' dur='0.22s' fill='freeze'/></rect><rect x='35' y='94' width='64' height='40' rx='8' fill='transparent' stroke='%23444' stroke-width='2'><animate attributeName='fill' values='transparent;%23c06535' begin='1.0s' dur='0.22s' fill='freeze'/><animate attributeName='stroke' values='%23444;%238a3e1c' begin='1.0s' dur='0.22s' fill='freeze'/></rect><rect x='106' y='94' width='64' height='40' rx='8' fill='transparent' stroke='%23444' stroke-width='2'><animate attributeName='fill' values='transparent;%23c06535' begin='1.3s' dur='0.22s' fill='freeze'/><animate attributeName='stroke' values='%23444;%238a3e1c' begin='1.3s' dur='0.22s' fill='freeze'/></rect></svg>") no-repeat center / contain !important;
 }
 @media (max-width: 480px) {
-  html.rsb-brick-active .brand-loader {
+  html[data-rsb-brick] .brand-loader {
     width: 148px !important;
     height: 96px !important;
   }
-  html.rsb-brick-active .brand-loader::before {
+  html[data-rsb-brick] .brand-loader::before {
     width: 148px !important;
     height: 96px !important;
   }
