@@ -4,6 +4,10 @@
   if (history.scrollRestoration) history.scrollRestoration = "manual";
   window.scrollTo(0, 0);
 
+  if (window.location.search && window.location.search.indexOf('skipIntro') !== -1) {
+    try { history.replaceState(null, document.title, window.location.pathname + window.location.hash); } catch(e) {}
+  }
+
   var isFile = window.location.protocol === "file:";
   var isGithubPages = window.location.pathname.indexOf("/reformasB") === 0;
   var moreServicesLoadPending = false;
