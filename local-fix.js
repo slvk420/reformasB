@@ -1,6 +1,5 @@
 (function () {
   var _bRef = document.referrer, _bInt = _bRef && _bRef.indexOf('reformasb.com') !== -1;
-  if (!_bInt) document.documentElement.setAttribute('data-rsb-brick', '1');
 
   if (history.scrollRestoration) history.scrollRestoration = "manual";
   window.scrollTo(0, 0);
@@ -15,8 +14,24 @@
     if (intro) intro.setAttribute("aria-hidden", "true");
   }
 
-  window.setTimeout(dismissBrandIntro, 1800);
-  if (!_bInt) window.setTimeout(function () { document.documentElement.removeAttribute('data-rsb-brick'); }, 2260);
+  if (_bInt) {
+    window.setTimeout(dismissBrandIntro, 1800);
+  } else {
+    window.setTimeout(function () {
+      var intro = document.querySelector('.brand-intro');
+      if (intro) {
+        intro.style.setProperty('opacity', '0', 'important');
+        intro.style.setProperty('pointer-events', 'none', 'important');
+      }
+    }, 1800);
+    window.setTimeout(function () {
+      dismissBrandIntro();
+      var intro = document.querySelector('.brand-intro');
+      if (intro) intro.style.cssText = '';
+      var brickStyle = document.getElementById('rsb-bl');
+      if (brickStyle) brickStyle.remove();
+    }, 2300);
+  }
 
   var isSubpage = /\/(?:contacto|mas-servicios)\//.test(window.location.pathname.replace(/\\/g, "/"));
   var rootUrl = isGithubPages
