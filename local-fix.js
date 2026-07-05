@@ -231,7 +231,7 @@
       '<section class="rsb-sate-section" aria-labelledby="rsb-sate-title">',
       '<div class="container rsb-sate-grid">',
       '<div class="rsb-sate-carousel" aria-label="Ejemplos de fachadas para SATE">',
-      '<img class="is-active" src="' + rootPath("reformas/sate-casa-blanca-hq.png") + '" alt="Casa blanca con fachada exterior renovada mediante SATE"/>',
+      '<img class="is-active" src="' + rootPath("reformas/sate-casa-blanca-hq.webp") + '" alt="Casa blanca con fachada exterior renovada mediante SATE"/>',
       '<img src="' + rootPath("reformas/sate-fachada-piedra.jpg") + '" alt="Vivienda moderna con fachada preparada para aislamiento exterior SATE"/>',
       '<img src="' + rootPath("reformas/sate-instalacion-andamios.webp") + '" alt="Instalaci&oacute;n de aislamiento SATE en una fachada de ladrillo con andamios"/>',
       '<div class="rsb-sate-controls">',
@@ -375,7 +375,7 @@
       "Kitchen",
       [
         {
-          src: rootPath("reformas/cocina-madera-negra.png"),
+          src: rootPath("reformas/cocina-madera-negra.webp"),
           label: "Cocina madera y negro",
           alt: "Cocina reformada con madera, frentes negros e iluminacion calida",
           isReal: true
