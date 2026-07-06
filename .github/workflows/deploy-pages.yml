@@ -47,6 +47,10 @@ jobs:
           else echo "publish_folder=." >> $GITHUB_OUTPUT
           fi
 
+      - name: Exclude internal docs from published output
+        if: steps.determine.outputs.publish_folder == '.'
+        run: rm -f CLAUDE.md errores-y-correcciones.md
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
