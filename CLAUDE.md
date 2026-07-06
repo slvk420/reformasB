@@ -255,6 +255,18 @@ de marca), formulario/schema/logo presentes según corresponda. Verificado:
 conocido" hace trabajo real (el error #418 sí ocurre y sí se captura, solo
 que se tolera a propósito). No añade tests unitarios: no hay código fuente,
 solo el export estático.
+**Revisor: NO APTO → corregido → re-verificado.** 2 hallazgos importantes:
+(1) `tests/` no estaba excluido del deploy (se habría publicado en
+producción, igual que le pasó a CLAUDE.md) — añadido a la exclusión y al
+assert, que ahora itera una lista en vez de comprobar un solo archivo;
+(2) el filtro del error #418 se aplicaba a las 7 páginas en vez de solo a
+Home, pudiendo enmascarar una regresión real de hidratación en otra página
+— movido a una propiedad por entrada en `PAGES` (`erroresConocidos` /
+`recursosRotosConocidos`). También 2 hallazgos menores corregidos
+(try/catch en el test 404, parseo de `--base=` usa la última coincidencia).
+Re-verificado tras las correcciones: 0 fallos, simulación local de la
+exclusión confirma `tests/`/`CLAUDE.md`/`errores-y-correcciones.md`
+ausentes del staging.
 **Abrir PR:** https://github.com/slvk420/reformasB/pull/new/test/paso-e-smoke-suite
 
 **Pendientes (en orden):**
