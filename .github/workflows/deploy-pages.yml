@@ -32,7 +32,7 @@ jobs:
         id: build
         run: |
           if [ -f package.json ]; then
-            npm ci
+            npm ci --omit=dev
             if npm run | grep -q "build"; then
               npm run build
             fi
