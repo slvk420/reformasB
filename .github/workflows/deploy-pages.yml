@@ -57,6 +57,16 @@ jobs:
           fi
           echo "site_dir=$SITE_DIR" >> $GITHUB_OUTPUT
 
+      - name: Assert internal docs are absent from staging dir
+        run: |
+          echo "site_dir resuelto: '${{ steps.prepare.outputs.site_dir }}'"
+          ls -la "${{ steps.prepare.outputs.site_dir }}" | head -20
+          if [ -f "${{ steps.prepare.outputs.site_dir }}/CLAUDE.md" ]; then
+            echo "::error::CLAUDE.md SIGUE en el directorio de staging, algo falló arriba"
+            exit 1
+          fi
+          echo "OK: CLAUDE.md ausente del staging"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
