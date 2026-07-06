@@ -173,7 +173,38 @@ confirmado con curl en producción — esto sí está excluido siempre, sin rela
 con el contenido). Arreglado: paso nuevo en el workflow que borra ambos
 archivos del checkout efímero del runner justo antes de publicar — siguen
 versionados en git para el equipo, pero no se sirven públicamente.
-**Abrir PR:** https://github.com/slvk420/reformasB/pull/new/chore/paso-d-limpieza
+**MERGEADO Y VERIFICADO EN PRODUCCIÓN (2026-07-06):** deploy en verde,
+`/CLAUDE.md` y `/errores-y-correcciones.md` dan 404 en vivo (confirmado).
+
+**✅ Logo y favicon (hecho, PENDIENTE DE MERGE).** Rama
+`fix/logo-favicon-branding` subida. Slavik preguntó por qué Google no
+mostraba el favicon en resultados de búsqueda — al investigar salió algo
+mucho más gordo: **el logo de cabecera de las 7 páginas**
+(`_next/static/media/logo-rsb-wood-transparent.png`) seguía mostrando la
+marca vieja completa ("RSB" en grande + "REFORMA SB" debajo) pese a todo el
+barrido de texto de tandas anteriores — ningún cambio previo tocaba esta
+imagen PNG. El favicon.svg heredaba la misma marca vieja (texto "RSB"
+dibujado en el SVG).
+- Causa técnica del favicon en Google: `favicon.ico` solo tenía una imagen de
+  32×32 — Google exige múltiplo de 48px para mostrarlo en resultados de
+  búsqueda.
+- Sin logo definitivo disponible, Slavik pidió un placeholder provisional:
+  logo PNG reemplazado IN-PLACE (mismo nombre/dimensiones 420×420/alpha) con
+  icono de tejado simple + "ReformasB" (colores de marca ya establecidos:
+  #18201d carbón, #c9842f cobre). favicon.svg: mismo icono sin texto
+  (ilegible a tamaño real). favicon.ico: regenerado multi-resolución
+  (16/32/48px) construido a mano, verificado byte a byte por el revisor
+  (cabecera, offsets, firmas PNG, CRC32 — sin un solo byte fuera de sitio).
+- Revisor: APTO. Cero archivos HTML/RSC tocados (reemplazo in-place puro) →
+  cero riesgo de pantalla en blanco.
+- **Marcado explícitamente como PROVISIONAL** — placeholder hasta que haya
+  diseño definitivo de un diseñador. No confundir con el logo final.
+- Nota: Google puede tardar días/semanas en reflejar el favicon nuevo en
+  resultados de búsqueda tras el merge (ciclo de rastreo propio, ajeno al
+  código); el navegador del usuario también cachea favicons de forma agresiva.
+**Abrir PR:** https://github.com/slvk420/reformasB/pull/new/fix/logo-favicon-branding
+
+**Pendientes (en orden):**
 - **Paso E — Testing:** suite Playwright de humo permanente (todas las páginas:
   status, consola limpia, recursos 200, form presente) para correr antes de
   cada merge. No hay código fuente (solo build), tests unitarios no aplican.
