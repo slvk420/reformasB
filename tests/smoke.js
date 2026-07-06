@@ -11,20 +11,21 @@
 
 const { chromium } = require('playwright');
 
-const BASE = (process.argv.find(a => a.startsWith('--base=')) || '--base=https://www.reformasb.com').split('=')[1];
+// Última coincidencia (no la primera): permite sobreescribir el --base= fijo
+// de "npm run test:local" pasando otro con "-- --base=...".
+const baseArgs = process.argv.filter(a => a.startsWith('--base='));
+const BASE = (baseArgs[baseArgs.length - 1] || '--base=https://www.reformasb.com').split('=')[1];
 
-// Problemas conocidos y ya aceptados (ver CLAUDE.md) — no deben hacer fallar
-// la suite, pero si aparece algo NUEVO fuera de esta lista, sí debe fallar.
-const KNOWN_PAGE_ERRORS = [/Minified React error #418/];
-const KNOWN_BROKEN_RESOURCES = [/\/gracias\/_next\/static\/css\/[a-f0-9]+\.css/];
-
+// Problemas conocidos y ya aceptados (ver CLAUDE.md), catalogados POR PÁGINA
+// para no enmascarar la misma regresión si empezara a ocurrir en otra página
+// donde hoy no pasa. Si aparece algo NUEVO fuera de esta lista, debe fallar.
 const PAGES = [
-  { path: '/', nombre: 'Home', esperaFormulario: true, jsonLd: true },
+  { path: '/', nombre: 'Home', esperaFormulario: true, jsonLd: true, erroresConocidos: [/Minified React error #418/] },
   { path: '/contacto/', nombre: 'Contacto', esperaFormulario: false, jsonLd: true },
   { path: '/mas-servicios/', nombre: 'Más servicios', esperaFormulario: false, jsonLd: true },
   { path: '/aviso-legal/', nombre: 'Aviso legal', esperaFormulario: false, jsonLd: true },
   { path: '/privacidad/', nombre: 'Privacidad', esperaFormulario: false, jsonLd: true },
-  { path: '/gracias/', nombre: 'Gracias', esperaFormulario: false, jsonLd: false, noindex: true },
+  { path: '/gracias/', nombre: 'Gracias', esperaFormulario: false, jsonLd: false, noindex: true, recursosRotosConocidos: [/\/gracias\/_next\/static\/css\/[a-f0-9]+\.css/] },
 ];
 
 let fallos = 0;
@@ -37,7 +38,7 @@ function esConocido(lista, texto) {
   return lista.some(re => re.test(texto));
 }
 
-async function testPagina(browser, { path, nombre, esperaFormulario, jsonLd, noindex }) {
+async function testPagina(browser, { path, nombre, esperaFormulario, jsonLd, noindex, erroresConocidos = [], recursosRotosConocidos = [] }) {
   console.log('\n== ' + nombre + ' (' + path + ') ==');
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   const pageErrors = [], brokenRes = [];
@@ -60,10 +61,10 @@ async function testPagina(browser, { path, nombre, esperaFormulario, jsonLd, noi
   const bodyVisible = await page.evaluate(() => document.body && document.body.innerText.trim().length > 50);
   chk('contenido visible (no pantalla en blanco)', bodyVisible);
 
-  const nuevosErrores = pageErrors.filter(e => !esConocido(KNOWN_PAGE_ERRORS, e));
+  const nuevosErrores = pageErrors.filter(e => !esConocido(erroresConocidos, e));
   chk('sin errores de página nuevos', nuevosErrores.length === 0, nuevosErrores.join(' | '));
 
-  const nuevosRotos = brokenRes.filter(u => !esConocido(KNOWN_BROKEN_RESOURCES, u));
+  const nuevosRotos = brokenRes.filter(u => !esConocido(recursosRotosConocidos, u));
   chk('sin recursos rotos nuevos', nuevosRotos.length === 0, nuevosRotos.join(' | '));
 
   const marcaVieja = await page.evaluate(() => {
@@ -104,13 +105,17 @@ async function test404(browser) {
   const brokenRes = [];
   page.on('response', r => { if (r.status() >= 400) brokenRes.push(r.status() + ' ' + r.url()); });
   const ruta = '/smoke-test-ruta-inexistente-' + Date.now() + '/';
-  const resp = await page.goto(BASE + ruta, { waitUntil: 'load', timeout: 20000 });
-  await page.waitForTimeout(2000);
-  chk('status 404', resp.status() === 404, 'recibido ' + resp.status());
-  const nuevosRotos = brokenRes.filter(u => !u.includes(ruta) && !esConocido(KNOWN_BROKEN_RESOURCES, u));
-  chk('página 404 sin recursos rotos propios', nuevosRotos.length === 0, nuevosRotos.join(' | '));
-  const marcaCorrecta = await page.evaluate(() => document.title.includes('ReformasB') && !document.title.includes('| RSB'));
-  chk('marca correcta en página 404', marcaCorrecta, await page.title());
+  try {
+    const resp = await page.goto(BASE + ruta, { waitUntil: 'load', timeout: 20000 });
+    await page.waitForTimeout(2000);
+    chk('status 404', resp.status() === 404, 'recibido ' + resp.status());
+    const nuevosRotos = brokenRes.filter(u => !u.includes(ruta));
+    chk('página 404 sin recursos rotos propios', nuevosRotos.length === 0, nuevosRotos.join(' | '));
+    const marcaCorrecta = await page.evaluate(() => document.title.includes('ReformasB') && !document.title.includes('| RSB'));
+    chk('marca correcta en página 404', marcaCorrecta, await page.title());
+  } catch (e) {
+    chk('página 404 carga', false, String(e).slice(0, 100));
+  }
   await page.close();
 }
 
