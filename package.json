@@ -1,5 +1,9 @@
 {
   "private": true,
+  "scripts": {
+    "test": "node tests/smoke.js",
+    "test:local": "node tests/smoke.js --base=http://localhost:8080"
+  },
   "devDependencies": {
     "playwright": "^1.61.0",
     "sharp": "^0.35.2"

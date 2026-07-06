@@ -54,6 +54,7 @@ jobs:
           else
             git archive HEAD | tar -x -C "$SITE_DIR"
             rm -f "$SITE_DIR/CLAUDE.md" "$SITE_DIR/errores-y-correcciones.md"
+            rm -rf "$SITE_DIR/tests"
           fi
           echo "site_dir=$SITE_DIR" >> $GITHUB_OUTPUT
 
@@ -61,11 +62,13 @@ jobs:
         run: |
           echo "site_dir resuelto: '${{ steps.prepare.outputs.site_dir }}'"
           ls -la "${{ steps.prepare.outputs.site_dir }}" | head -20
-          if [ -f "${{ steps.prepare.outputs.site_dir }}/CLAUDE.md" ]; then
-            echo "::error::CLAUDE.md SIGUE en el directorio de staging, algo falló arriba"
-            exit 1
-          fi
-          echo "OK: CLAUDE.md ausente del staging"
+          for p in CLAUDE.md errores-y-correcciones.md tests; do
+            if [ -e "${{ steps.prepare.outputs.site_dir }}/$p" ]; then
+              echo "::error::$p SIGUE en el directorio de staging, algo falló arriba"
+              exit 1
+            fi
+          done
+          echo "OK: archivos internos ausentes del staging"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -241,10 +241,35 @@ dibujado en el SVG).
   código); el navegador del usuario también cachea favicons de forma agresiva.
 **Abrir PR:** https://github.com/slvk420/reformasB/pull/new/fix/logo-favicon-branding
 
+**✅ Paso E — Testing (hecho, PENDIENTE DE MERGE).** Rama
+`test/paso-e-smoke-suite` subida: suite de humo permanente en
+`tests/smoke.js` (Playwright puro, sin runner adicional). Corre con
+`npm test` (contra producción) o `npm run test:local -- --base=http://...`.
+Para cada una de las 7 páginas + un 404 real: status HTTP, contenido visible
+(no pantalla en blanco), sin errores de consola/recursos rotos **nuevos**
+(los 2 problemas conocidos y aceptados — React #418 en Home, carrera del CSS
+en /gracias/ — están catalogados explícitamente para no hacer fallar la
+suite por algo ya asumido), sin marca "RSB" suelta (guarda contra regresión
+de marca), formulario/schema/logo presentes según corresponda. Verificado:
+0 fallos contra producción real, y confirmado que el filtro de "error
+conocido" hace trabajo real (el error #418 sí ocurre y sí se captura, solo
+que se tolera a propósito). No añade tests unitarios: no hay código fuente,
+solo el export estático.
+**Revisor: NO APTO → corregido → re-verificado.** 2 hallazgos importantes:
+(1) `tests/` no estaba excluido del deploy (se habría publicado en
+producción, igual que le pasó a CLAUDE.md) — añadido a la exclusión y al
+assert, que ahora itera una lista en vez de comprobar un solo archivo;
+(2) el filtro del error #418 se aplicaba a las 7 páginas en vez de solo a
+Home, pudiendo enmascarar una regresión real de hidratación en otra página
+— movido a una propiedad por entrada en `PAGES` (`erroresConocidos` /
+`recursosRotosConocidos`). También 2 hallazgos menores corregidos
+(try/catch en el test 404, parseo de `--base=` usa la última coincidencia).
+Re-verificado tras las correcciones: 0 fallos, simulación local de la
+exclusión confirma `tests/`/`CLAUDE.md`/`errores-y-correcciones.md`
+ausentes del staging.
+**Abrir PR:** https://github.com/slvk420/reformasB/pull/new/test/paso-e-smoke-suite
+
 **Pendientes (en orden):**
-- **Paso E — Testing:** suite Playwright de humo permanente (todas las páginas:
-  status, consola limpia, recursos 200, form presente) para correr antes de
-  cada merge. No hay código fuente (solo build), tests unitarios no aplican.
 - **Paso F — Documentación:** actualizar este archivo + notas del vault al
   cerrar cada tanda (usar agente archivista).
 - **Regla activa (paso G):** pasar agente `revisor` antes de cada push. En
