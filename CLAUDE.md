@@ -138,13 +138,42 @@ deploy falla, reintentar ahora es seguro: no puede volver a duplicar artefactos.
 - robots.txt: confirmar que no bloquea OAI-SearchBot ni otros bots de IA
   (hoy es `Allow: /` genérico, probablemente ya vale — revisar con calma).
 
-**Pendientes (en orden):**
-- **Paso D — Limpieza repo:** borrar `servicios/` (build viejo), PNGs de debug
-  (bk-*.png, co-*.png, cap-*.png, full-*.png, live-*.png...), scripts one-shot
-  (cap-ux46.js, pw-*.js) → mover los útiles a tests/ o borrar. Todo está SIN
-  trackear: decidir qué se añade a .gitignore vs se borra. Nota del revisor:
-  1 chunk JS con BOM preexistente (`_next/static/chunks/app/page-9a3c77278ed89762.js`)
-  — evaluar si tocar bundles de build vale la pena o se deja así.
+**✅ Paso D — Limpieza (hecho, PENDIENTE DE MERGE).** Rama
+`chore/paso-d-limpieza` subida, 3 commits:
+- Borrados: `servicios/` (build viejo, nunca trackeado ni desplegado) + ~45
+  capturas/scripts sueltos de sesiones de debug anteriores (sin trackear).
+- Borrados (trackeados): `sate-casa-blanca-hq.png` + `cocina-madera-negra.png`
+  (3,7 MB), sin ninguna referencia desde el swap a `.webp` del Paso B.
+- Recuperados a git (llevaban tiempo sin trackear, riesgo de perderse en un
+  clon nuevo): `CLAUDE.md`, `errores-y-correcciones.md`, `package.json` +
+  `package-lock.json` (playwright+sharp, las herramientas usadas para
+  verificar/optimizar la web en las últimas tandas).
+- `.gitignore`: `node_modules/` + patrones de capturas/scripts ad-hoc.
+- Cache-buster de `local-fix.js` actualizado (`fix36-20260626`→`fix37-20260706`).
+- **Incidente propio durante esta tanda:** un `;` en vez de `&&` en un comando
+  encadenado hizo que un `git reset --soft` se ejecutara sin condición y la
+  rama se crease accidentalmente desde un punto anterior al fix de CI del
+  Paso B/C — el revisor lo detectó (diff mostraba `deploy-pages.yml` como
+  "cambiado" en el PR aunque el contenido era idéntico a main). Corregido con
+  `git rebase main`.
+- **Hallazgo real del revisor:** trackear `package.json` activa `npm ci` por
+  primera vez en el pipeline de deploy — antes era no-op total. Como
+  playwright/sharp son solo herramientas de verificación local (0 imports en
+  código servido), se añadió `--omit=dev` para que siga siendo no-op y no
+  introduzca un nuevo punto de fallo (un blip del registro de npm bloqueando
+  el deploy de un cambio de contenido sin relación). `package.json` marcado
+  `private: true`.
+Nota pendiente (no bloqueante): 1 chunk JS con BOM preexistente
+(`_next/static/chunks/app/page-9a3c77278ed89762.js`) — bundle de build, se
+deja así por ahora.
+**Encontrado al preguntar Slavik "¿cambiará algo visual?":** trackear
+CLAUDE.md/errores-y-correcciones.md los habría publicado por primera vez en
+www.reformasb.com/CLAUDE.md (GH Pages sirve todo el repo salvo `.git`/`.github`,
+confirmado con curl en producción — esto sí está excluido siempre, sin relación
+con el contenido). Arreglado: paso nuevo en el workflow que borra ambos
+archivos del checkout efímero del runner justo antes de publicar — siguen
+versionados en git para el equipo, pero no se sirven públicamente.
+**Abrir PR:** https://github.com/slvk420/reformasB/pull/new/chore/paso-d-limpieza
 - **Paso E — Testing:** suite Playwright de humo permanente (todas las páginas:
   status, consola limpia, recursos 200, form presente) para correr antes de
   cada merge. No hay código fuente (solo build), tests unitarios no aplican.
