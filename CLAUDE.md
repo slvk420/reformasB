@@ -41,26 +41,36 @@ Me llamo Slavik. Me dedico a resolver problemas reales a empresas usando tecnolo
 
 ### Reglas técnicas importantes
 
-- Los `.txt` (RSC payload) con entradas `7:Txxxx,` tienen longitud prefijada en hex — **nunca editar sin recalcular el prefijo** o la web queda en blanco silenciosamente.
-- Verificar siempre en el sitio live (no local) con Playwright y `--disable-cache`.
-- Después de un push, esperar ~10 min por la caché del CDN antes de verificar.
+- Los `.txt` (RSC payload) con entradas `7:Txxxx,` tienen longitud prefijada en hex — **nunca editar sin recalcular el prefijo** o la web queda en blanco silenciosamente. El schema JSON-LD vive en una fila de este tipo tanto en `index.html` como en `index.txt` — si se edita el schema estático, hay que sincronizar también el flight con el mismo recálculo (pasó desincronizado meses sin que nadie lo notara, porque solo se ve post-hidratación).
+- Verificar siempre en el sitio live (no local) con Playwright y `--disable-cache`. Para un chequeo rápido y repetible: `npm test` desde la raíz del repo (suite de humo en `tests/smoke.js`, corre contra producción por defecto).
+- Después de un push, esperar ~10 min por la caché del CDN antes de verificar. Si un archivo ELIMINADO del despliegue sigue accesible tras ese margen, no asumir un patrón de "necesita N despliegues" — es un comportamiento de la plataforma sin causa raíz identificada (ver incidente 2026-07-06 en el historial del vault); confirmar primero que el job de build no falla (hay un `assert` en el workflow que lo garantiza) antes de sospechar del código.
 - Si hay pantalla en blanco tras 2 intentos fallidos: revertir al último commit bueno primero, luego diagnosticar.
+- El pipeline de despliegue (`.github/workflows/deploy-pages.yml`) tiene el job dividido en `build` + `deploy`: si un despliegue falla y se reintenta, nunca vuelve a duplicar artefactos (bug real que costó 3 reintentos fallidos antes de arreglarlo). El paso "Prepare publish directory" excluye `CLAUDE.md`, `errores-y-correcciones.md` y `tests/` del contenido público — cualquier archivo nuevo de solo-trabajo-interno que se añada a la raíz del repo debe añadirse también a esa exclusión, o quedará público en producción.
 
 ### Estado actual (2026-07-06)
 
 **Resuelto:**
 - Animación ladrillo: `btoa(svg + Date.now())` → URL única por carga, sin freeze
-- Branding: "RSB" → "ReformasB" en toda la web y chunk config
+- Branding "RSB" → "ReformasB": en el HTML visible **y** en el schema JSON-LD que indexa Google tras hidratar (antes solo en el HTML)
 - Email: info@reformasb.com en toda la web y chunk config
-- Año fundación: 2004 en toda la web
+- Año fundación: 2004 en las 5 páginas, sin inconsistencias
 - /gracias/ con noindex
+- Rendimiento: Home 9,4 MB → 2,26 MB en producción (−76%)
+- Repo limpio: sin `servicios/` (build viejo descartado), sin capturas/scripts de debug sueltos
+- Suite de tests de humo permanente (`npm test`)
 
 **Pendiente:**
+- 🔴 **Logo definitivo** — el logo de cabecera (7 páginas) y el favicon llevan un **placeholder provisional** (icono de tejado + "ReformasB") sustituyendo la marca vieja "RSB/REFORMA SB" de la imagen real. Slavik debe decidir si encarga uno definitivo a un diseñador.
 - Reindexación en Google Search Console (lo hace Slavik, no código)
-- Google Business Profile al 100% → ver `inbox/GBP ReformasB - checklist.md` en el vault
+- Google Business Profile al 100% → ver `GBP ReformasB - checklist.md` en el vault
 - Páginas SEO: /reformas-cocinas-lleida/, /reformas-banos-lleida/, /reformas-fachadas-lleida/, /obra-nueva-lleida/
+- Error React #418 (hydration mismatch) en Home — no fatal, tolerado explícitamente por la suite de tests, sin diagnosticar a fondo
 
-### Plan de pasos en curso (sesión 2026-07-06, retomar aquí)
+Historial completo de todas las tandas de esta sesión (rendimiento, SEO/GEO,
+limpieza, logo, testing, incidentes de CI) en el vault: ver más abajo.
+
+<details>
+<summary>Plan de pasos de la sesión 2026-07-06 (histórico, ya cerrado — ver Historial de cambios en el vault para el detalle completo)</summary>
 
 Slavik pidió ejecutar una serie de auditorías/mejoras paso a paso (documentación,
 rendimiento, logs, testing, SEO, evaluación, limpieza, revisión multi-agente).
@@ -269,15 +279,25 @@ exclusión confirma `tests/`/`CLAUDE.md`/`errores-y-correcciones.md`
 ausentes del staging.
 **Abrir PR:** https://github.com/slvk420/reformasB/pull/new/test/paso-e-smoke-suite
 
-**Pendientes (en orden):**
-- **Paso F — Documentación:** actualizar este archivo + notas del vault al
-  cerrar cada tanda (usar agente archivista).
-- **Regla activa (paso G):** pasar agente `revisor` antes de cada push. En
-  tanda 1 detectó 1 hallazgo importante real. Mantener.
+**Paso F (documentación) y todos los PRs de esta sesión: cerrados.** Las 7
+ramas (tanda 1, rendimiento, SEO, limpieza, logo/favicon, tests, más los
+fixes de CI directos a main) están mergeadas y verificadas en producción.
 
 Los pasos "copia de interfaces" y "feedback de usuarios" del plan original de
 Slavik se descartaron: no aplican a este proyecto (no hay interfaz objetivo ni
 canal de feedback).
+
+</details>
+
+### Regla activa: revisor antes de cada push
+
+Pasar el agente `revisor` antes de subir cualquier rama con cambios de
+código o de CI (no hace falta para cambios de solo documentación/notas). En
+esta sesión detectó hallazgos reales y no triviales en 4 de las 7 tandas
+(año de fundación desincronizado, favicons con ruta relativa en el payload
+RSC, un `npm ci` que activaba una dependencia nueva de red en el pipeline
+de deploy, y `tests/` sin excluir de la publicación). Mantener esta
+práctica para cualquier cambio futuro.
 
 ### Historial completo
 
