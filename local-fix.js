@@ -1282,10 +1282,40 @@
     });
   }
 
+  function injectContactSchema() {
+    if (!/\/contacto(?:\/|\/index\.html)?$/.test(pagePath())) return;
+    if (document.getElementById("rsb-contact-schema")) return;
+    var schema = document.createElement("script");
+    schema.type = "application/ld+json";
+    schema.id = "rsb-contact-schema";
+    schema.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contacto | ReformasB",
+      "url": "https://www.reformasb.com/contacto/",
+      "about": {
+        "@type": "HomeAndConstructionBusiness",
+        "name": "ReformasB",
+        "telephone": "+34675518448",
+        "email": "info@reformasb.com",
+        "url": "https://www.reformasb.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Lleida",
+          "addressRegion": "Cataluña",
+          "addressCountry": "ES"
+        }
+      }
+    });
+    document.head.appendChild(schema);
+  }
+
   if (document.readyState === "complete") {
     window.setTimeout(startFixes, 0);
+    window.setTimeout(injectContactSchema, 0);
   } else {
     window.addEventListener("load", startFixes, { once: true });
+    window.addEventListener("load", injectContactSchema, { once: true });
   }
 
   window.addEventListener("pageshow", function (event) {
