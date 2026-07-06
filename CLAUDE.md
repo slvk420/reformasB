@@ -173,26 +173,42 @@ confirmado con curl en producción — esto sí está excluido siempre, sin rela
 con el contenido). Arreglado: paso nuevo en el workflow que borra ambos
 archivos del checkout efímero del runner justo antes de publicar — siguen
 versionados en git para el equipo, pero no se sirven públicamente.
-**MERGEADO (2026-07-06) — con un incidente real de plataforma en el camino:**
+**MERGEADO (2026-07-06) — incidente de plataforma SIN causa raíz confirmada,
+documentado con precisión para no repetir el mismo rato de investigación:**
 tras mergear, `/CLAUDE.md` seguía dando 200 en producción pese a que el
-workflow excluía el archivo correctamente. Verificado con una fila `git
-archive HEAD` a un directorio limpio + un `assert` que hace fallar el job si
-el archivo sigue presente antes de subir el artefacto — el assert PASABA
-(archivo genuinamente ausente del paquete subido), pero GitHub Pages lo
-seguía sirviendo con `Last-Modified` fresco. **Causa: GitHub Pages (deploy
-vía Actions) tarda UN DESPLIEGUE DE MÁS en purgar un archivo eliminado** —
-el primer deploy que quita un archivo no basta, hace falta un segundo
-deploy limpio inmediatamente después para que deje de servirse. Confirmado
-empíricamente: tras un segundo deploy consecutivo, `/CLAUDE.md` y
-`/errores-y-correcciones.md` pasaron a dar 404 (verificado en vivo).
-**Lección para el futuro:** si se elimina un archivo servido públicamente
-(imagen, HTML, etc.) y sigue accesible tras el primer deploy, no es
-necesariamente un bug del workflow — probar un segundo deploy (commit vacío
-vale) antes de investigar más a fondo. El paso "Assert internal docs are
-absent from staging dir" del workflow queda como protección permanente
-contra regresiones (si vuelve a fallar el propio job avisará).
-**Estado final:** deploy en verde, `/CLAUDE.md` y `/errores-y-correcciones.md`
-dan 404 en vivo (confirmado 2026-07-06). Las 2 imágenes borradas en Paso D
+workflow excluía el archivo correctamente (verificado con `git archive HEAD`
+a un directorio limpio + un `assert` que hace fallar el job si el archivo
+sigue presente antes de subir el artefacto). Secuencia real de lo observado:
+
+1. Deploy con exclusión + assert (PASA, archivo ausente del artefacto) → live
+   sigue en 200.
+2. Deploy siguiente (commit vacío, sin cambios) → live pasa a 404. En su momento
+   esto se documentó (incorrectamente) como "GitHub Pages necesita 2 despliegues
+   para purgar un archivo". **Esa conclusión era errónea.**
+3. Deploy siguiente que SÍ cambiaba contenido de CLAUDE.md (misma lógica de
+   exclusión, assert vuelve a PASAR) → live vuelve a dar 200, y se mantiene así
+   más de 13 minutos — muy por encima de los ~10 min de caché documentados.
+
+Es decir: ni "una vez basta", ni "hacen falta 2 despliegues concretos", ni
+"es solo caché CDN" explican los 3 resultados juntos. La causa raíz real
+está en la capa de despliegue/CDN de GitHub Pages, fuera de lo que se puede
+diagnosticar desde este repositorio (no hay acceso a logs internos de
+GitHub ni a su infraestructura). El workflow está demostrado correcto por
+un assert que falla el job si algo va mal — el problema, si reaparece, no es
+nuestro código.
+**Lección real para el futuro:** si un archivo excluido del deploy sigue
+sirviéndose, comprobar primero que el propio job de build no falla (el
+assert ya lo garantiza). Si el job pasa pero el archivo sigue en producción,
+es un problema de la plataforma, no del workflow — no perder tiempo
+rediagnosticando esto mismo; considerar abrir un ticket a GitHub Support si
+llega a importar, o simplemente esperar más tiempo sin sacar conclusiones
+sobre "cuántos despliegues hacen falta" (no hay patrón fiable observado).
+**Riesgo real mientras tanto:** bajo — CLAUDE.md no contiene secretos, solo
+notas de trabajo; no está enlazado desde ninguna página ni en el sitemap.
+**Estado al cierre de esta tanda (2026-07-06, ~14:44 UTC):**
+`/CLAUDE.md` seguía en 200 pasados 13 min del último deploy — pendiente de
+que se resuelva solo o de una futura revisión si Slavik quiere insistir.
+Las 2 imágenes borradas en Paso D
 (`sate-casa-blanca-hq.png`, `cocina-madera-negra.png`) también confirmadas
 en 404 — no sufrieron el mismo problema porque tuvieron de sobra 5+ deploys
 de margen desde su borrado.
