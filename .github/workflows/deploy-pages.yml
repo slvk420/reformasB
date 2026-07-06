@@ -32,7 +32,7 @@ jobs:
         id: build
         run: |
           if [ -f package.json ]; then
-            npm ci
+            npm ci --omit=dev
             if npm run | grep -q "build"; then
               npm run build
             fi
@@ -46,6 +46,10 @@ jobs:
           elif [ -d public ]; then echo "publish_folder=public" >> $GITHUB_OUTPUT
           else echo "publish_folder=." >> $GITHUB_OUTPUT
           fi
+
+      - name: Exclude internal docs from published output
+        if: steps.determine.outputs.publish_folder == '.'
+        run: rm -f CLAUDE.md errores-y-correcciones.md
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

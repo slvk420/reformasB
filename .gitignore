@@ -1,2 +1,15 @@
 .agents/
 skills-lock.json
+node_modules/
+
+# Capturas y scripts sueltos de verificación manual (Playwright/debug ad-hoc).
+# Los tests permanentes viven en tests/, esto es descartable por diseño.
+verify-*.png
+verify2-*.png
+screenshot-*.png
+live-*.png
+full-*.png
+proc-*.png
+pw-*.js
+cap-ux*.png
+cap-ux*.js
