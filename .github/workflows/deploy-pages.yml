@@ -38,23 +38,29 @@ jobs:
             fi
           fi
 
-      - name: Determine publish folder
-        id: determine
+      - name: Prepare publish directory
+        id: prepare
         run: |
-          if [ -d dist ]; then echo "publish_folder=dist" >> $GITHUB_OUTPUT
-          elif [ -d build ]; then echo "publish_folder=build" >> $GITHUB_OUTPUT
-          elif [ -d public ]; then echo "publish_folder=public" >> $GITHUB_OUTPUT
-          else echo "publish_folder=." >> $GITHUB_OUTPUT
+          set -e
+          SITE_DIR="$RUNNER_TEMP/site"
+          rm -rf "$SITE_DIR"
+          mkdir -p "$SITE_DIR"
+          if [ -d dist ]; then
+            cp -r dist/. "$SITE_DIR/"
+          elif [ -d build ]; then
+            cp -r build/. "$SITE_DIR/"
+          elif [ -d public ]; then
+            cp -r public/. "$SITE_DIR/"
+          else
+            git archive HEAD | tar -x -C "$SITE_DIR"
+            rm -f "$SITE_DIR/CLAUDE.md" "$SITE_DIR/errores-y-correcciones.md"
           fi
-
-      - name: Exclude internal docs from published output
-        if: steps.determine.outputs.publish_folder == '.'
-        run: rm -f CLAUDE.md errores-y-correcciones.md
+          echo "site_dir=$SITE_DIR" >> $GITHUB_OUTPUT
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ steps.determine.outputs.publish_folder }}
+          path: ${{ steps.prepare.outputs.site_dir }}
 
   deploy:
     needs: build
