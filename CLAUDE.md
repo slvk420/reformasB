@@ -173,11 +173,32 @@ confirmado con curl en producción — esto sí está excluido siempre, sin rela
 con el contenido). Arreglado: paso nuevo en el workflow que borra ambos
 archivos del checkout efímero del runner justo antes de publicar — siguen
 versionados en git para el equipo, pero no se sirven públicamente.
-**MERGEADO Y VERIFICADO EN PRODUCCIÓN (2026-07-06):** deploy en verde,
-`/CLAUDE.md` y `/errores-y-correcciones.md` dan 404 en vivo (confirmado).
+**MERGEADO (2026-07-06) — con un incidente real de plataforma en el camino:**
+tras mergear, `/CLAUDE.md` seguía dando 200 en producción pese a que el
+workflow excluía el archivo correctamente. Verificado con una fila `git
+archive HEAD` a un directorio limpio + un `assert` que hace fallar el job si
+el archivo sigue presente antes de subir el artefacto — el assert PASABA
+(archivo genuinamente ausente del paquete subido), pero GitHub Pages lo
+seguía sirviendo con `Last-Modified` fresco. **Causa: GitHub Pages (deploy
+vía Actions) tarda UN DESPLIEGUE DE MÁS en purgar un archivo eliminado** —
+el primer deploy que quita un archivo no basta, hace falta un segundo
+deploy limpio inmediatamente después para que deje de servirse. Confirmado
+empíricamente: tras un segundo deploy consecutivo, `/CLAUDE.md` y
+`/errores-y-correcciones.md` pasaron a dar 404 (verificado en vivo).
+**Lección para el futuro:** si se elimina un archivo servido públicamente
+(imagen, HTML, etc.) y sigue accesible tras el primer deploy, no es
+necesariamente un bug del workflow — probar un segundo deploy (commit vacío
+vale) antes de investigar más a fondo. El paso "Assert internal docs are
+absent from staging dir" del workflow queda como protección permanente
+contra regresiones (si vuelve a fallar el propio job avisará).
+**Estado final:** deploy en verde, `/CLAUDE.md` y `/errores-y-correcciones.md`
+dan 404 en vivo (confirmado 2026-07-06). Las 2 imágenes borradas en Paso D
+(`sate-casa-blanca-hq.png`, `cocina-madera-negra.png`) también confirmadas
+en 404 — no sufrieron el mismo problema porque tuvieron de sobra 5+ deploys
+de margen desde su borrado.
 
-**✅ Logo y favicon (hecho, PENDIENTE DE MERGE).** Rama
-`fix/logo-favicon-branding` subida. Slavik preguntó por qué Google no
+**✅ Logo y favicon (MERGEADO Y VERIFICADO EN PRODUCCIÓN).** Rama
+`fix/logo-favicon-branding` mergeada. Slavik preguntó por qué Google no
 mostraba el favicon en resultados de búsqueda — al investigar salió algo
 mucho más gordo: **el logo de cabecera de las 7 páginas**
 (`_next/static/media/logo-rsb-wood-transparent.png`) seguía mostrando la
