@@ -58,9 +58,9 @@ Me llamo Slavik. Me dedico a resolver problemas reales a empresas usando tecnolo
 - Rendimiento: Home 9,4 MB → 2,26 MB en producción (−76%)
 - Repo limpio: sin `servicios/` (build viejo descartado), sin capturas/scripts de debug sueltos
 - Suite de tests de humo permanente (`npm test`)
+- Logo definitivo (monograma RSB + rótulo "REFORMASB" en madera) integrado en cabecera y favicon (rama `branding/logo-definitivo`, pendiente de merge por Slavik)
 
 **Pendiente:**
-- 🔴 **Logo definitivo** — el logo de cabecera (7 páginas) y el favicon llevan un **placeholder provisional** (icono de tejado + "ReformasB") sustituyendo la marca vieja "RSB/REFORMA SB" de la imagen real. Slavik debe decidir si encarga uno definitivo a un diseñador.
 - Reindexación en Google Search Console (lo hace Slavik, no código)
 - Google Business Profile al 100% → ver `GBP ReformasB - checklist.md` en el vault
 - Páginas SEO: /reformas-cocinas-lleida/, /reformas-banos-lleida/, /reformas-fachadas-lleida/, /obra-nueva-lleida/
@@ -244,12 +244,32 @@ dibujado en el SVG).
   (cabecera, offsets, firmas PNG, CRC32 — sin un solo byte fuera de sitio).
 - Revisor: APTO. Cero archivos HTML/RSC tocados (reemplazo in-place puro) →
   cero riesgo de pantalla en blanco.
-- **Marcado explícitamente como PROVISIONAL** — placeholder hasta que haya
-  diseño definitivo de un diseñador. No confundir con el logo final.
 - Nota: Google puede tardar días/semanas en reflejar el favicon nuevo en
   resultados de búsqueda tras el merge (ciclo de rastreo propio, ajeno al
   código); el navegador del usuario también cachea favicons de forma agresiva.
-**Abrir PR:** https://github.com/slvk420/reformasB/pull/new/fix/logo-favicon-branding
+
+**✅ Logo DEFINITIVO (hecho, PENDIENTE DE MERGE).** Slavik proporcionó el
+logo real (`logo madera.png` en su Escritorio): monograma "RSB" + rótulo
+"REFORMASB" en textura de madera/metal, sustituyendo el placeholder
+provisional anterior. Rama `branding/logo-definitivo`.
+- El archivo proporcionado NO tenía transparencia real: el patrón de cuadros
+  "transparente" estaba pintado en los píxeles (imagen aplanada, `hasAlpha:
+  false`). Se reconstruyó el canal alfa con flood-fill (BFS) desde el borde
+  sobre píxeles acromáticos casi-blancos, más una segunda pasada para huecos
+  interiores encerrados (la contracara de la "B"). Verificado componiendo
+  sobre fondo de color antes de integrar — sin halos ni fugas.
+- `logo-rsb-wood-transparent.png` reemplazado IN-PLACE (mismo nombre/420×420
+  RGBA) con la imagen real ya recortada con alfa.
+- `favicon.svg`: mismo icono simplificado (tejado, sin texto — ilegible a
+  tamaño real), colores actualizados a los tonos reales muestreados del logo
+  (`#4d4d4d` gris carbón, `#a97b4a` madera; antes `#fffdf8`/`#c9842f`).
+- `favicon.ico`: regenerado desde el SVG actualizado, multi-resolución
+  (16/32/48px), construido a mano igual que antes.
+- Revisor: APTO. Diff quirúrgico (solo esos 3 binarios), sin archivos de
+  debug colados, ICO y PNG verificados byte a byte.
+- Verificado visualmente en local (Home y Contacto, servidor estático +
+  Playwright) — logo nítido en cabecera oscura, sin recursos rotos nuevos.
+**Abrir PR:** https://github.com/slvk420/reformasB/pull/new/branding/logo-definitivo
 
 **✅ Paso E — Testing (hecho, PENDIENTE DE MERGE).** Rama
 `test/paso-e-smoke-suite` subida: suite de humo permanente en
