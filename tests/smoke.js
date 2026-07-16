@@ -26,6 +26,12 @@ const PAGES = [
   { path: '/aviso-legal/', nombre: 'Aviso legal', esperaFormulario: false, jsonLd: true },
   { path: '/privacidad/', nombre: 'Privacidad', esperaFormulario: false, jsonLd: true },
   { path: '/gracias/', nombre: 'Gracias', esperaFormulario: false, jsonLd: false, noindex: true, recursosRotosConocidos: [/\/gracias\/_next\/static\/css\/[a-f0-9]+\.css/] },
+  { path: '/blog/', nombre: 'Blog (índice)', esperaFormulario: false, jsonLd: true },
+  { path: '/blog/aislamiento-termico-sate-ahorro-ayudas/', nombre: 'Blog: SATE', esperaFormulario: false, jsonLd: true },
+  { path: '/blog/cuanto-cuesta-reformar-piso-2026/', nombre: 'Blog: precios 2026', esperaFormulario: false, jsonLd: true },
+  { path: '/blog/reformas-que-revalorizan-tu-vivienda/', nombre: 'Blog: revalorización', esperaFormulario: false, jsonLd: true },
+  { path: '/blog/reformar-en-verano-ventajas/', nombre: 'Blog: reformar en verano', esperaFormulario: false, jsonLd: true },
+  { path: '/blog/aerotermia-suelo-radiante-reforma/', nombre: 'Blog: aerotermia', esperaFormulario: false, jsonLd: true },
 ];
 
 let fallos = 0;
