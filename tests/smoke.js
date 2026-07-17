@@ -26,6 +26,7 @@ const PAGES = [
   { path: '/aviso-legal/', nombre: 'Aviso legal', esperaFormulario: false, jsonLd: true },
   { path: '/privacidad/', nombre: 'Privacidad', esperaFormulario: false, jsonLd: true },
   { path: '/gracias/', nombre: 'Gracias', esperaFormulario: false, jsonLd: false, noindex: true, recursosRotosConocidos: [/\/gracias\/_next\/static\/css\/[a-f0-9]+\.css/] },
+  { path: '/politica-cookies/', nombre: 'Política de cookies', esperaFormulario: false, jsonLd: true },
   { path: '/blog/', nombre: 'Blog (índice)', esperaFormulario: false, jsonLd: true },
   { path: '/blog/aislamiento-termico-sate-ahorro-ayudas/', nombre: 'Blog: SATE', esperaFormulario: false, jsonLd: true },
   { path: '/blog/cuanto-cuesta-reformar-piso-2026/', nombre: 'Blog: precios 2026', esperaFormulario: false, jsonLd: true },
@@ -101,6 +102,15 @@ async function testPagina(browser, { path, nombre, esperaFormulario, jsonLd, noi
 
   const logoVisible = await page.locator('img[src*="logo"]').first().isVisible().catch(() => false);
   chk('logo de cabecera visible', logoVisible);
+
+  const bannerCookiesVisible = await page.locator('.rsb-cookie-banner').first().isVisible().catch(() => false);
+  chk('aviso de cookies visible en primera visita', bannerCookiesVisible);
+
+  const tieneFooterLegal = await page.locator('.footer-legal-links').count() > 0;
+  if (tieneFooterLegal) {
+    const enlaceCookiesEnFooter = await page.locator('.footer-legal-links a[href*="politica-cookies"]').count() > 0;
+    chk('enlace a política de cookies en el footer', enlaceCookiesEnFooter);
+  }
 
   await page.close();
 }
