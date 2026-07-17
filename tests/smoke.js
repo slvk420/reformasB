@@ -48,9 +48,10 @@ function esConocido(lista, texto) {
 async function testPagina(browser, { path, nombre, esperaFormulario, jsonLd, noindex, erroresConocidos = [], recursosRotosConocidos = [] }) {
   console.log('\n== ' + nombre + ' (' + path + ') ==');
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
-  const pageErrors = [], brokenRes = [];
+  const pageErrors = [], brokenRes = [], gaRequests = [];
   page.on('pageerror', e => pageErrors.push(String(e)));
   page.on('response', r => { if (r.status() >= 400) brokenRes.push(r.status() + ' ' + r.url()); });
+  page.on('request', r => { if (r.url().indexOf('googletagmanager.com') !== -1) gaRequests.push(r.url()); });
 
   let status = null;
   try {
@@ -106,12 +107,38 @@ async function testPagina(browser, { path, nombre, esperaFormulario, jsonLd, noi
   const bannerCookiesVisible = await page.locator('.rsb-cookie-banner').first().isVisible().catch(() => false);
   chk('aviso de cookies visible en primera visita', bannerCookiesVisible);
 
+  chk('sin peticiones a Google Analytics antes de aceptar', gaRequests.length === 0, gaRequests.join(' | '));
+
   const tieneFooterLegal = await page.locator('.footer-legal-links').count() > 0;
   if (tieneFooterLegal) {
     const enlaceCookiesEnFooter = await page.locator('.footer-legal-links a[href*="politica-cookies"]').count() > 0;
     chk('enlace a política de cookies en el footer', enlaceCookiesEnFooter);
   }
 
+  await page.close();
+}
+
+async function testConsentimientoAnalytics(browser) {
+  console.log('\n== Aceptar cookies → se activa Google Analytics ==');
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  const gaRequests = [];
+  // Interceptamos y abortamos: solo nos interesa comprobar que el navegador
+  // INTENTA cargar el script tras aceptar, sin mandar un hit real a la
+  // propiedad de Analytics de producción cada vez que corra esta suite.
+  await page.route('**://www.googletagmanager.com/**', route => {
+    gaRequests.push(route.request().url());
+    route.abort();
+  });
+  try {
+    await page.goto(BASE + '/', { waitUntil: 'load', timeout: 30000 });
+    await page.waitForTimeout(2500);
+    chk('sin peticiones a Analytics antes de pulsar Aceptar', gaRequests.length === 0, gaRequests.join(' | '));
+    await page.locator('[data-rsb-cookie-accept]').click({ timeout: 5000 });
+    await page.waitForTimeout(1000);
+    chk('petición a Analytics tras pulsar Aceptar', gaRequests.length > 0);
+  } catch (e) {
+    chk('flujo de consentimiento de Analytics', false, String(e).slice(0, 150));
+  }
   await page.close();
 }
 
@@ -139,6 +166,7 @@ async function test404(browser) {
   console.log('Suite de humo — base: ' + BASE);
   const browser = await chromium.launch({ headless: true });
   for (const p of PAGES) await testPagina(browser, p);
+  await testConsentimientoAnalytics(browser);
   await test404(browser);
   await browser.close();
 
