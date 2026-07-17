@@ -1,8 +1,14 @@
 (function () {
-  var STORAGE_KEY = "rsbCookieConsent";
+  // v2: bumped when se introdujo Analytics, para forzar a repreguntar a
+  // quien ya había aceptado/rechazado cuando el aviso todavía no ofrecía
+  // nada que aceptar (consentimiento previo no informado, no válido para
+  // esta nueva finalidad).
+  var STORAGE_KEY = "rsbCookieConsent_v2";
   var CONSENT_MAX_AGE_MS = 365 * 24 * 60 * 60 * 1000;
   var POLICY_PATH = "/politica-cookies/";
+  var GA_MEASUREMENT_ID = "G-6PPX848GC5";
   var bannerEl = null;
+  var analyticsLoaded = false;
 
   function readConsent() {
     var raw;
@@ -26,6 +32,47 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ value: value, ts: Date.now() }));
     } catch (e) {}
+  }
+
+  function loadAnalytics() {
+    if (analyticsLoaded) return;
+    analyticsLoaded = true;
+    var script = document.createElement("script");
+    script.async = true;
+    script.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_MEASUREMENT_ID;
+    document.head.appendChild(script);
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+    gtag("js", new Date());
+    gtag("config", GA_MEASUREMENT_ID);
+  }
+
+  function revokeAnalytics() {
+    var hadAnalytics = analyticsLoaded;
+    // Flag de opt-out oficial de Google: para el "Enhanced Measurement"
+    // automático (scroll, engagement...) ANTES de borrar cookies, o un
+    // evento en curso puede reescribir _ga_<ID> justo después del borrado.
+    window["ga-disable-" + GA_MEASUREMENT_ID] = true;
+    try {
+      // gtag.js (cookie_domain: "auto") escala _ga/_ga_* al dominio
+      // registrable superior (domain=.reformasb.com), no al host exacto —
+      // hay que borrar probando esas variantes o la cookie sobrevive.
+      var host = location.hostname;
+      var parent = host.replace(/^www\./, "");
+      var domainVariants = ["", "; domain=" + host, "; domain=" + parent, "; domain=." + parent];
+      document.cookie.split(";").forEach(function (part) {
+        var name = part.split("=")[0].trim();
+        if (name === "_ga" || name.indexOf("_ga_") === 0) {
+          domainVariants.forEach(function (d) {
+            document.cookie = name + "=; Max-Age=0; path=/" + d;
+          });
+        }
+      });
+    } catch (e) {}
+    if (hadAnalytics) window.location.reload();
   }
 
   function injectStyles() {
@@ -63,7 +110,7 @@
     el.hidden = true;
     el.innerHTML =
       '<div class="rsb-cookie-inner">' +
-      '<p class="rsb-cookie-text">No utilizamos cookies de analítica ni publicidad. Guardamos tu elección sobre este aviso únicamente en tu navegador. <a href="' +
+      '<p class="rsb-cookie-text">Usamos Google Analytics para saber cuántas visitas tiene la web, solo si nos das tu permiso. No utilizamos cookies de publicidad. <a href="' +
       POLICY_PATH +
       '">Más información</a></p>' +
       '<div class="rsb-cookie-actions">' +
@@ -75,10 +122,12 @@
     el.querySelector("[data-rsb-cookie-accept]").addEventListener("click", function () {
       writeConsent("accepted");
       hideBanner();
+      loadAnalytics();
     });
     el.querySelector("[data-rsb-cookie-reject]").addEventListener("click", function () {
       writeConsent("rejected");
       hideBanner();
+      revokeAnalytics();
     });
     bannerEl = el;
     return el;
@@ -122,7 +171,12 @@
 
   function init() {
     addFooterLink();
-    if (!readConsent()) showBanner();
+    var consent = readConsent();
+    if (!consent) {
+      showBanner();
+    } else if (consent.value === "accepted") {
+      loadAnalytics();
+    }
   }
 
   function scheduleInit() {
@@ -164,5 +218,5 @@
     window.addEventListener("load", scheduleInit);
   }
 
-  window.rsbCookies = { get: readConsent, open: showBanner };
+  window.rsbCookies = { get: readConsent, open: showBanner, analyticsLoaded: function () { return analyticsLoaded; } };
 })();
